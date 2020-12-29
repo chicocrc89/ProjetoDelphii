@@ -1,0 +1,34 @@
+unit uFrmCadastroCor;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmCadastro, Vcl.StdCtrls, Vcl.Buttons,
+  uCores, uControllerCores;
+
+type
+  TFrmCadastroCor = class(TFrmCadastro)
+    Label3: TLabel;
+    Label4: TLabel;
+    edtcor: TEdit;
+  protected
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+
+  end;
+
+var
+  FrmCadastroCor: TFrmCadastroCor;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmCadastroCor }
+
+
+end.

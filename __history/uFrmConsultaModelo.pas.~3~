@@ -1,0 +1,71 @@
+unit uFrmConsultaModelo;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmConsulta, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons;
+
+type
+  TFrmConsultaModelo = class(TFrmConsulta)
+  private
+    { Private declarations }
+  protected
+    procedure Novo; Virtual;
+    procedure Alterar; Virtual;
+    procedure Excluir; Virtual;
+    procedure Sair; Virtual;
+    procedure Pesquisar; Virtual;
+
+  public
+    procedure conhecaObj (pObj : TObject; pctrl: TObject); Virtual;
+    procedure SetFrmCadastro (pObj : TObject); Virtual;
+
+  end;
+
+var
+  FrmConsultaModelo: TFrmConsultaModelo;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmConsultaModelo }
+
+procedure TFrmConsultaModelo.Alterar;
+begin
+
+end;
+
+procedure TFrmConsultaModelo.conhecaObj(pObj, pctrl: TObject);
+begin
+
+end;
+
+procedure TFrmConsultaModelo.Excluir;
+begin
+
+end;
+
+procedure TFrmConsultaModelo.Novo;
+begin
+
+end;
+
+procedure TFrmConsultaModelo.Pesquisar;
+begin
+
+end;
+
+procedure TFrmConsultaModelo.Sair;
+begin
+
+end;
+
+procedure TFrmConsultaModelo.SetFrmCadastro(pObj: TObject);
+begin
+
+end;
+
+end.

@@ -1,0 +1,68 @@
+unit uControllergrupos;
+
+interface
+
+uses ucontroller, uDM, DB;
+
+type
+  Controllergrupos = class(controller)
+  private
+
+  protected
+
+  public
+    constructor CrieObj;
+    destructor Destrua_se;
+    function Salvar(pObj: TObject): string; override;
+    function Carregar(pObj: TObject): string; override;
+    function Excluir(pObj: TObject): string; override;
+    function Pesquisar(pChave: string): string; override;
+    procedure setDM(pDM: TDM);
+    function getds: Tdatasource;
+  end;
+
+implementation
+
+{ Controllergrupos }
+
+function Controllergrupos.Carregar(pObj: TObject): string;
+begin
+
+end;
+
+constructor Controllergrupos.CrieObj;
+begin
+
+end;
+
+destructor Controllergrupos.Destrua_se;
+begin
+
+end;
+
+function Controllergrupos.Excluir(pObj: TObject): string;
+begin
+
+end;
+
+function Controllergrupos.getds: Tdatasource;
+begin
+
+end;
+
+function Controllergrupos.Pesquisar(pChave: string): string;
+begin
+
+end;
+
+function Controllergrupos.Salvar(pObj: TObject): string;
+begin
+
+end;
+
+procedure Controllergrupos.setDM(pDM: TDM);
+begin
+
+end;
+
+end.

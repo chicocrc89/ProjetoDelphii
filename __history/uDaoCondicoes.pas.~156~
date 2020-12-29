@@ -1,0 +1,200 @@
+unit uDaoCondicoes;
+
+interface
+
+uses udao, uDM, DB, ucondicoes, SysUtils, uDaoFormaPagamentos, uParcelas, uColecaoParcelas;
+
+type
+  Daocondicoes = class(dao)
+  private
+
+  protected
+    umdm: TDM;
+    umadaoformapagamento : DaoFormaPagamentos;
+    umaparcela : Parcelas;
+  public
+    constructor CrieObj;
+    destructor Destrua_se;
+    function Salvar(pObj: TObject): string; override;
+    function Carregar(pObj: TObject): string; override;
+    function Excluir(pObj: TObject): string; override;
+    function Pesquisar(pChave: string): string; override;
+    procedure setDM(pDM: TDM);
+    function getds: Tdatasource;
+    procedure setdaoformapagamento(pObj: TObject);
+  end;
+
+implementation
+
+{ Daocondicoes }
+
+function Daocondicoes.Carregar(pObj: TObject): string;
+var
+  mcondicoes: condicoes;
+begin
+  mcondicoes := condicoes(pObj);
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetcondicao.Active then
+    umdm.dsetcondicao.Open;
+  mcondicoes.setCodigo(umdm.dsetcondicaoID_CONDICAO.Value);
+  mcondicoes.setcondicao(umdm.dsetcondicaoCONDICAO.Value);
+  mcondicoes.setjuros(umdm.dsetcondicaoJUROS.Value);
+  mcondicoes.setnum_parcelas(umdm.dsetcondicaoQTD_PARCELA.Value);
+  mcondicoes.setCadastro(umdm.dsetcondicaoDATA_CADASTRO.Value);
+  mcondicoes.setUlt_Alt(umdm.dsetcondicaoULTIMA_ALTERACAO.Value);
+
+  umdm.dsetparcela.Close;
+  umdm.dsetparcela.SelectSQL.Text := 'select * from parcela where id_condicao = ' +QuotedStr(inttostr(umdm.dsetcondicaoID_CONDICAO.Value));
+  umdm.dsetparcela.Open;
+
+  mcondicoes.getumacolecaop.setQtd(0);
+  while not umdm.dsetparcela.Eof do
+  begin
+    umaparcela := Parcelas.Crieobj;
+    umaparcela.setnumero_parcela(umdm.dsetparcelaNUM_PARCELA.Value);
+    umaparcela.setdias_prazo(umdm.dsetparcelaDIAS_PRAZO.Value);
+    umaparcela.setperc_parcela(umdm.dsetparcelaPERCENTUAL.Value);
+    umaparcela.getumaformapagamento.setCodigo(umdm.dsetparcelaID_FORMAPAGAMENTO.Value);
+    mcondicoes.getumacolecaop.insereFim(umaparcela);
+    umdm.dsetparcela.Next;
+  end;
+end;
+
+constructor Daocondicoes.CrieObj;
+begin
+  umadaoformapagamento := DaoFormaPagamentos.CrieObj;
+end;
+
+destructor Daocondicoes.Destrua_se;
+begin
+  umadaoformapagamento.Destrua_se;
+end;
+
+function Daocondicoes.Excluir(pObj: TObject): string;
+var   mcolecao : ColecaoParcelas;
+      mParcela: Parcelas;
+      I, tamanho: integer;
+      mcondicoes: condicoes;
+begin
+  mcondicoes := condicoes(pObj);
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetcondicao.Active then
+    umdm.dsetcondicao.Open;
+  umdm.dsetcondicao.Delete;
+  //--------------------------------------------------------------------------------------------------------------------
+  //AQUI COMEÇÃO A EXCLUIR AS PARCELAS DA CONDIÇÃO
+  //---------------------------------------------------------------------------------------------------------------------
+  tamanho:=mcondicoes.getumacolecaop.getQtd;
+  for I := 1 to tamanho do
+  begin
+    mcolecao := ColecaoParcelas (mcondicoes.getumacolecaop);
+    mparcela := Parcelas (mcolecao.Carrega(I));
+    if not umdm.dsetparcela.active then
+      umdm.dsetparcela.Open;
+    umdm.dsetparcela.Delete;
+  end;
+  //-----------------------------------------------------------------------------------------------------------------------
+  umdm.trans.Commit;
+
+end;
+
+function Daocondicoes.getds: Tdatasource;
+begin
+  result := umdm.dscondicao;
+end;
+
+function Daocondicoes.Pesquisar(pChave: string): string;
+var
+  mSQL: string;
+begin
+  if length(pChave) = 0 then
+    mSQL := 'select * from condicao order by condicao'
+  else if ehnumero(pChave) then
+    mSQL := 'select * from condicao where id_condicao =' + QuotedStr(pChave)
+  else
+    mSQL := 'select * from condicao where condicao =' + QuotedStr(pChave);
+  umdm.dsetcondicao.Active := false;
+  umdm.dsetcondicao.SelectSQL.Text := mSQL;
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetcondicao.Active then
+    umdm.dsetcondicao.Open;
+  result := '';
+end;
+
+function Daocondicoes.Salvar(pObj: TObject): string;
+var
+  mcondicoes: condicoes;
+  mParcela: Parcelas;
+  I, tamanho: integer;
+  pcodigoCondicao : integer;
+  pDatac, pDataAlt: TDate;
+  mcolecao : ColecaoParcelas;
+begin
+  mcondicoes := condicoes(pObj);
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetcondicao.Active then
+    umdm.dsetcondicao.Open;
+  if mcondicoes.getcodigo = 0 then
+    umdm.dsetcondicao.Insert
+  else
+    umdm.dsetcondicao.Edit;
+  //umdm.dsetcondicaoID_CONDICAO.Value := mcondicoes.getcodigo;
+  umdm.dsetcondicaoCONDICAO.Value :=  mcondicoes.getcondicao;
+  umdm.dsetcondicaoJUROS.Value := mcondicoes.getjuros;
+  umdm.dsetcondicaoQTD_PARCELA.Value := mcondicoes.getnum_parcelas;
+  umdm.dsetcondicaoULTIMA_ALTERACAO.Value := mcondicoes.getUlt_Alt;
+  umdm.dsetcondicaoDATA_CADASTRO.Value := mcondicoes.getCadastro;
+  umdm.dsetcondicao.Post;
+  pcodigocondicao := umdm.dsetcondicaoID_CONDICAO.Value;
+  tamanho:=mcondicoes.getumacolecaop.getQtd;
+  pDatac := umdm.dsetcondicaoDATA_CADASTRO.Value;
+  pDataAlt := umdm.dsetcondicaoULTIMA_ALTERACAO.Value;
+  if mcondicoes.getcodigo <> 0 then
+  begin
+    for I := 1 to tamanho do
+    begin
+      mcolecao := ColecaoParcelas (mcondicoes.getumacolecaop);
+      mparcela := Parcelas (mcolecao.Carrega(I));
+      if not umdm.dsetparcela.active then
+        umdm.dsetparcela.Open;
+      umdm.dsetparcela.Delete;
+    end;
+    umdm.trans.Commit;
+  end;
+  for I := 1 to tamanho do
+  begin
+    mcolecao := ColecaoParcelas (mcondicoes.getumacolecaop);
+    mparcela := Parcelas (mcolecao.Carrega(I));
+    if not umdm.trans.Active then
+      umdm.trans.Active := true;
+    if not umdm.dsetparcela.active then
+      umdm.dsetparcela.Open;
+    umdm.dsetparcela.Insert;
+    umdm.dsetparcelaDIAS_PRAZO.Value := mparcela.getdias_prazo;
+    umdm.dsetparcelaID_FORMAPAGAMENTO.Value := mparcela.getumaformapagamento.getCodigo;
+    umdm.dsetparcelaPERCENTUAL.Value := mparcela.getperc_parcela;
+    umdm.dsetparcelaDATA_CADASTRO.Value := mparcela.getCadastro;
+    umdm.dsetparcelaDATA_ALTERACAO.Value := mparcela.getUlt_Alt;
+    umdm.dsetparcelaNUM_PARCELA.Value := mparcela.getnumero_parcela;
+    umdm.dsetparcelaID_CONDICAO.Value := pcodigocondicao;
+    umdm.dsetparcela.Post;
+  end;
+  umdm.trans.Commit;
+
+end;
+
+procedure Daocondicoes.setdaoformapagamento(pObj: TObject);
+begin
+  umadaoformapagamento := DaoFormaPagamentos (pObj);
+end;
+
+procedure Daocondicoes.setDM(pDM: TDM);
+begin
+  umdm := pDM;
+end;
+
+end.

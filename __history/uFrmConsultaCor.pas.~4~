@@ -1,0 +1,35 @@
+unit uFrmConsultaCor;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmConsulta, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, uFrmCadastroCor, uCores, uControllerCores, uDM;
+
+type
+  TFrmConsultaCor = class(TFrmConsulta)
+  private
+    { Private declarations }
+  protected
+    umFrmCadastroCor: TFrmCadastroCor;
+    umacor: Cores;
+    umactrlcor: Controllercores;
+    umdm: TDM;
+    procedure Novo; Override;
+    procedure Alterar; Override;
+    procedure Excluir; Override;
+    procedure Sair; Override;
+    procedure Pesquisar; Override;
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmConsultaCor: TFrmConsultaCor;
+
+implementation
+
+{$R *.dfm}
+
+end.

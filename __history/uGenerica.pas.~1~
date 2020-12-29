@@ -1,0 +1,66 @@
+unit uGenerica;
+
+interface
+  type Generica = class
+  private
+
+  protected
+    Codigo    : integer;
+    Cadastro  : string;
+    Ult_Alt   : string;
+  public
+    constructor Crieobj;
+    destructor Destrua_se;
+    procedure setCodigo (pCodigo : integer);
+    procedure setCadastro (pCadastro : string);
+    procedure setUlt_Alt (pUlt_Alt : string);
+    function getCodigo : integer;
+    function getCadastro : string;
+    function getUlt_Alt : string;
+  end;
+
+implementation
+
+{ Generica }
+
+constructor Generica.Crieobj;
+begin
+
+end;
+
+destructor Generica.Destrua_se;
+begin
+
+end;
+
+function Generica.getCadastro: string;
+begin
+  result := Cadastro;
+end;
+
+function Generica.getCodigo: integer;
+begin
+  result := Codigo;
+end;
+
+function Generica.getUlt_Alt: string;
+begin
+  result := Ult_Alt;
+end;
+
+procedure Generica.setCadastro(pCadastro: string);
+begin
+  Cadastro := pCadastro;
+end;
+
+procedure Generica.setCodigo(pCodigo: integer);
+begin
+  Codigo := pCodigo;
+end;
+
+procedure Generica.setUlt_Alt(pUlt_Alt: string);
+begin
+  Ult_Alt := pUlt_Alt;
+end;
+
+end.

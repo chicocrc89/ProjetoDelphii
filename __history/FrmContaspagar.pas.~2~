@@ -1,0 +1,35 @@
+unit FrmContaspagar;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Data.DB,
+  Vcl.Grids, Vcl.DBGrids, Vcl.Buttons;
+
+type
+  TFrmContasapagar = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    FILTROS: TRadioGroup;
+    RadioButton1: TRadioButton;
+    RadioButton2: TRadioButton;
+    btnPesquisar: TSpeedButton;
+    Panel1: TPanel;
+    Edit1: TEdit;
+    SpeedButton1: TSpeedButton;
+    DBGrid1: TDBGrid;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmContasapagar: TFrmContasapagar;
+
+implementation
+
+{$R *.dfm}
+
+end.

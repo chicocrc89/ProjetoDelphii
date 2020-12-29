@@ -1,0 +1,107 @@
+unit uDaopaises;
+
+interface
+  uses udao, uDM, DB, uPaises, SysUtils;
+  type Daopaises = class(dao)
+  private
+
+  protected
+    umdm : TDM;
+  public
+    constructor CrieObj;
+    destructor  Destrua_se;
+    function Salvar ( pObj :  TObject ):         string;    override;
+    function Carregar ( pObj : TObject ):        string;    override;
+    function Excluir ( pObj : TObject ):         string;    override;
+    function Pesquisar ( pChave : string):       string;    override;
+    procedure setDM (pDM : TDM);
+    function getds : Tdatasource;
+  end;
+
+implementation
+
+{ Daopaises }
+
+function Daopaises.Carregar(pObj: TObject): string;
+var mpaises : Paises;
+begin
+  mpaises := Paises (pObj);
+  if not umDM.trans.Active then
+      umDM.trans.Active := true;
+   if not umDM.dsetpais.Active then
+      umDM.dsetpais.Open;
+   mpaises.setCodigo(umdm.dsetpaisID_PAIS.Value);
+   mpaises.setpais(umdm.dsetpaisPAIS.Value);
+   mpaises.setDDI(umdm.dsetpaisDDI.Value);
+   mpaises.setsigra(umdm.dsetpaisSIGLA.value);
+end;
+
+constructor Daopaises.CrieObj;
+begin
+
+end;
+
+destructor Daopaises.Destrua_se;
+begin
+
+end;
+
+function Daopaises.Excluir(pObj: TObject): string;
+begin
+  if not umDM.trans.Active then
+      umDM.trans.Active := true;
+   if not umDM.DSetpais.Active then
+      umDM.DSetpais.Open;
+   umDM.DSetpais.Delete;
+   umDM.trans.Commit;
+end;
+
+function Daopaises.getds: Tdatasource;
+begin
+  result := umdm.dspais;
+end;
+
+function Daopaises.Pesquisar(pChave: string): string;
+var mSQL : string;
+begin
+  if length(pchave) = 0 then
+    mSQL := 'select * from pais order by pais'
+  else if ehnumero(pchave) then
+    mSql:='select * from pais where id_pais =' + QuotedStr(pchave)
+  else
+    mSql:='select * from pais where pais =' + QuotedStr(pchave);
+    umDM.DSetpais.Active := false;
+    umDM.DSetpais.SelectSQL.Text := mSQL;
+    if not umDM.trans.Active then
+      umDM.trans.Active := true;
+    if not umDM.DSetpais.Active then
+      umDM.DSetpais.Open;
+    result := '';
+end;
+
+function Daopaises.Salvar(pObj: TObject): string;
+var mpaises : Paises;
+begin
+   mpaises := Paises (pobj);
+   if not umDM.trans.Active then
+      umDM.trans.Active := true;
+   if not umDM.DSetpais.Active then
+      umDM.DSetpais.Open;
+   if mpaises.getcodigo = 0 then
+      umDM.DSetpais.Insert
+   else
+      umDM.DSetpais.Edit;
+      umdm.dsetpaisID_PAIS.Value := mpaises.getcodigo;
+      umdm.dsetpaisPAIS.Value := mpaises.getpais;
+      umdm.dsetpaisDDI.Value  := mpaises.getDDI;
+      umdm.dsetpaisSIGLA.Value := mpaises.getsigla;
+      umDM.DSetpais.Post;
+      umDM.trans.Commit;
+end;
+
+procedure Daopaises.setDM(pDM: TDM);
+begin
+  umdm := pDM;
+end;
+
+end.

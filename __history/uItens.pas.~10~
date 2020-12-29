@@ -1,0 +1,122 @@
+unit uItens;
+
+interface
+  uses uProdutos;
+
+  type Itens = Class(produtos)
+
+  private
+
+  protected
+    qtd:Integer;
+    valor: Currency;
+    desconto: Currency;
+    outrasdespesas: Currency;
+    frete: Currency;
+    custoTotal: Currency;
+  public
+    constructor Crieobj;
+    destructor Destrua_se;
+    procedure SetQtde(pQtd: Integer);
+    function  getQtde :Integer;
+    procedure setvalor(pvalor:Currency);
+    function  getvalor: Currency;
+    procedure setDesconto(pDesconto:Currency);
+    function  getDesconto: Currency;
+    procedure setOutrasdespesas(pOutrasDespesas:Currency);
+    function  getOutrasDespesas :Currency;
+    procedure setFrete(pfrete:Currency);
+    function  getfrete: Currency;
+    procedure setCustoTotal (pcustototal:Currency);
+    function getCustoTotal: Currency;
+    function clone : Itens;
+End;
+
+implementation
+
+{ Itens }
+
+function Itens.clone: Itens;
+begin
+  result := Itens.Crieobj;
+  result.setCodigo(codigo);
+  result.setdescricao(descricao);
+  result.SetQtde(qtd);
+  result.setvalor(valor);
+  result.setDesconto(desconto);
+  result.setmargem(margem);
+end;
+
+constructor Itens.Crieobj;
+begin
+  inherited;
+
+end;
+
+destructor Itens.Destrua_se;
+begin
+
+  inherited;
+end;
+
+function Itens.getCustoTotal: Currency;
+begin
+  result := custototal;
+end;
+
+function Itens.getDesconto: Currency;
+begin
+  result := desconto;
+end;
+
+function Itens.getfrete: Currency;
+begin
+  result := frete;
+end;
+
+function Itens.getOutrasDespesas: Currency;
+begin
+  result := outrasdespesas;
+end;
+
+function Itens.getQtde: Integer;
+begin
+  result := qtd;
+end;
+
+function Itens.getvalor: Currency;
+begin
+  result := valor;
+end;
+
+procedure Itens.setCustoTotal(pcustototal: Currency);
+begin
+  custototal := pcustototal;
+end;
+
+procedure Itens.setDesconto(pDesconto: Currency);
+begin
+  desconto := pdesconto;
+end;
+
+procedure Itens.setFrete(pfrete: Currency);
+begin
+  frete := pfrete;
+end;
+
+procedure Itens.setOutrasdespesas(pOutrasDespesas: Currency);
+begin
+  outrasdespesas := poutrasdespesas;
+end;
+
+procedure Itens.SetQtde(pQtd: Integer);
+begin
+  qtd := pqtd;
+end;
+
+procedure Itens.setvalor(pvalor: Currency);
+begin
+  valor := pvalor;
+end;
+
+end.

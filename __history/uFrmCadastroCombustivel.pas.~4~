@@ -1,0 +1,84 @@
+unit uFrmCadastroCombustivel;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmCadastro, Vcl.StdCtrls, Vcl.Buttons, uControllerCombustiveis, uCombustiveis;
+
+type
+  TFrmCadastroCombustivel = class(TFrmCadastro)
+    Label3: TLabel;
+    Label4: TLabel;
+    edtcombustivel: TEdit;
+  protected
+    umcombustivel : Combustiveis;
+    umactrlcombustivel : ControllerCombustiveis;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure ConhecaObj(pObj, pctrl: TObject); Override;
+    procedure Salvar; Override;
+    procedure Sair; Override;
+    procedure CarregaEdt; Override;
+    procedure LimpaEdt; Override;
+    procedure BloqueiaEdt; Override;
+    procedure DesbloqueiaEdt; Override;
+  end;
+
+var
+  FrmCadastroCombustivel: TFrmCadastroCombustivel;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmCadastroCombustivel }
+
+procedure TFrmCadastroCombustivel.BloqueiaEdt;
+begin
+  inherited;
+  self.edtcombustivel.Enabled := false;
+end;
+
+procedure TFrmCadastroCombustivel.CarregaEdt;
+begin
+  inherited;
+  self.edtcodigo.Text := inttostr(umcombustivel.getcodigo);
+  self.edtcombustivel.Text := umcombustivel.getcombustivel;
+  self.edtCadastro.Text := datetostr(umcombustivel.getCadastro);
+  self.edtUlt_alt.Text := datetostr(umcombustivel.getUlt_Alt);
+end;
+
+procedure TFrmCadastroCombustivel.ConhecaObj(pObj, pctrl: TObject);
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroCombustivel.DesbloqueiaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroCombustivel.LimpaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroCombustivel.Sair;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroCombustivel.Salvar;
+begin
+  inherited;
+
+end;
+
+end.

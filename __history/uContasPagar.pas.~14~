@@ -1,0 +1,63 @@
+unit uContasPagar;
+
+interface
+  uses uGenerica, uParcelas,uFornecedores, ucondicoes, uFormaPagamentos;
+  type
+  ContasPagar = class(Generica)
+
+  private
+    { private declarations }
+  protected
+    numero_nota       : integer;
+    serie             : string;
+    modelo            : string;
+    umfornecedor      :Fornecedores;
+    data_emissao      : TDate;
+    numero_parcela    : integer;
+    valor_parcela     : Currency;
+    data_vencimento   : Tdate;
+    data_pagamento    : Tdate;
+    juros             : Currency;
+    multa             : Currency;
+    valor_pago        : Currency;
+    desconto          : Currency;
+    umacondicao       : Condicoes;
+  public
+    constructor Crieobj ;
+    destructor Destrua_se;
+    procedure Setnumero_nota(pnumero_nota: integer);
+    procedure Setserie(pserie: string);
+    procedure setmodelo(pmodelo : string);
+    procedure setumfornecedor(pfornecedor : fornecedores);
+    procedure setdata_emissao(pdata_emissao : Tdate);
+    procedure setnumero_parcela(pnumero_parcela : integer);
+    procedure setvalor_parcela(pvalor_parcela : Currency);
+    procedure setdata_vencimento(pdata_vencimento : Tdate);
+    procedure setdata_pagamento(pdata_pagamento : Tdate);
+    procedure setjuros(pjuros : Currency);
+    procedure setmulta(pmulta : Currency);
+    procedure setvalor_pago(pvalor_pago : Currency);
+    procedure setdesconto(pdesconto : Currency);
+    procedure setumacondicao(pcondicao : condicoes);
+    function getnumero_nota : integer;
+    function getserie : string;
+    function getmodelo : string;
+    function getumfornecedor : fornecedores;
+    function getdata_emissao : Tdate;
+    function getnumero_parcela : integer;
+    function getvalor_pacela : Currency;
+    function getdata_vencimento : Tdate;
+    function getdata_pagamento : Tdate;
+    function getjuros : Currency;
+    function getmulta : Currency;
+    function getvalor_pago : Currency;
+    function getdesconto : Currency;
+    function getumacondicao : Condicoes;
+
+  end;
+
+implementation
+
+{ ContasPagar }
+
+end.

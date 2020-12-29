@@ -1,0 +1,81 @@
+inherited FrmConsultaVendas: TFrmConsultaVendas
+  Caption = 'Consulta Vendas'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited DBGrid1: TDBGrid
+    DataSource = DM.dsvenda_produto
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'NUMERO_NOTA'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DATA_VENDA'
+        Width = 64
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DATA_EMISSAO'
+        Width = 64
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ID_CLIENTE'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ID_CONDICAO'
+        Width = 64
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DATA_CANCELAMENTO'
+        Width = 64
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'TOTAL_PRODUTOS'
+        Width = 64
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'TOTAL_VENDA'
+        Width = 64
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'TOTAL_SERVICOS'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'TOTAL_DESCONTO'
+        Width = 64
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'SERIE'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'MODELO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'STATUS'
+        Visible = True
+      end>
+  end
+end

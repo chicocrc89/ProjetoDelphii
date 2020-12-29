@@ -1,0 +1,86 @@
+unit uFrmConsultaFuncionario;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmConsulta, Data.DB, Vcl.Grids,uDM,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, uFrmCadastroFuncionario, uFuncionarios, uControllerFuncionarios;
+
+type
+  TFrmConsultaFuncionario = class(TFrmConsulta)
+    procedure btnPesquisarClick(Sender: TObject);
+  private
+    { Private declarations }
+  protected
+    umFrmCadastrofuncionario : TFrmCadastroFuncionario;
+    umdm                : TDM;
+    umfuncionario : Funcionarios;
+    umactrlfuncionario : ControllerFuncionarios;
+    procedure Novo; Override;
+    procedure Alterar; Override;
+    procedure Excluir; Override;
+    procedure Sair; Override;
+    procedure Pesquisar; Override;
+  public
+    { Public declarations }
+    procedure conhecaObj (pObj : TObject; pctrl: TObject); Override;
+    procedure SetFrmCadastro (pObj : TObject); Override;
+  end;
+
+var
+  FrmConsultaFuncionario: TFrmConsultaFuncionario;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFrmConsultaFuncionario.Alterar;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaFuncionario.btnPesquisarClick(Sender: TObject);
+begin
+  inherited;
+  self.Pesquisar;
+end;
+
+procedure TFrmConsultaFuncionario.conhecaObj(pObj, pctrl: TObject);
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaFuncionario.Excluir;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaFuncionario.Novo;
+begin
+  inherited;
+  self.umFrmCadastrofuncionario.ShowModal;
+end;
+
+procedure TFrmConsultaFuncionario.Pesquisar;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaFuncionario.Sair;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaFuncionario.SetFrmCadastro(pObj: TObject);
+begin
+  inherited;
+  umfrmcadastrofuncionario := TFrmCadastroFuncionario (pObj);
+end;
+
+end.

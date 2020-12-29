@@ -1,0 +1,131 @@
+inherited FrmConsultaCliente: TFrmConsultaCliente
+  Caption = 'Consulta Cliente'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited DBGrid1: TDBGrid
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ID_CLIENTE'
+        Title.Alignment = taCenter
+        Title.Caption = 'CODIGO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NOME'
+        Width = 235
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DATA_NASC'
+        Title.Alignment = taCenter
+        Title.Caption = 'NASCIMENTO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'SEXO'
+        Title.Alignment = taCenter
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'TPCLIENTE'
+        Title.Alignment = taCenter
+        Title.Caption = 'FIS/JUR'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NACIONALIDADE'
+        Title.Alignment = taCenter
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CNPJ_CPF'
+        Title.Alignment = taCenter
+        Title.Caption = 'CNPJ/CPF'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'INSCEST_RG'
+        Title.Alignment = taCenter
+        Title.Caption = 'INSC. EST/RG'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'EMAIL'
+        Title.Alignment = taCenter
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'LIMITE'
+        Title.Alignment = taCenter
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CELULAR'
+        Title.Alignment = taCenter
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'TELEFONE'
+        Title.Alignment = taCenter
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'PONTO_REF'
+        Title.Alignment = taCenter
+        Title.Caption = 'PONTO REF.'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ENDERECO'
+        Title.Alignment = taCenter
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NUMERO'
+        Title.Alignment = taCenter
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BAIRRO'
+        Title.Alignment = taCenter
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ID_CIDADE'
+        Title.Alignment = taCenter
+        Title.Caption = 'ID CIDADE'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ID_FORMAPAGAMENTO'
+        Title.Alignment = taCenter
+        Title.Caption = 'ID FORMA PAG'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'STATUS'
+        Title.Alignment = taCenter
+        Title.Caption = 'ATIVO/INAT.'
+        Visible = True
+      end>
+  end
+end

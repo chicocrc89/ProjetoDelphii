@@ -1,0 +1,58 @@
+inherited FrmCadastroGrupo: TFrmCadastroGrupo
+  Caption = 'Cadastro Grupo'
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel [3]
+    Left = 8
+    Top = 80
+    Width = 56
+    Height = 18
+    Caption = 'GRUPO'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  inherited lblobs: TLabel
+    Left = 8
+    Top = 395
+    ExplicitLeft = 8
+    ExplicitTop = 395
+  end
+  inherited Label23: TLabel
+    Left = 200
+    Top = 395
+    ExplicitLeft = 200
+    ExplicitTop = 395
+  end
+  object Label3: TLabel [9]
+    Left = 70
+    Top = 76
+    Width = 9
+    Height = 23
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -19
+    Font.Name = 'Calibri'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  inherited edtCodigo: TEdit
+    Width = 71
+    ExplicitWidth = 71
+  end
+  inherited edtcodusuario: TEdit
+    TabOrder = 4
+  end
+  object edtgrupo: TEdit
+    Left = 8
+    Top = 99
+    Width = 249
+    Height = 21
+    Alignment = taCenter
+    TabOrder = 3
+  end
+end

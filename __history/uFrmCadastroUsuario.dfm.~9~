@@ -1,0 +1,263 @@
+inherited FrmCadastroUsuario: TFrmCadastroUsuario
+  Caption = 'Cadastro Usuario'
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel [5]
+    Left = 8
+    Top = 80
+    Width = 46
+    Height = 18
+    Caption = 'NOME'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel [6]
+    Left = 8
+    Top = 144
+    Width = 68
+    Height = 18
+    Caption = 'USUARIO'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label3: TLabel [7]
+    Left = 8
+    Top = 336
+    Width = 51
+    Height = 18
+    Caption = 'SENHA'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label4: TLabel [8]
+    Left = 216
+    Top = 336
+    Width = 192
+    Height = 18
+    Caption = 'CONFIRMA'#199#195'O DE SENHA'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  inherited lblobs: TLabel
+    Top = 403
+    ExplicitTop = 403
+  end
+  inherited Label23: TLabel
+    Top = 403
+    ExplicitTop = 403
+  end
+  object Label9: TLabel [12]
+    Left = 60
+    Top = 76
+    Width = 9
+    Height = 23
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -19
+    Font.Name = 'Calibri'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label6: TLabel [13]
+    Left = 82
+    Top = 134
+    Width = 9
+    Height = 23
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -19
+    Font.Name = 'Calibri'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label5: TLabel [14]
+    Left = 111
+    Top = 190
+    Width = 9
+    Height = 23
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -19
+    Font.Name = 'Calibri'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label7: TLabel [15]
+    Left = 65
+    Top = 326
+    Width = 9
+    Height = 23
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -19
+    Font.Name = 'Calibri'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label8: TLabel [16]
+    Left = 414
+    Top = 326
+    Width = 9
+    Height = 23
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -19
+    Font.Name = 'Calibri'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label11: TLabel [17]
+    Left = 520
+    Top = 189
+    Width = 9
+    Height = 23
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -19
+    Font.Name = 'Calibri'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  inherited edtcodusuario: TEdit
+    TabOrder = 7
+  end
+  object edtnome: TEdit
+    Left = 8
+    Top = 99
+    Width = 265
+    Height = 21
+    TabOrder = 3
+  end
+  object edtusuario: TEdit
+    Left = 8
+    Top = 163
+    Width = 153
+    Height = 21
+    TabOrder = 4
+  end
+  object edtsenha1: TEdit
+    Left = 8
+    Top = 355
+    Width = 186
+    Height = 21
+    TabOrder = 5
+  end
+  object edtsenha2: TEdit
+    Left = 216
+    Top = 355
+    Width = 192
+    Height = 21
+    TabOrder = 6
+  end
+  object status: TRadioGroup
+    Left = 520
+    Top = 27
+    Width = 175
+    Height = 45
+    Caption = 'STATUS'
+    Color = clRed
+    Columns = 2
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clHighlightText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    Items.Strings = (
+      'ATIVO'
+      'INATIVO')
+    ParentBackground = False
+    ParentColor = False
+    ParentFont = False
+    TabOrder = 8
+  end
+  object permissao: TRadioGroup
+    Left = 8
+    Top = 205
+    Width = 321
+    Height = 100
+    Caption = 'PERMISS'#195'O'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    Items.Strings = (
+      'ADM TOTAL'
+      'ADM OPERACIONAL'
+      'TECNICO')
+    ParentFont = False
+    TabOrder = 9
+  end
+  object GroupBox1: TGroupBox
+    Left = 400
+    Top = 200
+    Width = 361
+    Height = 120
+    Caption = 'FUNCION'#193'RIO'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 10
+    object RadioButton1: TRadioButton
+      Left = 3
+      Top = 32
+      Width = 113
+      Height = 17
+      Caption = 'SIM'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+    end
+    object RadioButton2: TRadioButton
+      Left = 3
+      Top = 80
+      Width = 113
+      Height = 17
+      Caption = 'N'#195'O'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+    end
+    object ComboBox1: TComboBox
+      Left = 80
+      Top = 24
+      Width = 249
+      Height = 26
+      TabOrder = 2
+      Text = 'SELECIONE UM FUNCION'#193'RIO'
+    end
+  end
+end

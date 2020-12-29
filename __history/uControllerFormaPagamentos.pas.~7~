@@ -1,0 +1,83 @@
+unit uControllerFormaPagamentos;
+
+interface
+
+uses sysutils, uController, uDM, uDaoformapagamentos, DB, uControllerCondicoes, uFormaPagamentos;
+
+type
+  Controllerformapagamentos = class(controller)
+  private
+
+  protected
+    umadaoformapagamento: Daoformapagamentos;
+    umactrlcondicao : ControllerCondicoes;
+  public
+    constructor CrieObj;
+    destructor Destrua_se;
+    function Salvar(pObj: TObject): string; override;
+    function Carregar(pObj: TObject): string; override;
+    function Excluir(pObj: TObject): string; override;
+    function Pesquisar(pChave: string): string; override;
+    procedure setDM(pDM: TDM);
+    function getds: Tdatasource;
+    procedure setctrlcondicao(pObj: TObject);
+    function getctrlcondicao: ControllerCondicoes;
+  end;
+
+implementation
+
+{ Controllerpais }
+
+function Controllerformapagamentos.Carregar(pObj: TObject): string;
+var mformapagamentos : FormaPagamentos;
+begin
+  self.umadaoformapagamento.Carregar(pObj);
+  mformapagamentos := FormaPagamentos (pobj);
+end;
+
+constructor Controllerformapagamentos.CrieObj;
+begin
+  umadaoformapagamento := Daoformapagamentos.CrieObj;
+end;
+
+destructor Controllerformapagamentos.Destrua_se;
+begin
+  umadaoformapagamento.Destrua_se;
+end;
+
+function Controllerformapagamentos.Excluir(pObj: TObject): string;
+begin
+  self.umadaoformapagamento.Excluir(pObj);
+end;
+
+function Controllerformapagamentos.getctrlcondicao: ControllerCondicoes;
+begin
+  result := umactrlcondicao;
+end;
+
+function Controllerformapagamentos.getds: Tdatasource;
+begin
+  result := umadaoformapagamento.getds;
+end;
+
+function Controllerformapagamentos.Pesquisar(pChave: string): string;
+begin
+  self.umadaoformapagamento.Pesquisar(pChave);
+end;
+
+function Controllerformapagamentos.Salvar(pObj: TObject): string;
+begin
+  self.umadaoformapagamento.Salvar(pObj);
+end;
+
+procedure Controllerformapagamentos.setctrlcondicao(pObj: TObject);
+begin
+  umactrlcondicao := ControllerCondicoes (pObj);
+end;
+
+procedure Controllerformapagamentos.setDM(pDM: TDM);
+begin
+  self.umadaoformapagamento.setDM(pDM);
+end;
+
+end.

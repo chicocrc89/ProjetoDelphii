@@ -1,0 +1,20 @@
+unit uItens;
+  uses uProdutos;
+interface
+type Itens = Class(produtos)
+  private
+
+  protected
+    qtde:Integer;
+    subtotal: Currency;
+    desconto: Currency;
+    outrasdespezas: Currency;
+    rateiofrete: Currency;
+    custoTotal: Currency;
+  public
+
+End;
+
+implementation
+
+end.

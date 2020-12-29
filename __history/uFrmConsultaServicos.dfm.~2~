@@ -1,0 +1,8 @@
+inherited FrmConsultaServicos: TFrmConsultaServicos
+  Caption = 'Consulta Servicos'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited DBGrid1: TDBGrid
+    DataSource = DM.dsservico
+  end
+end

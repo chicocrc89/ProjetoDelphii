@@ -1,0 +1,65 @@
+unit uControllerFormaPagamentos;
+
+interface
+  uses uController, uDM, uDaoformapagamentos, DB;
+  type Controllerformapagamentos = class(controller)
+  private
+
+  protected
+    umadaopais : Daoformapagamentos;
+  public
+    constructor CrieObj;
+    destructor  Destrua_se;
+    function Salvar ( pObj :  TObject ):            string;    override;
+    function Carregar ( pObj : TObject ):           string;    override;
+    function Excluir ( pObj : TObject ):            string;    override;
+    function Pesquisar ( pChave : string):          string;    override;
+    procedure setDM (pDM : TDM);
+    function getds : Tdatasource;
+  end;
+
+implementation
+
+{ Controllerpais }
+
+function Controllerformapagamentos.Carregar(pObj: TObject): string;
+begin
+  self.umadaopais.Carregar(pObj);
+end;
+
+constructor Controllerformapagamentos.CrieObj;
+begin
+  umadaopais := Daoformapagamentos.CrieObj;
+end;
+
+destructor Controllerformapagamentos.Destrua_se;
+begin
+  umadaopais.Destrua_se;
+end;
+
+function Controllerformapagamentos.Excluir(pObj: TObject): string;
+begin
+  self.umadaopais.Excluir(pObj);
+end;
+
+function Controllerformapagamentos.getds: Tdatasource;
+begin
+  result := umadaopais.getds;
+end;
+
+function Controllerformapagamentos.Pesquisar(pChave: string): string;
+begin
+  self.umadaopais.Pesquisar(pChave);
+end;
+
+function Controllerformapagamentos.Salvar(pObj: TObject): string;
+begin
+  self.umadaopais.Salvar(pObj);
+end;
+
+procedure Controllerformapagamentos.setDM(pDM: TDM);
+begin
+  self.umadaopais.setDM(pDM);
+end;
+
+end.

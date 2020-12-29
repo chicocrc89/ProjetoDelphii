@@ -1,0 +1,68 @@
+unit uFormaPagamentos;
+
+interface
+
+uses uGenerica, uCondicoes;
+
+type
+  FormaPagamentos = class(Generica)
+
+  private
+
+  protected
+    pagamento: string;
+    umacondicao : Condicoes;
+
+  public
+    constructor crieobj;
+    destructor Destrua_se;
+    procedure setpagamento(ppagamento: string);
+    procedure setumacondicao (pcondicao : Condicoes);
+    function getpagamento: string;
+    function getumacondicao : Condicoes;
+    function clone: FormaPagamentos;
+  end;
+
+implementation
+
+{ FormaPagamentos }
+
+function FormaPagamentos.clone: FormaPagamentos;
+begin
+  result := FormaPagamentos.crieobj;
+  result.setCodigo(codigo);
+  result.setpagamento(pagamento);
+  result.setumacondicao(umacondicao);
+end;
+
+constructor FormaPagamentos.crieobj;
+begin
+  self.umacondicao.crieobj;
+end;
+
+destructor FormaPagamentos.Destrua_se;
+begin
+  self.umacondicao.destrua_se;
+end;
+
+function FormaPagamentos.getpagamento: string;
+begin
+  result := pagamento;
+end;
+
+function FormaPagamentos.getumacondicao: Condicoes;
+begin
+  result := umacondicao;
+end;
+
+procedure FormaPagamentos.setpagamento(ppagamento: string);
+begin
+  pagamento := ppagamento;
+end;
+
+procedure FormaPagamentos.setumacondicao(pcondicao: Condicoes);
+begin
+  umacondicao := pcondicao;
+end;
+
+end.

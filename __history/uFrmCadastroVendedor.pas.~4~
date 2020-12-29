@@ -1,0 +1,75 @@
+unit uFrmCadastroVendedor;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmCadastro, Vcl.StdCtrls, Vcl.Buttons;
+
+type
+  TFrmCadastroVendedor = class(TFrmCadastro)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure ConhecaObj (pObj : TObject; pctrl: TObject);  Override;
+    procedure Salvar;                       Override;
+    procedure Sair;                         Override;
+    procedure CarregaEdt;                   Override;
+    procedure LimpaEdt;                     Override;
+    procedure BloqueiaEdt;                  Override;
+    procedure DesbloqueiaEdt;               Override;
+  end;
+
+var
+  FrmCadastroVendedor: TFrmCadastroVendedor;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmCadastroVendedor }
+
+procedure TFrmCadastroVendedor.BloqueiaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroVendedor.CarregaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroVendedor.ConhecaObj(pObj: TObject; pctrl: TObject);
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroVendedor.DesbloqueiaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroVendedor.LimpaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroVendedor.Sair;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroVendedor.Salvar;
+begin
+  inherited;
+
+end;
+
+end.

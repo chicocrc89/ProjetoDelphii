@@ -1,0 +1,101 @@
+unit uControllerfornecedores;
+
+interface
+
+uses SysUtils, ucontroller, uDM, DB, uDaoFornecedores, uControllerCidades, uControllerFormaPagamentos, uFornecedores;
+
+type
+  Controllerfornecedores = class(controller)
+  private
+
+  protected
+    umadaofornecedor: DaoFornecedores;
+    umactrlcidade: ControllerCidades;
+    umactrlformapagamento : ControllerFormaPagamentos;
+  public
+    constructor CrieObj;
+    destructor Destrua_se;
+    function Salvar(pObj: TObject): string; override;
+    function Carregar(pObj: TObject): string; override;
+    function Excluir(pObj: TObject): string; override;
+    function Pesquisar(pChave: string): string; override;
+    procedure setDM(pDM: TDM);
+    function getds: Tdatasource;
+    procedure setctrlcidade(pObj: TObject);
+    function getctrlcidade: ControllerCidades;
+    procedure setctrlformapagamento(pObj: TObject);
+    function getctrlformapagamento: ControllerFormaPagamentos;
+  end;
+
+implementation
+
+{ Controllerfornecedores }
+
+function Controllerfornecedores.Carregar(pObj: TObject): string;
+var
+  mfornecedor: Fornecedores;
+begin
+  self.umadaofornecedor.Carregar(pObj);
+  mfornecedor := Fornecedores(pObj);
+  umactrlcidade.Pesquisar(inttostr(mfornecedor.getumacidade.getcodigo));
+  self.umactrlcidade.Carregar(mfornecedor.getumacidade);
+  umactrlformapagamento.Pesquisar(inttostr(mfornecedor.getumaformapagamento.getCodigo));
+  self.umactrlformapagamento.Carregar(mfornecedor.getumaformapagamento);
+end;
+
+constructor Controllerfornecedores.CrieObj;
+begin
+  self.umadaofornecedor := DaoFornecedores.CrieObj;
+end;
+
+destructor Controllerfornecedores.Destrua_se;
+begin
+  self.umadaofornecedor.Destrua_se;
+end;
+
+function Controllerfornecedores.Excluir(pObj: TObject): string;
+begin
+  self.umadaofornecedor.Excluir(pObj);
+end;
+
+function Controllerfornecedores.getctrlcidade: ControllerCidades;
+begin
+  result := umactrlcidade;
+end;
+
+function Controllerfornecedores.getctrlformapagamento: ControllerFormaPagamentos;
+begin
+  result := umactrlformapagamento;
+end;
+
+function Controllerfornecedores.getds: Tdatasource;
+begin
+  result := umadaofornecedor.getds;
+end;
+
+function Controllerfornecedores.Pesquisar(pChave: string): string;
+begin
+  self.umadaofornecedor.Pesquisar(pChave);
+end;
+
+function Controllerfornecedores.Salvar(pObj: TObject): string;
+begin
+  self.umadaofornecedor.Salvar(pObj);
+end;
+
+procedure Controllerfornecedores.setctrlcidade(pObj: TObject);
+begin
+
+end;
+
+procedure Controllerfornecedores.setctrlformapagamento(pObj: TObject);
+begin
+
+end;
+
+procedure Controllerfornecedores.setDM(pDM: TDM);
+begin
+
+end;
+
+end.

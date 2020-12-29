@@ -1,0 +1,8 @@
+inherited FrmConsultaContasReceber: TFrmConsultaContasReceber
+  Caption = 'Consulta Contas Receber'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited DBGrid1: TDBGrid
+    DataSource = DM.dscontasreceber
+  end
+end

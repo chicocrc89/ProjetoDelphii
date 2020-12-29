@@ -1,0 +1,7 @@
+inherited FrmCadastroLaboratorio: TFrmCadastroLaboratorio
+  Caption = 'Cadastro Laboratorio'
+  ExplicitWidth = 799
+  ExplicitHeight = 526
+  PixelsPerInch = 96
+  TextHeight = 13
+end

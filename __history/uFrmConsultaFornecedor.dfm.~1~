@@ -1,0 +1,9 @@
+inherited FrmConsultaFornecedor: TFrmConsultaFornecedor
+  Caption = 'Consulta Fornecedor'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited edtPesquisar: TEdit
+    Height = 21
+    ExplicitHeight = 21
+  end
+end

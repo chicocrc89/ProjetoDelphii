@@ -1,0 +1,92 @@
+unit uFrmConsultaCondicao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmConsulta, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, uFrmCadastroCondicao, uCondicoes, uControllerCondicoes, uDM, uColecaoParcelas;
+
+type
+  TFrmConsultaCondicao = class(TFrmConsulta)
+    procedure btnNovoClick(Sender: TObject);
+  private
+    { Private declarations }
+    umFrmCadastroCondicao: TFrmCadastroCondicao;
+    umaCondicao: Condicoes;
+    umactrlcondicao: ControllerCondicoes;
+    umdm: TDM;
+  protected
+    procedure Novo; Override;
+    procedure Alterar; Override;
+    procedure Excluir; Override;
+    procedure Sair; Override;
+    procedure Pesquisar; Override;
+  public
+    procedure conhecaObj(pObj: TObject; pctrl: TObject); Override;
+    procedure SetFrmCadastro(pObj: TObject); Override;
+  end;
+
+var
+  FrmConsultaCondicao: TFrmConsultaCondicao;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmConsultaCondicao }
+
+procedure TFrmConsultaCondicao.Alterar;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaCondicao.btnNovoClick(Sender: TObject);
+begin
+  inherited;
+  umfrmcadastrocondicao.ShowModal;
+  self.umFrmCadastroCondicao.ListView1.Clear;
+end;
+
+procedure TFrmConsultaCondicao.conhecaObj(pObj, pctrl: TObject);
+begin
+  inherited;
+  umacondicao := Condicoes(pObj);
+  umactrlcondicao := Controllercondicoes(pctrl);
+  self.umFrmCadastrocondicao.conhecaObj(umacondicao, umactrlcondicao);
+  self.Pesquisar;
+  self.DBGrid1.DataSource := umactrlcondicao.getds;
+end;
+
+procedure TFrmConsultaCondicao.Excluir;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaCondicao.Novo;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaCondicao.Pesquisar;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaCondicao.Sair;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaCondicao.SetFrmCadastro(pObj: TObject);
+begin
+  inherited;
+  umfrmcadastrocondicao := TFrmCadastroCondicao (pObj);
+end;
+
+end.

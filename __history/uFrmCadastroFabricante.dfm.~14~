@@ -1,0 +1,131 @@
+inherited FrmCadastroFabricante: TFrmCadastroFabricante
+  Caption = 'Cadastro Fabricante'
+  ClientHeight = 230
+  ClientWidth = 681
+  ExplicitWidth = 697
+  ExplicitHeight = 269
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited lblDtCadastro: TLabel
+    Left = 8
+    Top = 182
+    ExplicitLeft = 8
+    ExplicitTop = 182
+  end
+  inherited lblDtUlt_alt: TLabel
+    Left = 152
+    Top = 182
+    ExplicitLeft = 152
+    ExplicitTop = 182
+  end
+  object Label1: TLabel [3]
+    Left = 8
+    Top = 72
+    Width = 40
+    Height = 18
+    Caption = 'CNPJ'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel [4]
+    Left = 168
+    Top = 72
+    Width = 94
+    Height = 18
+    Caption = 'FABRICANTE'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  inherited btnSalvar: TSpeedButton
+    Left = 496
+    Top = 179
+    ExplicitLeft = 496
+    ExplicitTop = 179
+  end
+  inherited btnSair: TSpeedButton
+    Left = 592
+    Top = 179
+    ExplicitLeft = 592
+    ExplicitTop = 179
+  end
+  inherited Label10: TLabel
+    Left = 320
+    Top = 182
+    ExplicitLeft = 320
+    ExplicitTop = 182
+  end
+  inherited lblobs: TLabel
+    Left = 8
+    Top = 139
+    ExplicitLeft = 8
+    ExplicitTop = 139
+  end
+  inherited Label23: TLabel
+    Left = 200
+    Top = 139
+    ExplicitLeft = 200
+    ExplicitTop = 139
+  end
+  object Label3: TLabel [10]
+    Left = 268
+    Top = 68
+    Width = 9
+    Height = 23
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -19
+    Font.Name = 'Calibri'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  inherited edtCodigo: TEdit
+    Width = 40
+    ExplicitWidth = 40
+  end
+  inherited edtCadastro: TEdit
+    Left = 8
+    Top = 201
+    TabOrder = 3
+    ExplicitLeft = 8
+    ExplicitTop = 201
+  end
+  inherited edtUlt_alt: TEdit
+    Left = 152
+    Top = 201
+    TabOrder = 4
+    ExplicitLeft = 152
+    ExplicitTop = 201
+  end
+  inherited edtcodusuario: TEdit
+    Left = 320
+    Top = 201
+    TabOrder = 5
+    ExplicitLeft = 320
+    ExplicitTop = 201
+  end
+  object edtcnpj: TEdit
+    Left = 8
+    Top = 91
+    Width = 145
+    Height = 21
+    Alignment = taCenter
+    TabOrder = 1
+  end
+  object edtfabricante: TEdit
+    Left = 168
+    Top = 91
+    Width = 145
+    Height = 21
+    Alignment = taCenter
+    TabOrder = 2
+  end
+end

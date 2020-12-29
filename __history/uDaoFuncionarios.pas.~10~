@@ -1,0 +1,130 @@
+unit uDaoFuncionarios;
+
+interface
+  uses udao, ufuncionarios, uDM, DB, uDaoCidades, SysUtils;
+  type Daofuncionarios = class(dao)
+  private
+
+  protected
+    umdm : TDM;
+    umadaocidade : DaoCidades;
+  public
+    constructor CrieObj;
+    destructor  Destrua_se;
+    function Salvar ( pObj :  TObject ):         string;    override;
+    function Carregar ( pObj : TObject ):        string;    override;
+    function Excluir ( pObj : TObject ):         string;    override;
+    function Pesquisar ( pChave : string):       string;    override;
+    procedure setDM (pDM : TDM);
+    function getds : Tdatasource;
+    procedure setdaocidade (pObj : TObject);
+  end;
+
+implementation
+
+{ Daofuncionarios }
+
+function Daofuncionarios.Carregar(pObj: TObject): string;
+var mfuncionarios : funcionarios;
+begin
+  mfuncionarios := funcionarios (pObj);
+  if not umDM.trans.Active then
+      umDM.trans.Active := true;
+   if not umDM.dsetfuncionario.Active then
+      umDM.dsetfuncionario.Open;
+   mfuncionarios.setCodigo(umdm.dsetfuncionarioID_FUNCIONARIO.Value);
+   mfuncionarios.setnome(umdm.dsetfuncionarioNOME.Value);
+   mfuncionarios.setcargo(umdm.dsetfuncionarioCARGO.Value);
+   mfuncionarios.setcpf(umdm.dsetfuncionarioCPF.Value);
+   mfuncionarios.setdatanasc(umdm.dsetfuncionarioNASCIMENTO.Value);
+   mfuncionarios.setendereco(umdm.dsetfuncionarioENDERECO.Value);
+   mfuncionarios.setnumero(umdm.dsetfuncionarioNUMERO.Value);
+   mfuncionarios.setbairro(umdm.dsetfuncionarioBAIRRO.Value);
+   mfuncionarios.getumacidade.setCodigo(umdm.dsetfuncionarioID_CIDADE.Value);
+   mfuncionarios.setcelular(umdm.dsetfuncionarioCELULAR.Value);
+   mfuncionarios.settelefone(umdm.dsetfuncionarioTELEFONE.Value);
+   mfuncionarios.setsexo(umdm.dsetfuncionarioSEXO.Value);
+   mfuncionarios.setstatus(umdm.dsetfuncionarioSTATUS.Value);
+   mfuncionarios.setemail(umdm.dsetfuncionarioEMAIL.Value);
+end;
+
+constructor Daofuncionarios.CrieObj;
+begin
+  umadaocidade := DaoCidades.crieobj;
+end;
+
+destructor Daofuncionarios.Destrua_se;
+begin
+  umadaocidade.Destrua_se;
+end;
+
+function Daofuncionarios.Excluir(pObj: TObject): string;
+begin
+  if not umDM.trans.Active then
+      umDM.trans.Active := true;
+   if not umDM.dsetfuncionario.Active then
+      umDM.dsetfuncionario.Open;
+   umDM.dsetfuncionario.Delete;
+   umDM.trans.Commit;
+end;
+
+function Daofuncionarios.getds: Tdatasource;
+begin
+  result := umdm.dsfuncionario;
+end;
+
+function Daofuncionarios.Pesquisar(pChave: string): string;
+var mSQL : string;
+begin
+  if length(pchave) = 0 then
+    mSQL := 'select * from funcionario order by nome'
+  else if ehnumero(pchave) then
+    mSql:='select * from funcionario where id_funcionario =' + QuotedStr(pchave)
+  else
+    mSql:='select * from funcionario where nome =' + QuotedStr(pchave);
+    umDM.dsetfuncionario.Active := false;
+    umDM.dsetfuncionario.SelectSQL.Text := mSQL;
+    if not umDM.trans.Active then
+      umDM.trans.Active := true;
+    if not umDM.dsetfuncionario.Active then
+      umDM.dsetfuncionario.Open;
+    result := '';
+end;
+
+function Daofuncionarios.Salvar(pObj: TObject): string;
+var mfuncionarios : funcionarios;
+begin
+   mfuncionarios := funcionarios (pObj);
+   if not umDM.trans.Active then
+      umDM.trans.Active := true;
+   if not umDM.DSetfuncionario.Active then
+      umDM.dsetfuncionario.Open;
+   if mfuncionarios.getcodigo = 0 then
+      umDM.dsetfuncionario.Insert
+   else
+      umDM.dsetfuncionario.Edit;
+      umdm.dsetfuncionarioID_FUNCIONARIO.Value := mfuncionarios.getCodigo;
+      umdm.dsetfuncionarioNOME.Value:= mfuncionarios.getnome;
+      umdm.dsetfuncionarioCARGO.Value := mfuncionarios.getcargo;
+      umdm.dsetfuncionarioSEXO.Value := mfuncionarios.getsexo;
+      umdm.dsetfuncionarioTELEFONE.Value := mfuncionarios.gettelefone;
+      umdm.dsetfuncionarioCELULAR.Value := mfuncionarios.getcelular;
+      umdm.dsetfuncionarioNASCIMENTO.Value := mfuncionarios.getdatanasc;
+      umdm.dsetfuncionarioEMAIL.Value := mfuncionarios.getemail;
+      umdm.dsetfuncionarioCOMISSAO.Value := mfuncionarios
+      umDM.dsetcidade.Post;
+      umDM.trans.Commit;
+
+end;
+
+procedure Daofuncionarios.setdaoestado(pObj: TObject);
+begin
+  umadaoestado := DaoEstados (pObj);
+end;
+
+procedure Daofuncionarios.setDM(pDM: TDM);
+begin
+  umdm := pDM;
+end;
+
+end.

@@ -1,0 +1,127 @@
+unit uFrmConsultaCidade;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmConsulta, Vcl.ComCtrls,
+  Vcl.StdCtrls, uFrmCadastroCidade,
+  Data.DB, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids, uDM,
+  uControllerCidades,
+  uCidades, Vcl.Buttons;
+
+type
+  TFrmConsultaCidade = class(TFrmConsulta)
+    Label1: TLabel;
+    procedure btnPesquisarClick(Sender: TObject);
+  private
+    { Private declarations }
+  protected
+    umFrmCadastroCidade: TFrmCadastroCidade;
+    umdm: TDM;
+    umacidade: Cidades;
+    umactrlcidade: ControllerCidades;
+    procedure Novo; Override;
+    procedure Alterar; Override;
+    procedure Excluir; Override;
+    procedure Sair; Override;
+    procedure Pesquisar; Override;
+  public
+    { Public declarations }
+    procedure conhecaObj(pObj: TObject; pctrl: TObject); Override;
+    procedure SetFrmCadastro(pObj: TObject); Override;
+  end;
+
+var
+  FrmConsultaCidade: TFrmConsultaCidade;
+
+implementation
+
+{$R *.dfm}
+{ TFrmConsultaCidade }
+
+procedure TFrmConsultaCidade.Alterar;
+begin
+  inherited;
+  self.umactrlcidade.Carregar(umacidade);
+  self.umFrmCadastroCidade.conhecaObj(umacidade, umactrlcidade);
+  self.umFrmCadastroCidade.CarregaEdt;
+  umFrmCadastroCidade.ShowModal;
+  self.Pesquisar;
+end;
+
+procedure TFrmConsultaCidade.btnPesquisarClick(Sender: TObject);
+begin
+  inherited;
+  self.Pesquisar;
+end;
+
+procedure TFrmConsultaCidade.conhecaObj(pObj: TObject; pctrl: TObject);
+begin
+  inherited;
+  umacidade := Cidades(pObj);
+  umactrlcidade := ControllerCidades(pctrl);
+  self.umFrmCadastroCidade.conhecaObj(umacidade, umactrlcidade);
+  self.Pesquisar;
+  self.DBGrid1.DataSource := umactrlcidade.getds;
+end;
+
+procedure TFrmConsultaCidade.Excluir;
+var
+  mtitulo: string;
+begin
+  inherited;
+  self.umactrlcidade.Carregar(umacidade);
+  self.umFrmCadastroCidade.conhecaObj(umacidade, umactrlcidade);
+  self.umFrmCadastroCidade.limpaedt;
+  self.umFrmCadastroCidade.CarregaEdt;
+  self.umFrmCadastroCidade.bloqueiaedt;
+  mtitulo := umFrmCadastroCidade.btnSalvar.Caption;
+  umFrmCadastroCidade.btnSalvar.Caption := '&Excluir';
+  umFrmCadastroCidade.ShowModal;
+  self.umFrmCadastroCidade.DesbloqueiaEdt;
+  umFrmCadastroCidade.btnSalvar.Caption := mtitulo;
+  self.Pesquisar;
+end;
+
+procedure TFrmConsultaCidade.Novo;
+begin
+  inherited;
+  self.umacidade.setcodigo(0);
+  self.umacidade.setCadastro(Date);
+  self.umacidade.setUlt_Alt(Date);
+  self.umFrmCadastroCidade.limpaedt;
+  self.umFrmCadastroCidade.DesbloqueiaEdt;
+  self.umFrmCadastroCidade.conhecaObj(umacidade, umactrlcidade);
+  self.umFrmCadastroCidade.ShowModal;
+  self.Pesquisar;
+end;
+
+procedure TFrmConsultaCidade.Pesquisar;
+var
+  mMSG: string;
+begin
+  inherited;
+  mMSG := umactrlcidade.Pesquisar(self.edtPesquisar.Text);
+  if mMSG <> '' then
+    ShowMessage('CIDADE ' + self.edtPesquisar.Text + ' NÃO ENCONTRADO');
+end;
+
+procedure TFrmConsultaCidade.Sair;
+begin
+  if self.btnsair.Caption = 'SELECIONAR' then
+    umactrlcidade.Carregar(umacidade);
+  inherited;
+
+end;
+
+procedure TFrmConsultaCidade.SetFrmCadastro(pObj: TObject);
+begin
+  inherited;
+  umFrmCadastroCidade := TFrmCadastroCidade(pObj);
+end;
+
+end.

@@ -1,0 +1,25 @@
+unit uFrmConsultaCor;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmConsulta, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons;
+
+type
+  TuFrmConsultaCor = class(TFrmConsulta)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  uFrmConsultaCor: TuFrmConsultaCor;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,328 @@
+unit uFrmCadastroFuncionario;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmCadastro, Vcl.StdCtrls, Vcl.Buttons,
+  Vcl.ExtCtrls, uControllerFuncionarios, uFrmConsultaCidade, uFuncionarios;
+
+type
+  TFrmCadastroFuncionario = class(TFrmCadastro)
+    Label1: TLabel;
+    edtnome: TEdit;
+    edtcomissao: TEdit;
+    Label2: TLabel;
+    edtcargo: TEdit;
+    Label5: TLabel;
+    sexo: TRadioGroup;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    edtcodcidade: TEdit;
+    edtcidade: TEdit;
+    edtddd: TEdit;
+    edtendereco: TEdit;
+    edtnumero: TEdit;
+    edtbairro: TEdit;
+    status: TRadioGroup;
+    Label6: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label17: TLabel;
+    Label19: TLabel;
+    edttelefone: TEdit;
+    edtcelular: TEdit;
+    Label18: TLabel;
+    Label20: TLabel;
+    Label21: TLabel;
+    Label22: TLabel;
+    edtnascimento: TEdit;
+    edtemail: TEdit;
+    btnPesquisar: TSpeedButton;
+    Label24: TLabel;
+    Label25: TLabel;
+    edtcpf: TEdit;
+    procedure edtcodcidadeExit(Sender: TObject);
+    procedure btnPesquisarClick(Sender: TObject);
+  private
+    { Private declarations }
+  protected
+    umfrmconsultacidade : TFrmConsultaCidade;
+    umactrlfuncionario  : ControllerFuncionarios;
+    umfuncionario : Funcionarios;
+  public
+    { Public declarations }
+    procedure ConhecaObj (pObj : TObject; pctrl: TObject);  Override;
+    procedure Salvar;                       Override;
+    procedure Sair;                         Override;
+    procedure CarregaEdt;                   Override;
+    procedure LimpaEdt;                     Override;
+    procedure BloqueiaEdt;                  Override;
+    procedure DesbloqueiaEdt;               Override;
+    procedure setfrmconsulta (pObj : TObject);
+  end;
+
+var
+  FrmCadastroFuncionario: TFrmCadastroFuncionario;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmCadastroVendedor }
+
+procedure TFrmCadastroFuncionario.BloqueiaEdt;
+begin
+  inherited;
+  self.edtnome.Enabled := false;
+  self.edtcomissao.Enabled := false;
+  self.edtcargo.Enabled := false;
+  self.edtcodcidade.Enabled := false;
+  self.edtcidade.Enabled := false;
+  self.edtddd.Enabled := false;
+  self.edtendereco.Enabled := false;
+  self.edtnumero.Enabled := false;
+  self.edtbairro.Enabled := false;
+  self.edttelefone.Enabled := false;
+  self.edtcelular.Enabled := false;
+  self.edtnascimento.Enabled := false;
+  self.edtemail.Enabled := false;
+  self.edtcpf.Enabled := false;
+end;
+
+procedure TFrmCadastroFuncionario.btnPesquisarClick(Sender: TObject);
+var mbotao : string;
+begin
+  inherited;
+  mbotao := umfrmconsultacidade.btnSair.Caption;
+  umfrmconsultacidade.btnSair.Caption := 'SELECIONAR';
+  umfrmconsultacidade.conhecaObj(umfuncionario.getumacidade, umactrlfuncionario.getctrlcidade);
+  umfrmconsultacidade.ShowModal;
+
+  umfrmconsultacidade.btnSair.Caption := mbotao;
+  self.edtcodcidade.Text := inttostr(umfuncionario.getumacidade.getcodigo);
+  self.edtcidade.Text := umfuncionario.getumacidade.getcidade;
+  self.edtddd.Text := umfuncionario.getumacidade.getDDd;
+end;
+
+procedure TFrmCadastroFuncionario.CarregaEdt;
+begin
+  inherited;
+  self.edtCodigo.Text := inttostr(umfuncionario.getCodigo);
+  self.edtnome.Text := umfuncionario.getnome;
+  self.edtcomissao.Text := floattostr(umfuncionario.getcomissao);
+  self.edtcargo.Text := umfuncionario.getcargo;
+  self.edtcodcidade.Text := inttostr(umfuncionario.getumacidade.getCodigo);
+  self.edtcidade.Text := umfuncionario.getumacidade.getcidade;
+  self.edtddd.Text := umfuncionario.getumacidade.getDDD;
+  self.edtendereco.Text := umfuncionario.getendereco;
+  self.edtnumero.Text := inttostr(umfuncionario.getnumero);
+  self.edtbairro.Text := umfuncionario.getbairro;
+  self.edttelefone.Text := umfuncionario.gettelefone;
+  self.edtcelular.Text := umfuncionario.getcelular;
+  self.edtnascimento.Text := datetostr(umfuncionario.getdatanasc);
+  self.edtemail.Text := umfuncionario.getemail;
+  self.edtcpf.Text := umfuncionario.getcpf;
+end;
+
+procedure TFrmCadastroFuncionario.ConhecaObj(pObj: TObject; pctrl: TObject);
+begin
+  inherited;
+  umfuncionario := Funcionarios (pObj);
+  umactrlfuncionario := ControllerFuncionarios (pctrl);
+  self.edtCodigo.Text := inttostr(self.umfuncionario.getCodigo);
+
+end;
+
+procedure TFrmCadastroFuncionario.DesbloqueiaEdt;
+begin
+  inherited;
+  self.edtnome.Enabled := true;
+  self.edtcomissao.Enabled := true;
+  self.edtcargo.Enabled := true;
+  self.edtcodcidade.Enabled := true;
+  self.edtcidade.Enabled := true;
+  self.edtddd.Enabled := true;
+  self.edtendereco.Enabled := true;
+  self.edtnumero.Enabled := true;
+  self.edtbairro.Enabled := true;
+  self.edttelefone.Enabled := true;
+  self.edtcelular.Enabled := true;
+  self.edtnascimento.Enabled := true;
+  self.edtemail.Enabled := true;
+  self.edtcpf.Enabled := true;
+end;
+
+procedure TFrmCadastroFuncionario.edtcodcidadeExit(Sender: TObject);
+var mMSG : string;
+begin
+  inherited;
+  mMSG := umactrlfuncionario.getctrlcidade.Pesquisar(self.edtcodcidade.Text);
+
+  umactrlfuncionario.getctrlcidade.Carregar(umfuncionario.getumacidade);
+
+  self.edtcodcidade.Text := inttostr(umfuncionario.getumacidade.getcodigo);
+  self.edtcidade.Text := umfuncionario.getumacidade.getcidade;
+  self.edtddd.Text := umfuncionario.getumacidade.getddd;
+end;
+
+procedure TFrmCadastroFuncionario.LimpaEdt;
+begin
+  inherited;
+  self.edtnome.Clear;
+  self.edtcomissao.Clear;
+  self.edtcargo.Clear;
+  self.edtcodcidade.Clear;
+  self.edtcidade.Clear;
+  self.edtddd.Clear;
+  self.edtendereco.Clear;
+  self.edtnumero.Clear;
+  self.edtbairro.Clear;
+  self.edttelefone.Clear;
+  self.edtcelular.Clear;
+  self.edtnascimento.Clear;
+  self.edtemail.Clear;
+  self.edtcpf.Clear;
+end;
+
+procedure TFrmCadastroFuncionario.Sair;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroFuncionario.Salvar;
+begin
+  inherited;
+  if self.btnSalvar.Caption = '&Excluir' then
+  begin
+    If Application.MessageBox('Confirma Exclusão ?','Cuidado !!!',MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES Then
+    begin
+      self.umactrlfuncionario.Excluir(umfuncionario);
+      ShowMessage('Excluido com Sucesso!!!');
+      self.sair;
+    end;
+  end
+  else
+  begin
+    if self.sexo.ItemIndex < 0 then
+    begin
+       ShowMessage('Campo Sexo precisa ser selecionado!!!');
+       self.sexo.SetFocus;
+    end
+    else if self.status.ItemIndex < 0 then
+    begin
+       ShowMessage('Campo Status precisa ser selecionado!!!');
+       self.status.SetFocus;
+    end
+    else if (self.edtnome.Text = '')then
+    begin
+        ShowMessage('Campo Nome precisa ser preenchido!!!');
+        self.edtnome.SetFocus;
+    end
+    else if (self.edtcomissao.Text = '') then
+    begin
+        ShowMessage('Campo Comissão precisa ser preenchido!!!');
+        self.edtcomissao.SetFocus
+    end
+    else if (self.edtcargo.Text = '') then
+    begin
+        ShowMessage('Campo Cargo precisa ser preenchido!!!');
+        self.edtcargo.SetFocus;
+    end
+    else if (self.edtcodcidade.Text = '') then
+    begin
+       showmessage('Campo Codigo Cidade precisa ser preenchido!!!');
+       self.edtcodcidade.SetFocus;
+    end
+    else if (self.edtendereco.Text = '') then
+    begin
+       showmessage('Campo Endereço precisa ser preenchido!!!');
+       self.edtendereco.SetFocus;
+    end
+    else if (self.edtnumero.Text = '') then
+    begin
+       showmessage('Campo Numero precisa ser preenchido!!!');
+       self.edtnumero.SetFocus;
+    end
+    else if (self.edtbairro.Text = '') then
+    begin
+       showmessage('Campo Bairro precisa ser preenchido!!!');
+       self.edtbairro.SetFocus;
+    end
+    else if (self.edttelefone.Text = '') then
+    begin
+       showmessage('Campo Telefone precisa ser preenchido!!!');
+       self.edttelefone.SetFocus;
+    end
+    else if (self.edtcelular.Text = '') then
+    begin
+       showmessage('Campo Celular precisa ser preenchido!!!');
+       self.edtcelular.SetFocus;
+    end
+    else if (self.edtnascimento.Text = '') then
+    begin
+       showmessage('Campo Data de Nascimento precisa ser preenchido!!!');
+       self.edtnascimento.SetFocus;
+    end
+    else if (self.edtemail.Text = '') then
+    begin
+       showmessage('Campo E-mail precisa ser preenchido!!!');
+       self.edtemail.SetFocus;
+    end
+    else if (self.edtcpf.Text = '') then
+    begin
+       showmessage('Campo CPF precisa ser preenchido!!!');
+       self.edtcpf.SetFocus;
+    end
+    else
+    begin
+      umfuncionario.setcodigo(strtoint(self.edtcodigo.Text));
+      umfuncionario.setnome(self.edtnome.Text);
+      umfuncionario.setcpf(self.edtcpf.Text);
+      umfuncionario.setdatanasc(strtodate(self.edtnascimento.Text));
+      umfuncionario.setendereco(self.edtendereco.Text);
+      umfuncionario.setnumero(strtoint(self.edtnumero.Text));
+      umfuncionario.setbairro(self.edtbairro.Text);
+      umfuncionario.getumacidade.setCodigo(strtoint(self.edtcodcidade.Text));
+      umfuncionario.setcargo(self.edtcargo.Text);
+      umfuncionario.setcelular(self.edtcelular.Text);
+      umfuncionario.settelefone(self.edttelefone.Text);
+      if self.sexo.ItemIndex = 0 then
+      begin
+        umfuncionario.setsexo('M');
+      end
+      else
+      begin
+        umfuncionario.setsexo('F');
+      end;
+      if self.status.ItemIndex = 0 then
+      begin
+        umfuncionario.setstatus('A');
+      end
+      else
+      begin
+        umfuncionario.setstatus('I');
+      end;
+      umfuncionario.setemail(self.edtemail.Text);
+      umfuncionario.setcomissao(strtofloat(self.edtcomissao.Text));
+      umactrlfuncionario.Salvar(umfuncionario.clone);
+      ShowMessage('Salvo com Sucesso!!!');
+      self.sair;
+    end;
+  end;
+end;
+
+procedure TFrmCadastroFuncionario.setfrmconsulta(pObj: TObject);
+begin
+  umfrmconsultacidade := TFrmconsultacidade (pObj);
+end;
+
+end.

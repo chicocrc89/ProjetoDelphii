@@ -1,0 +1,5 @@
+inherited FrmCadastroServicos: TFrmCadastroServicos
+  Caption = 'Cadastro Servicos'
+  PixelsPerInch = 96
+  TextHeight = 13
+end

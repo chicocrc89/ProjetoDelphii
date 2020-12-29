@@ -1,0 +1,17 @@
+unit uModelos;
+
+interface
+  uses uGenerica;
+  type
+    Modelos = class(Generica)
+  private
+
+  protected
+
+  public
+
+  end;
+
+implementation
+
+end.

@@ -1,0 +1,93 @@
+unit uDaoprodutos;
+
+interface
+
+uses udao, uprodutos, uDM, DB, uDaoFabricantes, uDaoFornecedores,uDaoGrupos, SysUtils;
+
+type
+  Daoprodutos = class(dao)
+  private
+
+  protected
+    umdm: TDM;
+    umadaofabricante  : DaoFabricantes;
+    umadaofornecedor  : DaoFornecedores;
+    umadaogrupo       : DaoGrupos;
+  public
+    constructor CrieObj;
+    destructor Destrua_se;
+    function Salvar(pObj: TObject): string; override;
+    function Carregar(pObj: TObject): string; override;
+    function Excluir(pObj: TObject): string; override;
+    function Pesquisar(pChave: string): string; override;
+    procedure setDM(pDM: TDM);
+    function getds: Tdatasource;
+    procedure setdaofabricante(pObj: TObject);
+    procedure setdaofornecedor (pObj : TObject);
+    procedure setdaogrupo (pObj : TObject);
+  end;
+
+implementation
+
+{ Daoprodutos }
+
+{ Daoprodutos }
+
+function Daoprodutos.Carregar(pObj: TObject): string;
+begin
+
+end;
+
+constructor Daoprodutos.CrieObj;
+begin
+  umadaofabricante := DaoFabricantes.CrieObj;
+  umadaofornecedor := DaoFornecedores.CrieObj;
+  umadaogrupo := DaoGrupos.CrieObj;
+end;
+
+destructor Daoprodutos.Destrua_se;
+begin
+
+end;
+
+function Daoprodutos.Excluir(pObj: TObject): string;
+begin
+
+end;
+
+function Daoprodutos.getds: Tdatasource;
+begin
+
+end;
+
+function Daoprodutos.Pesquisar(pChave: string): string;
+begin
+
+end;
+
+function Daoprodutos.Salvar(pObj: TObject): string;
+begin
+
+end;
+
+procedure Daoprodutos.setdaofabricante(pObj: TObject);
+begin
+  umadaofabricante := DaoFabricantes(pObj);
+end;
+
+procedure Daoprodutos.setdaofornecedor(pObj: TObject);
+begin
+  umadaofornecedor := DaoFornecedores(pObj);
+end;
+
+procedure Daoprodutos.setdaogrupo(pObj: TObject);
+begin
+  umadaogrupo := DaoGrupos(pObj);
+end;
+
+procedure Daoprodutos.setDM(pDM: TDM);
+begin
+  umdm := pDM;
+end;
+
+end.

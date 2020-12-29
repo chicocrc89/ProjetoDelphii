@@ -1,0 +1,54 @@
+inherited FrmConsultaCidade: TFrmConsultaCidade
+  Caption = 'Consulta Cidade'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited btnPesquisar: TSpeedButton
+    OnClick = btnPesquisarClick
+  end
+  inherited btnNovo: TSpeedButton
+    Left = 501
+    Width = 118
+    ExplicitLeft = 501
+    ExplicitWidth = 118
+  end
+  inherited DBGrid1: TDBGrid
+    Left = 8
+    DataSource = DM.dscidade
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ID_CIDADE'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CIDADE01'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DDD'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ID_ESTADO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ESTADO01'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DATA_CADASTRO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ULTIMA_ALTERACAO'
+        Visible = True
+      end>
+  end
+end

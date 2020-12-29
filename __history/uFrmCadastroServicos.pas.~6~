@@ -1,0 +1,87 @@
+unit uFrmCadastroServicos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmCadastro, Vcl.StdCtrls, Vcl.Buttons,
+  Vcl.Mask, uServicos, uControllerServicos;
+
+type
+  TFrmCadastroServicos = class(TFrmCadastro)
+    edtdescricao: TEdit;
+    Label1: TLabel;
+    edtobs: TEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    edtcusto: TMaskEdit;
+    Label4: TLabel;
+    edtpreco_venda: TMaskEdit;
+  private
+    { Private declarations }
+  protected
+    umactrlservico: ControllerServicos;
+    umservico: Servicos;
+  public
+    { Public declarations }
+    procedure ConhecaObj(pObj, pctrl: TObject); Override;
+    procedure Salvar; Override;
+    procedure Sair; Override;
+    procedure CarregaEdt; Override;
+    procedure LimpaEdt; Override;
+    procedure BloqueiaEdt; Override;
+    procedure DesbloqueiaEdt; Override;
+  end;
+
+var
+  FrmCadastroServicos: TFrmCadastroServicos;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmCadastroServicos }
+
+procedure TFrmCadastroServicos.BloqueiaEdt;
+begin
+  inherited;
+  self.edt
+end;
+
+procedure TFrmCadastroServicos.CarregaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroServicos.ConhecaObj(pObj, pctrl: TObject);
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroServicos.DesbloqueiaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroServicos.LimpaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroServicos.Sair;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroServicos.Salvar;
+begin
+  inherited;
+
+end;
+
+end.

@@ -1,0 +1,83 @@
+unit uFrmConsultaFabricante;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmConsulta, Vcl.ComCtrls, Vcl.StdCtrls, uFrmCadastroFabricante,
+  Data.DB, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids;
+
+type
+  TFrmConsultaFabricante = class(TFrmConsulta)
+    mmtablefabricante: TFDMemTable;
+    dsfabricante: TDataSource;
+  private
+    { Private declarations }
+  protected
+    umFrmCadastroFabricante : TFrmCadastroFabricante;
+    procedure Novo; Override;
+    procedure Alterar; Override;
+    procedure Excluir; Override;
+    procedure Sair; Override;
+    procedure Pesquisar; Override;
+  public
+    { Public declarations }
+    procedure conhecaObj (pObj : TObject); Override;
+    procedure SetFrmCadastro (pObj : TObject); Override;
+
+  end;
+
+var
+  FrmConsultaFabricante: TFrmConsultaFabricante;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmConsultaFabricante }
+
+procedure TFrmConsultaFabricante.Alterar;
+begin
+  inherited;
+  umFrmCadastroFabricante.ShowModal;
+end;
+
+procedure TFrmConsultaFabricante.conhecaObj(pObj: TObject);
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaFabricante.Excluir;
+begin
+  inherited;
+  umFrmCadastroFabricante.ShowModal;
+end;
+
+procedure TFrmConsultaFabricante.Novo;
+begin
+  inherited;
+  umFrmCadastroFabricante.ShowModal;
+end;
+
+procedure TFrmConsultaFabricante.Pesquisar;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaFabricante.Sair;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaFabricante.SetFrmCadastro(pObj: TObject);
+begin
+  inherited;
+  umFrmCadastroFabricante := TFrmCadastroFabricante (pObj);
+end;
+
+end.

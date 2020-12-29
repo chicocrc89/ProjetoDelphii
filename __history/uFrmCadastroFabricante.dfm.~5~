@@ -1,0 +1,94 @@
+inherited FrmCadastroFabricante: TFrmCadastroFabricante
+  Caption = 'Cadastro Fabricante'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited lblCodigo: TLabel
+    Top = 8
+    Width = 62
+    Height = 18
+    Caption = 'CODIGO'
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ExplicitTop = 8
+    ExplicitWidth = 62
+    ExplicitHeight = 18
+  end
+  inherited lblDtCadastro: TLabel
+    Top = 443
+    Width = 123
+    Height = 18
+    Caption = 'DATA CADASTRO'
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ExplicitTop = 443
+    ExplicitWidth = 123
+    ExplicitHeight = 18
+  end
+  inherited lblDtUlt_alt: TLabel
+    Width = 146
+    Height = 18
+    Caption = 'ULTIMA ALTERA'#199#195'O'
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ExplicitWidth = 146
+    ExplicitHeight = 18
+  end
+  object Label1: TLabel [3]
+    Left = 8
+    Top = 72
+    Width = 40
+    Height = 18
+    Caption = 'CNPJ'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel [4]
+    Left = 8
+    Top = 152
+    Width = 94
+    Height = 18
+    Caption = 'FABRICANTE'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  inherited edtCodigo: TEdit
+    Top = 27
+    Width = 65
+    ExplicitTop = 27
+    ExplicitWidth = 65
+  end
+  inherited edtUlt_alt: TEdit
+    Width = 146
+    ExplicitWidth = 146
+  end
+  object edtcnpj: TEdit
+    Left = 8
+    Top = 91
+    Width = 177
+    Height = 21
+    Alignment = taCenter
+    TabOrder = 3
+  end
+  object edtfabricante: TEdit
+    Left = 8
+    Top = 171
+    Width = 313
+    Height = 21
+    Alignment = taCenter
+    TabOrder = 4
+  end
+end

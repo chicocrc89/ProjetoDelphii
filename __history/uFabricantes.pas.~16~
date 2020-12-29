@@ -1,0 +1,104 @@
+unit uFabricantes;
+
+interface
+  uses uGenerica, FireDAC.Comp.Client;
+  type Fabricantes = class(Generica)
+  private
+
+  protected
+    nome : string;
+    cnpj : string;
+    umaacao : Acao;
+  public
+    constructor Crieobj;
+    destructor Destrua_se;
+    procedure setcodigo (pcodigo : integer);
+    procedure setnome (pnome : string);
+    procedure setcnpj (pcnpj : string);
+    function getcodigo : integer;
+    function getnome : string;
+    function getcnpj : string;
+    function clone : Fabricantes;
+    procedure setumaacao (pacao : Acao);
+    function getumaacao : Acao;
+    function obter : TFDQuery;
+  end;
+
+implementation
+
+{ Fabricante }
+
+uses uDaoFabricantes;
+
+function Fabricantes.clone: Fabricantes;
+begin
+  result := Fabricantes.Crieobj;
+  result.setcodigo(codigo);
+  result.setcodigo(codigo);
+  result.setnome(nome);
+  result.setcnpj(cnpj);
+end;
+
+constructor Fabricantes.Crieobj;
+begin
+
+end;
+
+destructor Fabricantes.Destrua_se;
+begin
+
+end;
+
+function Fabricantes.getcnpj: string;
+begin
+  result := cnpj;
+end;
+
+function Fabricantes.getcodigo: integer;
+begin
+  result := codigo;
+end;
+
+function Fabricantes.getnome: string;
+begin
+  result := nome;
+end;
+
+function Fabricantes.getumaacao: Acao;
+begin
+  result := umaacao;
+end;
+
+function Fabricantes.obter: TFDQuery;
+var mfabricantedao : DaoFabricantes;
+
+begin
+  mfabricantedao := DaoFabricantes.create;
+  try
+    result := mfabricantedao.obter;
+  finally
+    mfabricantedao.free;
+  end;
+end;
+
+procedure Fabricantes.setcnpj(pcnpj: string);
+begin
+  cnpj := pcnpj;
+end;
+
+procedure Fabricantes.setcodigo(pcodigo: integer);
+begin
+  codigo := pcodigo;
+end;
+
+procedure Fabricantes.setnome(pnome: string);
+begin
+  nome := pnome;
+end;
+
+procedure Fabricantes.setumaacao(pacao: Acao);
+begin
+  umaacao := pacao;
+end;
+
+end.

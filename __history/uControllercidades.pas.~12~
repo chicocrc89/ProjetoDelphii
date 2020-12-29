@@ -1,0 +1,71 @@
+unit uControllercidades;
+
+interface
+  uses ucontroller, uDaocidades, DB, uDM, uCidades, uControllerEstados;
+  type Controllercidades = class(controller)
+  private
+
+  protected
+    umadaocidade : Daocidades;
+    umactrlestado : ControllerEstados;
+  public
+    constructor CrieObj;
+    destructor  Destrua_se;
+    function Salvar ( pObj :  TObject ):            string;    override;
+    function Carregar ( pObj : TObject ):           string;    override;
+    function Excluir ( pObj : TObject ):            string;    override;
+    function Pesquisar ( pChave : string):          string;    override;
+    procedure setDM (pDM : TDM);
+    function getds : Tdatasource;
+    procedure setctrlestado (pObj : TObject);
+    function getctrlestado : ControllerEstados;
+  end;
+
+implementation
+
+{ Controllercidades }
+
+function Controllercidades.Carregar(pObj: TObject): string;
+var mcidade : Cidades;
+begin
+  self.umadaocidade.Carregar(pObj);
+  mcidade := Cidades (pobj);
+  self.umactrlestado.Carregar(mcidade.getumestado);
+end;
+
+constructor Controllercidades.CrieObj;
+begin
+  self.umadaocidade := Daocidades.CrieObj;
+end;
+
+destructor Controllercidades.Destrua_se;
+begin
+  self.umadaocidade.Destrua_se;
+end;
+
+function Controllercidades.Excluir(pObj: TObject): string;
+begin
+  self.umadaocidade.Excluir(pObj);
+end;
+
+function Controllercidades.getds: Tdatasource;
+begin
+  result := umadaocidade.getds;
+end;
+
+function Controllercidades.Pesquisar(pChave: string): string;
+begin
+  self.umadaocidade.Pesquisar(pChave);
+end;
+
+function Controllercidades.Salvar(pObj: TObject): string;
+begin
+  self.umadaocidade.Salvar(pObj);
+end;
+
+procedure Controllercidades.setDM(pDM: TDM);
+begin
+  self.umadaocidade.setDM(pDM);
+end;
+
+end.

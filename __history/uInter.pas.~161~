@@ -1,0 +1,422 @@
+unit uInter;
+
+interface
+
+uses uFrmConsultaCliente, uFrmConsultaFornecedor, uFrmCadastroCliente,
+  uFrmCadastroFornecedor, uFrmConsultaProduto, uFrmCadastroProduto,
+  uFrmConsultaPais, uFrmConsultaEstado, uFrmConsultaCidade, uFrmCadastroPais,
+  uFrmCadastroEstado, uFrmCadastroCidade, uFrmConsultaUsuario,
+  uFrmConsultaFuncionario, uFrmCadastroUsuario, uFrmCadastroFuncionario,
+  uFrmConsultaFabricante,
+  uFrmConsultaGrupo, uFrmConsultaCarro, uFrmCadastroGrupo,
+  uFrmCadastroFabricante, uFrmCadastroCarro,
+  uProdutos, uFabricantes, uVeiculos, uGrupos, uPaises, uEstados, uCidades,
+  uUsuarios, uFuncionarios, uClientes, uFornecedores,
+  uControllerpaises, uControllerestados, uControllercidades,
+  uControllerclientes, uControllerfornecedores, uControllerprodutos,
+  uControllerusuarios, uControllerFuncionarios, uControllergrupos, uControllerCompras,
+  uControllerfabricantes, uControllerveiculos, uFrmConsultaOrdemServ, uCompras,
+  uFrmCadastroOrdemServ, uFrmConsultaMarca, uFrmConsultaModelo,
+  uFrmCadastroMarca, uFrmCadastroModelo, uMarcas, uControllerMarcas,
+  uModelos, uControllerModelos, uFormaPagamentos, uControllerFormaPagamentos,
+  uFrmConsultaFormaPagamento, uFrmCadastroFormaPagamento, uFrmConsultaCondicao, uFrmCadastroCondicao,
+  uCondicoes, uControllerCondicoes, uFrmCadastroCor, uFrmConsultaCor, uCores, uControllerCores,
+  uCombustiveis, uFrmConsultaCombustivel, uFrmCadastroCombustivel, uControllerCombustiveis, uFrmConsulta,
+  uFrmConsultaCompra, uFrmCadastroCompra, uFrmLogin, uFrmConsultaContasPagar, uFrmCadastroContasPagar,
+  uContasPagar, uControllerContasPagar, uOrdemservicos, uControllerOrdemServicos,
+  uFrmConsultaServicos, uFrmCadastroServicos, uServicos, uControllerServicos, uVendas, uControllerVendas, uFrmCadastroVendas, uFrmConsultaVendas,
+  uFrmConsultaContasReceber, uFrmCadastroContasReceber, uContasReceber, uControllerContasReceber;
+
+type
+  Interfaces = class
+  private
+
+  protected
+    umFrmConsultaCliente        : TFrmConsultaCliente;
+    umFrmConsultaFornecedor     : TFrmConsultaFornecedor;
+    umFrmConsultaProduto        : TFrmConsultaProduto;
+    umFrmConsultaPais           : TFrmConsultaPais;
+    umFrmConsultaEstado         : TFrmConsultaEstado;
+    umFrmConsultaCidade         : TFrmConsultaCidade;
+    umFrmConsultaUsuario        : TFrmConsultaUsuario;
+    umFrmConsultaFuncionario    : TFrmConsultaFuncionario;
+    umFrmConsultaGrupo          : TFrmConsultaGrupo;
+    umFrmConsultaFabricante     : TFrmConsultaFabricante;
+    umFrmConsultaCarro          : TFrmConsultaCarro;
+    umFrmConsultaOrdemServ      : TFrmConsultaOrdemServ;
+    umFrmConsultaMarca          : TFrmConsultaMarca;
+    umFrmConsultaModelo         : TFrmConsultaModelo;
+    umFrmConsultaFormaPagamento : TFrmConsultaFormaPagamento;
+    umFrmConsultaCondicao       : TFrmConsultaCondicao;
+    umFrmConsultaCor            : TFrmConsultaCor;
+    umFrmConsultaCombustivel    : TFrmConsultaCombustivel;
+    umFrmConsultaCompra         : TFrmConsultaCompra;
+    umFrmConsultaContasPagar    : TFrmConsultaContasPagar;
+    umFrmConsultaServico        : TFrmConsultaServicos;
+    umFrmConsultaVenda          : TFrmConsultaVendas;
+    umFrmConsultaContasReceber  : TFrmConsultaContasReceber;
+
+    umFrmCadastroCliente        : TFrmCadastroCliente;
+    umFrmCadastroFornecedor     : TFrmCadastroFornecedor;
+    umFrmCadastroProduto        : TFrmCadastroProduto;
+    umFrmCadastroPais           : TFrmCadastroPais;
+    umFrmCadastroEstado         : TFrmCadastroEstado;
+    umFrmCadastroCidade         : TFrmCadastroCidade;
+    umFrmCadastroUsuario        : TFrmCadastroUsuario;
+    umFrmCadastroFuncionario    : TFrmCadastroFuncionario;
+    umFrmCadastroGrupo          : TFrmCadastroGrupo;
+    umFrmCadastroFabricante     : TFrmCadastroFabricante;
+    umFrmCadastroCarro          : TFrmCadastroCarro;
+    umFrmCadastroOrdemServ      : TFrmCadastroOrdemServ;
+    umFrmCadastroMarca          : TFrmCadastroMarca;
+    umFrmCadastroModelo         : TFrmCadastroModelo;
+    umFrmCadastroFormaPagamento : TFrmCadastroFormaPagamento;
+    umFrmCadastroCondicao       : TFrmCadastroCondicao;
+    umFrmCadastroCor            : TFrmCadastroCor;
+    umFrmCadastroCombustivel    : TFrmCadastroCombustivel;
+    umFrmCadastroCompra         : TFrmCadastroCompra;
+    umfrmlogin                  : TFrmLogin;
+    umFrmCadastroContasPagar    : TFrmCadastroContasPagar;
+    umFrmCadastroServico        : TFrmCadastroServicos;
+    umFrmCadastroVenda          : TFrmCadastroVendas;
+    umFrmCadastroContasReceber  : TFrmCadastroContasReceber;
+
+  public
+    constructor crieObj;
+    destructor Destrua_se;
+    procedure PDcliente(pcliente: Clientes; pctrlcliente: Controllerclientes);
+    procedure PDfornecedor(pfornecedor: Fornecedores;pctrlfornecedor: Controllerfornecedores);
+    procedure PDproduto(pproduto: Produtos; pctrlproduto: Controllerprodutos);
+    procedure PDpais(ppais: Paises; pctrlpais: Controllerpaises);
+    procedure PDestado(pestado: Estados; pctrlestado: Controllerestados);
+    procedure PDcidade(pcidade: Cidades; pctrlcidade: Controllercidades);
+    procedure PDusuario(pusuario: Usuarios; pctrlusuario: Controllerusuarios);
+    procedure PDFuncionario(pfuncionario: Funcionarios;
+      pctrlfuncionario: Controllerfuncionarios);
+    procedure PDfabricante(pfabricante: Fabricantes;
+      pctrlfabricante: Controllerfabricantes);
+    procedure PDgrupo(pgrupo: Grupos; pctrlgrupo: Controllergrupos);
+    procedure PDveiculo(pveiculo: Veiculos; pctrlveiculo: Controllerveiculos);
+    procedure PDordemservico(pordemservico : OrdemServicos; pctrlordemservico : ControllerOrdemservicos);
+    procedure PDmarca(pmarca: Marcas; pctrlmarca: ControllerMarcas);
+    procedure PDmodelo(pmodelo: Modelos; pctrlmodelo: ControllerModelos);
+    procedure PDformapagamento (pformapagamento: FormaPagamentos; pctrlformapagamento : ControllerFormaPagamentos);
+    procedure PDcondicao (pcondicao : Condicoes; pctrlcondicao : ControllerCondicoes);
+    procedure PDcor (pcor : Cores; pctrlcor : ControllerCores);
+    procedure PDcombustivel (pcombustivel: Combustiveis; pctrlcombustivel : ControllerCombustiveis);
+    procedure PDcompra (pCompra : Compras; pctrlcompra : ControllerCompras);
+    procedure PDcontaspagar(pContasPagar : ContasPagar; pctrlContasPagar : ControllerContasPagar);
+    procedure PDservico (pservico : Servicos; pctrlservico : ControllerServicos);
+    procedure PDvenda (pvenda : Vendas; pctrlvenda : ControllerVendas);
+    procedure PDcontasReceber(pcontasreceber : ContasReceber; pctrlcontasreceber : ControllerContasReceber);
+    end;
+
+implementation
+
+{ Interfaces }
+
+constructor Interfaces.crieObj;
+begin
+  umFrmConsultaCliente := TFrmConsultaCliente.Create(nil);
+  umFrmConsultaFornecedor := TFrmConsultaFornecedor.Create(nil);
+  umFrmConsultaProduto := TFrmConsultaProduto.Create(nil);
+  umFrmConsultaPais := TFrmConsultaPais.Create(nil);
+  umFrmConsultaEstado := TFrmConsultaEstado.Create(nil);
+  umFrmConsultaCidade := TFrmConsultaCidade.Create(nil);
+  umFrmConsultaUsuario := TFrmConsultaUsuario.Create(nil);
+  umFrmConsultaFuncionario := TFrmConsultaFuncionario.Create(nil);
+  umFrmConsultaGrupo := TFrmConsultaGrupo.Create(nil);
+  umFrmConsultaFabricante := TFrmConsultaFabricante.Create(nil);
+  umFrmConsultaCarro := TFrmConsultaCarro.Create(nil);
+  umFrmConsultaOrdemServ := TFrmConsultaOrdemServ.Create(nil);
+  umFrmConsultaMarca := TFrmConsultaMarca.Create(nil);
+  umFrmConsultaModelo := TFrmConsultaModelo.Create(nil);
+  umFrmConsultaFormaPagamento := TFrmConsultaFormaPagamento.Create(nil);
+  umFrmConsultaCondicao := TFrmConsultaCondicao.Create(nil);
+  umFrmConsultaCor := TFrmConsultaCor.Create(nil);
+  umFrmConsultaCombustivel := TFrmConsultaCombustivel.Create(nil);
+  umFrmConsultaCompra := TFrmConsultaCompra.create(nil);
+  umFrmConsultaContasPagar := TFrmConsultaContasPagar.Create(nil);
+  umFrmConsultaServico := TFrmConsultaServicos.Create(nil);
+  umFrmConsultaContasReceber := TFrmConsultaContasReceber.Create(nil);
+  umFrmConsultaVenda := TFrmConsultaVendas.Create(nil);
+
+  umFrmCadastroProduto := TFrmCadastroProduto.Create(nil);
+  umFrmCadastroCliente := TFrmCadastroCliente.Create(nil);
+  umFrmCadastroFornecedor := TFrmCadastroFornecedor.Create(nil);
+  umFrmCadastroPais := TFrmCadastroPais.Create(nil);
+  umFrmCadastroEstado := TFrmCadastroEstado.Create(nil);
+  umFrmCadastroCidade := TFrmCadastroCidade.Create(nil);
+  umFrmCadastroUsuario := TFrmCadastroUsuario.Create(nil);
+  umFrmCadastroFuncionario := TFrmCadastroFuncionario.Create(nil);
+  umFrmCadastroGrupo := TFrmCadastroGrupo.Create(nil);
+  umFrmCadastroFabricante := TFrmCadastroFabricante.Create(nil);
+  umFrmCadastroCarro := TFrmCadastroCarro.Create(nil);
+  umFrmCadastroOrdemServ := TFrmCadastroOrdemServ.Create(nil);
+  umFrmCadastroMarca := TFrmCadastroMarca.Create(nil);
+  umFrmCadastroModelo := TFrmCadastroModelo.Create(nil);
+  umFrmCadastroFormaPagamento := TFrmCadastroFormaPagamento.Create(nil);
+  umFrmCadastroCondicao := TFrmCadastroCondicao.Create(nil);
+  umFrmCadastroCor := TFrmCadastroCor.Create(nil);
+  umFrmCadastroCombustivel := TFrmCadastroCombustivel.Create(nil);
+  umFrmCadastroCompra := TFrmCadastroCompra.Create(nil);
+  umFrmLogin := TFrmLogin.Create(nil);
+  umFrmCadastroContasPagar := TFrmCadastroContasPagar.Create(nil);
+  umFrmCadastroServico := TFrmCadastroServicos.Create(nil);
+  umFrmCadastroContasReceber := TFrmCadastroContasReceber.Create(nil);
+  umFrmCadastroVenda := TFrmCadastroVendas.Create(nil);
+
+  umFrmConsultaCliente.SetFrmCadastro(umFrmCadastroCliente);
+  umFrmConsultaFornecedor.SetFrmCadastro(umFrmCadastroFornecedor);
+  umFrmConsultaProduto.SetFrmCadastro(umFrmCadastroProduto);
+  umFrmConsultaPais.SetFrmCadastro(umFrmCadastroPais);
+  umFrmConsultaEstado.SetFrmCadastro(umFrmCadastroEstado);
+  umFrmConsultaCidade.SetFrmCadastro(umFrmCadastroCidade);
+  umFrmConsultaUsuario.SetFrmCadastro(umFrmCadastroUsuario);
+  umFrmConsultaFuncionario.SetFrmCadastro(umFrmCadastroFuncionario);
+  umFrmConsultaGrupo.SetFrmCadastro(umFrmCadastroGrupo);
+  umFrmConsultaFabricante.SetFrmCadastro(umFrmCadastroFabricante);
+  umFrmConsultaCarro.SetFrmCadastro(umFrmCadastroCarro);
+  umFrmConsultaMarca.SetFrmCadastro(umFrmCadastroMarca);
+  umFrmConsultaModelo.SetFrmCadastro(umFrmCadastroModelo);
+  umFrmConsultaFormaPagamento.SetFrmCadastro(umFrmCadastroFormaPagamento);
+  umFrmConsultaCondicao.SetFrmCadastro(umFrmCadastroCondicao);
+  umFrmConsultaCor.SetFrmCadastro(umFrmCadastroCor);
+  umFrmConsultaCombustivel.SetFrmCadastro(umFrmCadastroCombustivel);
+  umFrmConsultaCompra.setFrmCadastro(umFrmCadastroCompra);
+  umFrmConsultaContasPagar.SetFrmCadastro(umFrmCadastroContasPagar);
+  umFrmConsultaOrdemServ.SetFrmCadastro(umFrmCadastroOrdemServ);
+  umFrmConsultaServico.SetFrmCadastro(umFrmCadastroServico);
+  umFrmConsultaVenda.SetFrmCadastro(umFrmCadastroVenda);
+  umFrmConsultaContasReceber.SetFrmCadastro(umFrmCadastroContasreceber);
+
+  umFrmCadastroCidade.SetFrmConsulta(umFrmConsultaEstado);
+  umFrmCadastroEstado.SetFrmConsulta(umFrmConsultaPais);
+  umFrmCadastroModelo.SetFrmConsulta(umFrmConsultaMarca);
+  umFrmCadastroCarro.SetFrmConsulta(umFrmConsultaModelo);
+  umFrmCadastroCarro.SetFrmConsultacombustivel(umFrmConsultaCombustivel);
+  umFrmCadastroCarro.SetFrmConsultacor(umFrmConsultaCor);
+  umFrmCadastroFuncionario.SetFrmConsulta(umFrmConsultaCidade);
+  umFrmCadastroCliente.SetFrmConsulta(umFrmConsultaCidade);
+  umFrmCadastroCliente.SetFrmConsultapagamento(umFrmConsultaCondicao);
+  umFrmCadastroUsuario.setfrmconsulta(umFrmConsultaFuncionario);
+  umFrmCadastroCondicao.SetFrmConsulta(umFrmConsultaFormaPagamento);
+  umFrmCadastroFornecedor.SetFrmConsulta(umFrmConsultaCidade);
+  umFrmCadastroFornecedor.SetFrmConsultapagamento(umFrmConsultaFormaPagamento);
+  umFrmCadastroProduto.SetFrmConsulta(umFrmConsultaFabricante);
+  umFrmCadastroProduto.SetFrmConsultaFornecedor(umFrmConsultaFornecedor);
+  umFrmCadastroProduto.SetFrmConsultaGrupo(umFrmConsultaGrupo);
+  umFrmCadastroCompra.SetFrmConsulta(umFrmConsultaCondicao);
+  umFrmCadastroCompra.SetFrmConsultaFornecedor(umFrmConsultaFornecedor);
+  umFrmCadastroCompra.SetFrmConsultaProduto(umFrmConsultaProduto);
+  umFrmCadastroCompra.SetFrmConsultaFormaPagamento(umFrmConsultaFormaPagamento);
+  umFrmCadastroContasPagar.SetFrmConsultafornecedor(umFrmConsultaFornecedor);
+  umFrmCadastroContasPagar.SetFrmConsultaformapagamento(umFrmConsultaFormapagamento);
+  umFrmcadastroordemserv.SetFrmConsultacliente(umFrmconsultacliente);
+  umfrmcadastroordemserv.SetFrmConsultaproduto(umfrmconsultaproduto);
+  umfrmcadastroordemserv.SetFrmConsultausuario(umfrmconsultausuario);
+  umfrmcadastroordemserv.setFrmConsultacor(umfrmconsultacor);
+  umfrmcadastroordemserv.setFrmConsultamodelo(umfrmconsultamodelo);
+  umfrmcadastroordemserv.setFrmConsultaservico(umfrmconsultaservico);
+  umfrmcadastroordemserv.setfrmconsultafuncionario(umfrmconsultafuncionario);
+  umfrmcadastroordemserv.setfrmconsultacondicao(umfrmconsultacondicao);
+  umfrmcadastrovenda.SetFrmConsultaCliente(umfrmconsultacliente);
+  umfrmcadastrovenda.SetFrmConsultaCondicao(umfrmconsultacondicao);
+  umfrmcadastrovenda.SetFrmConsultaProduto(umfrmconsultaproduto);
+  umfrmcadastrovenda.SetFrmConsultaFormaPagamento(umfrmconsultaformapagamento);
+  umfrmcadastrovenda.SetFrmConsultaservico(umfrmconsultaservico);
+end;
+
+destructor Interfaces.Destrua_se;
+begin
+  umFrmConsultaCliente.Free;
+  umFrmConsultaFornecedor.Free;
+  umFrmConsultaProduto.Free;
+  umFrmCadastroCliente.Free;
+  umFrmCadastroFornecedor.Free;
+  umFrmCadastroProduto.Free;
+  umFrmConsultaPais.Free;
+  umFrmConsultaEstado.Free;
+  umFrmConsultaCidade.Free;
+  umFrmCadastroPais.Free;
+  umFrmCadastroEstado.Free;
+  umFrmCadastroCidade.Free;
+  umFrmConsultaUsuario.Free;
+  umFrmConsultaFuncionario.Free;
+  umFrmConsultaMarca.Free;
+  umFrmConsultaModelo.Free;
+  umFrmCadastroUsuario.Free;
+  umFrmCadastroFuncionario.Free;
+  umFrmConsultaGrupo.Free;
+  umFrmConsultaFabricante.Free;
+  umFrmConsultaCarro.Free;
+  umFrmConsultaCondicao.Free;
+  umFrmCadastroGrupo.Free;
+  umFrmCadastroFabricante.Free;
+  umFrmCadastroCarro.Free;
+  umFrmConsultaOrdemServ.Free;
+  umFrmCadastroOrdemServ.Free;
+  umFrmCadastroMarca.Free;
+  umFrmCadastroModelo.Free;
+  umFrmCadastroFormaPagamento.Free;
+  umFrmConsultaFormaPagamento.Free;
+  umFrmCadastroCondicao.Free;
+  umFrmCadastroCor.Free;
+  umFrmConsultaCor.Free;
+  umFrmConsultaCombustivel.Free;
+  umFrmCadastroCombustivel.Free;
+  umFrmConsultacompra.Free;
+  umFrmCadastroCompra.Free;
+  umFrmLogin.Free;
+  umFrmConsultaContasPagar.Free;
+  umFrmCadastroContasPagar.Free;
+  umFrmConsultaServico.Free;
+  umFrmCadastroServico.Free;
+  umFrmConsultaContasReceber.Free;
+  umFrmCadastroContasReceber.Free;
+  umFrmConsultaVenda.Free;
+  umFrmCadastroVenda.Free;
+end;
+
+procedure Interfaces.PDcidade(pcidade: Cidades; pctrlcidade: Controllercidades);
+begin
+  umFrmConsultaCidade.conhecaObj(pcidade, pctrlcidade);
+  umFrmConsultaCidade.ShowModal;
+end;
+
+procedure Interfaces.PDcliente(pcliente: Clientes;pctrlcliente: Controllerclientes);
+begin
+  umFrmConsultaCliente.conhecaObj(pcliente, pctrlcliente);
+  umFrmConsultaCliente.ShowModal;
+end;
+
+procedure Interfaces.PDcombustivel(pcombustivel: Combustiveis;
+  pctrlcombustivel: ControllerCombustiveis);
+begin
+  umFrmConsultaCombustivel.conhecaobj(pcombustivel, pctrlcombustivel);
+  umFrmConsultaCombustivel.ShowModal;
+end;
+
+procedure Interfaces.PDcompra(pCompra: Compras; pctrlcompra: ControllerCompras);
+begin
+  umFrmConsultaCompra.conhecaObj (pcompra, pctrlcompra);
+  umFrmConsultaCompra.showModal;
+end;
+
+procedure Interfaces.PDcondicao(pcondicao: Condicoes; pctrlcondicao: ControllerCondicoes);
+begin
+  umFrmConsultacondicao.conhecaObj(pcondicao, pctrlcondicao);
+  umFrmConsultacondicao.ShowModal;
+end;
+
+procedure Interfaces.PDcontaspagar(pContasPagar : ContasPagar; pctrlContasPagar : ControllerContasPagar);
+begin
+  umFrmConsultaContasPagar.conhecaObj(pContasPagar, pctrlContasPagar);
+  umFrmConsultaContasPagar.ShowModal;
+end;
+
+procedure Interfaces.PDcontasReceber(pcontasreceber: ContasReceber;
+  pctrlcontasreceber: ControllerContasReceber);
+begin
+  umFrmConsultaContasReceber.conhecaObj(pcontasreceber, pctrlcontasreceber);
+  umFrmConsultaContasReceber.ShowModal;
+end;
+
+procedure Interfaces.PDcor(pcor: Cores; pctrlcor: ControllerCores);
+begin
+  umFrmConsultaCor.conhecaObj(pcor, pctrlcor);
+  umFrmConsultaCor.ShowModal;
+end;
+
+procedure Interfaces.PDestado(pestado: Estados; pctrlestado: Controllerestados);
+begin
+  umFrmConsultaEstado.conhecaObj(pestado, pctrlestado);
+  umFrmConsultaEstado.ShowModal;
+end;
+
+procedure Interfaces.PDfabricante(pfabricante: Fabricantes; pctrlfabricante: Controllerfabricantes);
+begin
+  umFrmConsultaFabricante.conhecaObj(pfabricante, pctrlfabricante);
+  umFrmConsultaFabricante.ShowModal;
+end;
+
+procedure Interfaces.PDformapagamento(pformapagamento: FormaPagamentos; pctrlformapagamento: ControllerFormaPagamentos);
+begin
+  umFrmConsultaFormapagamento.conhecaObj(pformapagamento, pctrlformapagamento);
+  umFrmConsultaFormapagamento.ShowModal;
+end;
+
+procedure Interfaces.PDfornecedor(pfornecedor: Fornecedores; pctrlfornecedor: Controllerfornecedores);
+begin
+  umFrmConsultaFornecedor.conhecaObj(pfornecedor, pctrlfornecedor);
+  umFrmConsultaFornecedor.ShowModal;
+end;
+
+procedure Interfaces.PDgrupo(pgrupo: Grupos; pctrlgrupo: Controllergrupos);
+begin
+  umFrmConsultaGrupo.conhecaObj(pgrupo, pctrlgrupo);
+  umFrmConsultaGrupo.ShowModal;
+end;
+
+procedure Interfaces.PDmarca(pmarca: Marcas; pctrlmarca: ControllerMarcas);
+begin
+  umFrmConsultaMarca.conhecaObj(pmarca, pctrlmarca);
+  umFrmConsultaMarca.ShowModal;
+end;
+
+procedure Interfaces.PDmodelo(pmodelo: Modelos; pctrlmodelo: ControllerModelos);
+begin
+  umFrmConsultaModelo.conhecaObj(pmodelo, pctrlmodelo);
+  umFrmConsultaModelo.ShowModal;
+end;
+
+procedure Interfaces.PDordemservico(pordemservico : OrdemServicos; pctrlordemservico : ControllerOrdemServicos);
+begin
+  umFrmconsultaOrdemServ.conhecaObj(pordemservico, pctrlordemservico);
+  umFrmConsultaOrdemServ.ShowModal;
+end;
+
+procedure Interfaces.PDveiculo(pveiculo: Veiculos; pctrlveiculo: Controllerveiculos);
+begin
+  umFrmConsultaCarro.conhecaObj(pveiculo, pctrlveiculo);
+  umFrmConsultaCarro.ShowModal;
+end;
+
+procedure Interfaces.PDvenda(pvenda: Vendas; pctrlvenda: ControllerVendas);
+begin
+  umFrmConsultaVenda.conhecaObj(pvenda, pctrlvenda);
+  umFrmConsultaVenda.ShowModal;
+end;
+
+procedure Interfaces.PDpais(ppais: Paises; pctrlpais: Controllerpaises);
+begin
+  umFrmConsultaPais.conhecaObj(ppais, pctrlpais);
+  umFrmConsultaPais.ShowModal;
+end;
+
+procedure Interfaces.PDproduto(pproduto: Produtos; pctrlproduto: Controllerprodutos);
+begin
+  umFrmConsultaProduto.conhecaObj(pproduto, pctrlproduto);
+  umFrmConsultaProduto.ShowModal;
+end;
+
+procedure Interfaces.PDservico(pservico: Servicos;
+  pctrlservico: ControllerServicos);
+begin
+  umFrmConsultaServico.conhecaObj(pservico, pctrlservico);
+  umFrmConsultaServico.ShowModal;
+end;
+
+procedure Interfaces.PDusuario(pusuario: Usuarios;pctrlusuario: Controllerusuarios);
+begin
+  umFrmConsultaUsuario.conhecaObj(pusuario, pctrlusuario);
+  umFrmConsultaUsuario.ShowModal;
+end;
+
+procedure Interfaces.PDFuncionario(pfuncionario: Funcionarios;pctrlfuncionario: Controllerfuncionarios);
+begin
+  umFrmConsultaFuncionario.conhecaObj(pfuncionario, pctrlfuncionario);
+  umFrmConsultaFuncionario.ShowModal;
+end;
+
+end.

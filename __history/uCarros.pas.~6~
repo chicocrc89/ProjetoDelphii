@@ -1,0 +1,140 @@
+unit uCarros;
+
+interface
+  uses uGenerica, uModelos;
+  type Carros = class(Generica)
+  private
+
+  protected
+    ummodelo : Modelos;
+    chassi : string;
+    placa  : string;
+    ano    : string;
+    cor    : string;
+    combustivel: string;
+
+  public
+    constructor Crieobj;
+    destructor Destrua_se;
+    procedure setcodigo (pcodigo : integer);
+    procedure setmodelo (pmodelo : string);
+    procedure setmarca (pmarca : string);
+    procedure setchassi (pchassi : string);
+    procedure setplaca (pplaca : string);
+    procedure setano (pano : string);
+    procedure setcor (pcor : string);
+    procedure setcombustivel (pcombustivel : string);
+    function getcodigo : integer;
+    function getmodelo : string;
+    function getmarca : string;
+    function getchassi : string;
+    function getplaca : string;
+    function getano : string;
+    function getcor : string;
+    function getcombustivel : string;
+    function clone : carros;
+  end;
+
+implementation
+
+{ Laboratorios }
+
+
+{ Carros }
+
+function Carros.clone: carros;
+begin
+
+end;
+
+constructor Carros.Crieobj;
+begin
+
+end;
+
+destructor Carros.Destrua_se;
+begin
+
+end;
+
+function Carros.getano: string;
+begin
+
+end;
+
+function Carros.getchassi: string;
+begin
+
+end;
+
+function Carros.getcodigo: integer;
+begin
+
+end;
+
+function Carros.getcombustivel: string;
+begin
+
+end;
+
+function Carros.getcor: string;
+begin
+
+end;
+
+function Carros.getmarca: string;
+begin
+
+end;
+
+function Carros.getmodelo: string;
+begin
+
+end;
+
+function Carros.getplaca: string;
+begin
+
+end;
+
+procedure Carros.setano(pano: string);
+begin
+
+end;
+
+procedure Carros.setchassi(pchassi: string);
+begin
+
+end;
+
+procedure Carros.setcodigo(pcodigo: integer);
+begin
+
+end;
+
+procedure Carros.setcombustivel(pcombustivel: string);
+begin
+
+end;
+
+procedure Carros.setcor(pcor: string);
+begin
+
+end;
+
+procedure Carros.setmarca(pmarca: string);
+begin
+
+end;
+
+procedure Carros.setmodelo(pmodelo: string);
+begin
+
+end;
+
+procedure Carros.setplaca(pplaca: string);
+begin
+
+end;
+
+end.

@@ -1,0 +1,7 @@
+inherited FrmCadastroCor: TFrmCadastroCor
+  Caption = 'Cadastro Cor'
+  ExplicitWidth = 850
+  ExplicitHeight = 585
+  PixelsPerInch = 96
+  TextHeight = 13
+end

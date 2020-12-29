@@ -1,0 +1,75 @@
+unit FrmVendas;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Buttons,
+  Vcl.ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    GroupBox2: TGroupBox;
+    Label10: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label22: TLabel;
+    edtnome: TEdit;
+    Label9: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Label14: TLabel;
+    Edit4: TEdit;
+    Label11: TLabel;
+    Label15: TLabel;
+    Edit3: TEdit;
+    Edit5: TEdit;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
+    Edit6: TEdit;
+    Edit7: TEdit;
+    Panel1: TPanel;
+    Edit8: TEdit;
+    Label19: TLabel;
+    Label20: TLabel;
+    Edit9: TEdit;
+    Label21: TLabel;
+    btnSair: TSpeedButton;
+    btnfinalizar: TSpeedButton;
+    ListView1: TListView;
+    Panel2: TPanel;
+    Label23: TLabel;
+    Label24: TLabel;
+    Label25: TLabel;
+    Label26: TLabel;
+    Label27: TLabel;
+    Label28: TLabel;
+    Label29: TLabel;
+    Label2: TLabel;
+    btnPesquisar: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+end.

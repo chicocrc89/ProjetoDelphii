@@ -1,0 +1,101 @@
+unit uControllerContasPagar;
+
+interface
+
+uses SysUtils, ucontroller, uDM, DB, uDaocontaspagar, uControllerCondicoes, uControllerFornecedores, ucontaspagar;
+
+type
+  Controllercontaspagar = class(controller)
+  private
+
+  protected
+    umadaocontaspagar: Daocontaspagar;
+    umactrlcondicao: ControllerCondicoes;
+    umactrlfornecedor : ControllerFornecedores;
+  public
+    constructor CrieObj;
+    destructor Destrua_se;
+    function Salvar(pObj: TObject): string; override;
+    function Carregar(pObj: TObject): string; override;
+    function Excluir(pObj: TObject): string; override;
+    function Pesquisar(pChave: string): string; override;
+    procedure setDM(pDM: TDM);
+    function getds: Tdatasource;
+    procedure setctrlcidade(pObj: TObject);
+    function getctrlcidade: ControllerCidades;
+    procedure setctrlformapagamento(pObj: TObject);
+    function getctrlformapagamento: ControllerFormaPagamentos;
+  end;
+
+implementation
+
+{ Controllercontaspagar }
+
+function Controllercontaspagar.Carregar(pObj: TObject): string;
+var
+  mcontaspagar: contaspagar;
+begin
+  self.umadaocontaspagar.Carregar(pObj);
+  mcontaspagar := contaspagar(pObj);
+  umactrlcidade.Pesquisar(inttostr(mcontaspagar.getumacidade.getcodigo));
+  self.umactrlcidade.Carregar(mcontaspagar.getumacidade);
+  umactrlformapagamento.Pesquisar(inttostr(mcontaspagar.getumaformapagamento.getCodigo));
+  self.umactrlformapagamento.Carregar(mcontaspagar.getumaformapagamento);
+end;
+
+constructor Controllercontaspagar.CrieObj;
+begin
+  self.umadaocontaspagar := Daocontaspagar.CrieObj;
+end;
+
+destructor Controllercontaspagar.Destrua_se;
+begin
+  self.umadaocontaspagar.Destrua_se;
+end;
+
+function Controllercontaspagar.Excluir(pObj: TObject): string;
+begin
+  self.umadaocontaspagar.Excluir(pObj);
+end;
+
+function Controllercontaspagar.getctrlcidade: ControllerCidades;
+begin
+  result := umactrlcidade;
+end;
+
+function Controllercontaspagar.getctrlformapagamento: ControllerFormaPagamentos;
+begin
+  result := umactrlformapagamento;
+end;
+
+function Controllercontaspagar.getds: Tdatasource;
+begin
+  result := umadaocontaspagar.getds;
+end;
+
+function Controllercontaspagar.Pesquisar(pChave: string): string;
+begin
+  self.umadaocontaspagar.Pesquisar(pChave);
+end;
+
+function Controllercontaspagar.Salvar(pObj: TObject): string;
+begin
+  self.umadaocontaspagar.Salvar(pObj);
+end;
+
+procedure Controllercontaspagar.setctrlcidade(pObj: TObject);
+begin
+  umactrlcidade := ControllerCidades(pObj);
+end;
+
+procedure Controllercontaspagar.setctrlformapagamento(pObj: TObject);
+begin
+  umactrlformapagamento := ControllerFormaPagamentos(pObj);
+end;
+
+procedure Controllercontaspagar.setDM(pDM: TDM);
+begin
+  self.umadaocontaspagar.setDM(pDM);
+end;
+
+end.

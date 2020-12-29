@@ -1,0 +1,8 @@
+unit uEnumerado;
+
+interface
+  type Enumerado = (tacIndefinido, tacIncluir, tacAlterar, tacExcluir);
+
+implementation
+
+end.

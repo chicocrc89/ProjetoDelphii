@@ -1,0 +1,58 @@
+unit uCores;
+
+interface
+
+uses uGenerica;
+
+type
+  Cores = class(Generica)
+  private
+
+  protected
+    cor: string;
+  public
+    constructor Crieobj;
+    destructor Destrua_se;
+    procedure setcor(pcor: string);
+    function getcor: string;
+    function clone: Cores;
+  end;
+
+implementation
+
+{ Grupo }
+
+
+
+{ Cores }
+
+function Cores.clone: Cores;
+begin
+  result := Cores.Crieobj;
+  result.setCodigo(codigo);
+  result.setcor(cor);
+  result.setCadastro(cadastro);
+  result.setUlt_Alt(ult_alt);
+end;
+
+constructor Cores.Crieobj;
+begin
+
+end;
+
+destructor Cores.Destrua_se;
+begin
+
+end;
+
+function Cores.getcor: string;
+begin
+  result := cor;
+end;
+
+procedure Cores.setcor(pcor: string);
+begin
+  cor := pcor;
+end;
+
+end.

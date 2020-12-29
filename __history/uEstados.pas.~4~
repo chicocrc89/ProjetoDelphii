@@ -1,0 +1,27 @@
+unit uEstados;
+
+interface
+  uses uPaises, uGenerica;
+  type Estados = class(Generica)
+  private
+
+  protected
+    estado : string;
+    UF     : string;
+    umpais : Paises;
+
+  public
+    destructor Destrua_se;
+    procedure setestado (pestado : string);
+    procedure setUF (pUF : string);
+    procedure setumpais (ppais : Paises);
+    function getestado : string;
+    function getUF : string;
+    function getumpais : Paises;
+    function clone : Estados;
+  end;
+
+
+implementation
+
+end.

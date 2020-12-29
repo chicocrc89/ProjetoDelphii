@@ -1,0 +1,5 @@
+inherited FrmConsultaContasReceber: TFrmConsultaContasReceber
+  Caption = 'Consulta Contas Receber'
+  PixelsPerInch = 96
+  TextHeight = 13
+end

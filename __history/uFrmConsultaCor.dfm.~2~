@@ -1,0 +1,5 @@
+inherited FrmConsultaCor: TFrmConsultaCor
+  Caption = 'Consulta Cor'
+  PixelsPerInch = 96
+  TextHeight = 13
+end

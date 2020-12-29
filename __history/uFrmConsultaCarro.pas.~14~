@@ -1,0 +1,120 @@
+unit uFrmConsultaCarro;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmConsulta, Vcl.ComCtrls, Vcl.StdCtrls, uFrmCadastroCarro,
+  Data.DB, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, uDM, uVeiculos, uControllerVeiculos;
+
+type
+  TFrmConsultaCarro = class(TFrmConsulta)
+    Label1: TLabel;
+    SpeedButton1: TSpeedButton;
+    Edit1: TEdit;
+    Label2: TLabel;
+    SpeedButton2: TSpeedButton;
+    Edit2: TEdit;
+    Label3: TLabel;
+  private
+    { Private declarations }
+  protected
+    umdm : TDM;
+    umFrmCadastroCarro : TFrmCadastrocarro;
+    umveiculo : Veiculos;
+    umactrlveiculo : ControllerVeiculos;
+    procedure Novo; Override;
+    procedure Alterar; Override;
+    procedure Excluir; Override;
+    procedure Sair; Override;
+    procedure Pesquisar; Override;
+  public
+    { Public declarations }
+    procedure conhecaObj (pObj : TObject; pctrl: TObject); Override;
+    procedure SetFrmCadastro (pObj : TObject); Override;
+  end;
+
+var
+  FrmConsultaCarro: TFrmConsultaCarro;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmConsultaLaboratorio }
+
+procedure TFrmConsultaCarro.Alterar;
+begin
+  inherited;
+    inherited;
+  self.umactrlveiculo.Carregar(umveiculo);
+  self.umFrmCadastroCarro.conhecaobj(umveiculo, umactrlveiculo);
+  self.umFrmCadastroCarro.carregaedt;
+  self.umFrmCadastroCarro.ShowModal;
+  self.Pesquisar;
+  umFrmCadastroCarro.ShowModal;
+end;
+
+procedure TFrmConsultaCarro.conhecaObj(pObj: TObject; pctrl: TObject);
+begin
+  inherited;
+  umveiculo := Veiculos (pobj);
+  umactrlveiculo := ControllerVeiculos (pctrl);
+  self.umFrmCadastroCarro.ConhecaObj(umveiculo, umactrlveiculo);
+  self.Pesquisar;
+  self.DBGrid1.DataSource := umactrlveiculo.getds;
+end;
+
+procedure TFrmConsultaCarro.Excluir;
+var mtitulo : string;
+begin
+  inherited;
+  self.umFrmCadastroCarro.Carregar(umveiculo);
+  self.umFrmCadastroCarro.conhecaobj(umveiculo, umactrlveiculo);
+  self.umFrmCadastroCarro.limpaedt;
+  self.umFrmCadastroCarro.carregaedt;
+  self.umFrmCadastroCarro.bloqueiaedt;
+  mtitulo := umFrmCadastroCarro.btnSalvar.Caption;
+  umFrmCadastroCarro.btnSalvar.Caption := '&Excluir';
+  umFrmCadastroCarro.ShowModal;
+  self.umFrmCadastroCarro.DesbloqueiaEdt;
+  umFrmCadastroCarro.btnSalvar.Caption := mtitulo;
+  self.Pesquisar;
+end;
+
+procedure TFrmConsultaCarro.Novo;
+begin
+  inherited;
+  self.umveiculo.setcodigo(0);
+  self.umFrmCadastroCarro.limpaedt;
+  self.umFrmCadastroCarro.desbloqueiaedt;
+  self.umFrmCadastroCarro.conhecaobj(umveiculo, umactrlveiculo);
+  self.umFrmCadastroCarro.ShowModal;
+  self.Pesquisar;
+end;
+
+procedure TFrmConsultaCarro.Pesquisar;
+var mMSG : string;
+begin
+  inherited;
+  mMSG := umactrlveiculo.Pesquisar(self.edtPesquisar.Text);
+  if mMSG <> '' then
+     ShowMessage('VEICULO'+Self.edtPesquisar.Text+'NÃO ENCONTRADO');
+end;
+
+procedure TFrmConsultaCarro.Sair;
+begin
+  if self.btnsair.Caption = 'SELECIONAR' then
+    umactrlveiculo.Carregar(umveiculo);
+   inherited;
+end;
+
+procedure TFrmConsultaCarro.SetFrmCadastro(pObj: TObject);
+begin
+  inherited;
+  umFrmCadastroCarro := TFrmCadastrocarro (pObj);
+end;
+
+end.

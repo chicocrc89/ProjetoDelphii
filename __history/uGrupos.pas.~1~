@@ -1,0 +1,59 @@
+unit uGrupos;
+
+interface
+  uses uGenerica;
+  type Grupos = class(Generica)
+  private
+
+  protected
+    nome : string;
+  public
+    constructor Crieobj;
+    destructor Destrua_se;
+    procedure setcodigo (pcodigo : integer);
+    procedure setnome (pnome : string);
+    function getcodigo : integer;
+    function getnome : string;
+    function clone : Grupos;
+  end;
+
+implementation
+
+{ Grupo }
+
+function Grupos.clone: Grupos;
+begin
+
+end;
+
+constructor Grupos.Crieobj;
+begin
+
+end;
+
+destructor Grupos.Destrua_se;
+begin
+
+end;
+
+function Grupos.getcodigo: integer;
+begin
+  result := codigo;
+end;
+
+function Grupos.getnome: string;
+begin
+  result := nome;
+end;
+
+procedure Grupos.setcodigo(pcodigo: integer);
+begin
+  codigo := pcodigo;
+end;
+
+procedure Grupos.setnome(pnome: string);
+begin
+  nome := pnome;
+end;
+
+end.

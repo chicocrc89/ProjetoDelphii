@@ -1,0 +1,78 @@
+unit uFrmConsultaProduto;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmConsulta, Vcl.ComCtrls, Vcl.StdCtrls, uFrmCadastroProduto;
+
+type
+  TFrmConsultaProduto = class(TFrmConsulta)
+  private
+    { Private declarations }
+  protected
+    umFrmCadastroProduto : TFrmCadastroProduto;
+    procedure Novo; Override;
+    procedure Alterar; Override;
+    procedure Excluir; Override;
+    procedure Sair; Override;
+    procedure Pesquisar; Override;
+  public
+    { Public declarations }
+    procedure conhecaObj (pObj : TObject); Override;
+    procedure SetFrmCadastro (pObj : TObject); Override;
+
+  end;
+
+var
+  FrmConsultaProduto: TFrmConsultaProduto;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmConsultaProduto }
+
+procedure TFrmConsultaProduto.Alterar;
+begin
+  inherited;
+  umFrmCadastroProduto.ShowModal;
+end;
+
+procedure TFrmConsultaProduto.conhecaObj(pObj: TObject);
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaProduto.Excluir;
+begin
+  inherited;
+  umFrmCadastroProduto.ShowModal;
+end;
+
+procedure TFrmConsultaProduto.Novo;
+begin
+  inherited;
+  umFrmCadastroProduto.ShowModal;
+end;
+
+procedure TFrmConsultaProduto.Pesquisar;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaProduto.Sair;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaProduto.SetFrmCadastro(pObj: TObject);
+begin
+  inherited;
+  umFrmCadastroProduto := TFrmCadastroProduto (pObj);
+end;
+
+end.

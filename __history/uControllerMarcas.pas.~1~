@@ -1,0 +1,66 @@
+unit uControllerMarcas;
+
+interface
+  uses uController, uDM, uDaomarcas, DB;
+  type Controllermarcas = class(controller)
+  private
+
+  protected
+    umadaopais : Daomarcas;
+  public
+    constructor CrieObj;
+    destructor  Destrua_se;
+    function Salvar ( pObj :  TObject ):            string;    override;
+    function Carregar ( pObj : TObject ):           string;    override;
+    function Excluir ( pObj : TObject ):            string;    override;
+    function Pesquisar ( pChave : string):          string;    override;
+    procedure setDM (pDM : TDM);
+    function getds : Tdatasource;
+  end;
+
+implementation
+
+{ Controllerpais }
+
+function Controllermarcas.Carregar(pObj: TObject): string;
+begin
+  self.umadaopais.Carregar(pObj);
+end;
+
+constructor Controllermarcas.CrieObj;
+begin
+  umadaopais := Daomarcas.CrieObj;
+end;
+
+destructor Controllermarcas.Destrua_se;
+begin
+  umadaopais.Destrua_se;
+end;
+
+function Controllermarcas.Excluir(pObj: TObject): string;
+begin
+  self.umadaopais.Excluir(pObj);
+end;
+
+function Controllermarcas.getds: Tdatasource;
+begin
+  result := umadaopais.getds;
+end;
+
+function Controllermarcas.Pesquisar(pChave: string): string;
+begin
+  self.umadaopais.Pesquisar(pChave);
+end;
+
+function Controllermarcas.Salvar(pObj: TObject): string;
+begin
+  self.umadaopais.Salvar(pObj);
+end;
+
+procedure Controllermarcas.setDM(pDM: TDM);
+begin
+  self.umadaopais.setDM(pDM);
+end;
+
+end.
+

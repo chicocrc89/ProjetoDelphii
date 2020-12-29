@@ -1,0 +1,90 @@
+unit uFrmCadastro;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TFrmCadastro = class(TForm)
+    lblCodigo: TLabel;
+    edtCodigo: TEdit;
+    lblDtCadastro: TLabel;
+    edtCadastro: TEdit;
+    lblDtUlt_alt: TLabel;
+    edtUlt_alt: TEdit;
+    btnSalvar: TButton;
+    btnSair: TButton;
+    procedure btnSalvarClick(Sender: TObject);
+    procedure btnSairClick(Sender: TObject);
+  private
+    { Private declarations }
+  protected
+
+  public
+    { Public declarations }
+    procedure ConhecaObj (pObj : TObject; pctrl : TObject);  Virtual;
+    procedure Salvar;                       Virtual;
+    procedure Sair;                         Virtual;
+    procedure CarregaEdt;                   Virtual;
+    procedure LimpaEdt;                     Virtual;
+    procedure BloqueiaEdt;                  Virtual;
+    procedure DesbloqueiaEdt;               Virtual;
+  end;
+
+var
+  FrmCadastro: TFrmCadastro;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmCadastro }
+
+procedure TFrmCadastro.BloqueiaEdt;
+begin
+
+end;
+
+procedure TFrmCadastro.btnSairClick(Sender: TObject);
+begin
+  Sair;
+end;
+
+procedure TFrmCadastro.btnSalvarClick(Sender: TObject);
+begin
+  Salvar;
+end;
+
+procedure TFrmCadastro.CarregaEdt;
+begin
+
+end;
+
+procedure TFrmCadastro.ConhecaObj(pObj: TObject; pctrl : TObject);
+begin
+
+end;
+
+procedure TFrmCadastro.DesbloqueiaEdt;
+begin
+
+end;
+
+procedure TFrmCadastro.LimpaEdt;
+begin
+
+end;
+
+procedure TFrmCadastro.Sair;
+begin
+  close;
+end;
+
+procedure TFrmCadastro.Salvar;
+begin
+
+end;
+
+end.

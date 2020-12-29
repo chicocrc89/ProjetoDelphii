@@ -1,0 +1,113 @@
+unit uDaoFabricantes;
+
+interface
+
+uses udao, uDM, DB, ufabricantes, SysUtils;
+
+type
+  Daofabricantes = class(dao)
+  private
+
+  protected
+    umdm: TDM;
+  public
+    constructor CrieObj;
+    destructor Destrua_se;
+    function Salvar(pObj: TObject): string; override;
+    function Carregar(pObj: TObject): string; override;
+    function Excluir(pObj: TObject): string; override;
+    function Pesquisar(pChave: string): string; override;
+    procedure setDM(pDM: TDM);
+    function getds: Tdatasource;
+  end;
+
+implementation
+
+{ Daofabricantes }
+
+function Daofabricantes.Carregar(pObj: TObject): string;
+var
+  mfabricantes: fabricantes;
+begin
+  mfabricantes := fabricantes(pObj);
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetpais.Active then
+    umdm.dsetpais.Open;
+  mfabricantes.setCodigo(umdm.dsetpaisID_PAIS.Value);
+  mfabricantes.setpais(umdm.dsetpaisPAIS.Value);
+  mfabricantes.setDDI(umdm.dsetpaisDDI.Value);
+  mfabricantes.setsigra(umdm.dsetpaisSIGLA.Value);
+end;
+
+constructor Daofabricantes.CrieObj;
+begin
+
+end;
+
+destructor Daofabricantes.Destrua_se;
+begin
+
+end;
+
+function Daofabricantes.Excluir(pObj: TObject): string;
+begin
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetpais.Active then
+    umdm.dsetpais.Open;
+  umdm.dsetpais.Delete;
+  umdm.trans.Commit;
+end;
+
+function Daofabricantes.getds: Tdatasource;
+begin
+  result := umdm.dspais;
+end;
+
+function Daofabricantes.Pesquisar(pChave: string): string;
+var
+  mSQL: string;
+begin
+  if length(pChave) = 0 then
+    mSQL := 'select * from pais order by pais'
+  else if ehnumero(pChave) then
+    mSQL := 'select * from pais where id_pais =' + QuotedStr(pChave)
+  else
+    mSQL := 'select * from pais where pais =' + QuotedStr(pChave);
+  umdm.dsetpais.Active := false;
+  umdm.dsetpais.SelectSQL.Text := mSQL;
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetpais.Active then
+    umdm.dsetpais.Open;
+  result := '';
+end;
+
+function Daofabricantes.Salvar(pObj: TObject): string;
+var
+  mfabricantes: fabricantes;
+begin
+  mfabricantes := fabricantes(pObj);
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetpais.Active then
+    umdm.dsetpais.Open;
+  if mfabricantes.getcodigo = 0 then
+    umdm.dsetpais.Insert
+  else
+    umdm.dsetpais.Edit;
+  umdm.dsetpaisID_PAIS.Value := mfabricantes.getcodigo;
+  umdm.dsetpaisPAIS.Value := mfabricantes.getpais;
+  umdm.dsetpaisDDI.Value := mfabricantes.getDDI;
+  umdm.dsetpaisSIGLA.Value := mfabricantes.getsigla;
+  umdm.dsetpais.Post;
+  umdm.trans.Commit;
+end;
+
+procedure Daofabricantes.setDM(pDM: TDM);
+begin
+  umdm := pDM;
+end;
+
+end.

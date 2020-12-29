@@ -1,0 +1,82 @@
+unit uControllerModelos;
+
+interface
+  uses sysutils, ucontroller, uDaomodelos, DB, uDM, umodelos, uControllerMarcas;
+  type Controllermodelos = class(controller)
+  private
+
+  protected
+    umadaomodelo : Daomodelos;
+    umactrlmarca : ControllerMarcas;
+  public
+    constructor CrieObj;
+    destructor  Destrua_se;
+    function Salvar ( pObj :  TObject ):            string;    override;
+    function Carregar ( pObj : TObject ):           string;    override;
+    function Excluir ( pObj : TObject ):            string;    override;
+    function Pesquisar ( pChave : string):          string;    override;
+    procedure setDM (pDM : TDM);
+    function getds : Tdatasource;
+    procedure setctrlmarca (pObj : TObject);
+    function getctrlmarca : ControllerMarcas;
+  end;
+
+implementation
+
+{ Controllermodelos }
+
+function Controllermodelos.Carregar(pObj: TObject): string;
+var mmodelo : modelos;
+begin
+  self.umadaocidade.Carregar(pObj);
+  mcidade := modelos (pobj);
+  umaCtrlEstado.pesquisar(inttostr(mcidade.getumestado.getcodigo));
+  self.umactrlestado.Carregar(mcidade.getumestado);
+end;
+
+constructor Controllermodelos.CrieObj;
+begin
+  self.umadaocidade := Daomodelos.CrieObj;
+end;
+
+destructor Controllermodelos.Destrua_se;
+begin
+  self.umadaocidade.Destrua_se;
+end;
+
+function Controllermodelos.Excluir(pObj: TObject): string;
+begin
+  self.umadaocidade.Excluir(pObj);
+end;
+
+function Controllermodelos.getctrlestado: ControllerEstados;
+begin
+  result := umactrlestado;
+end;
+
+function Controllermodelos.getds: Tdatasource;
+begin
+  result := umadaocidade.getds;
+end;
+
+function Controllermodelos.Pesquisar(pChave: string): string;
+begin
+  self.umadaocidade.Pesquisar(pChave);
+end;
+
+function Controllermodelos.Salvar(pObj: TObject): string;
+begin
+  self.umadaocidade.Salvar(pObj);
+end;
+
+procedure Controllermodelos.setctrlestado(pObj: TObject);
+begin
+  umactrlestado := ControllerEstados (pObj);
+end;
+
+procedure Controllermodelos.setDM(pDM: TDM);
+begin
+  self.umadaocidade.setDM(pDM);
+end;
+
+end.

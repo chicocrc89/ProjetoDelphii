@@ -1,0 +1,63 @@
+unit uLaboratorios;
+
+interface
+  uses uGenerica;
+  type Laboratorios = class(Generica)
+  private
+
+  protected
+    nome : string;
+
+  public
+    constructor Crieobj;
+    destructor Destrua_se;
+    procedure setcodigo (pcodigo : integer);
+    procedure setnome (pnome : string);
+    function getcodigo : integer;
+    function getnome : string;
+    function clone : laboratorios;
+  end;
+
+implementation
+
+{ Laboratorios }
+
+function Laboratorios.clone: laboratorios;
+begin
+  result := Laboratorios.Crieobj;
+  result.setcodigo(codigo);
+  result.setcodigo(codigo);
+  result.setnome(nome);
+end;
+
+constructor Laboratorios.Crieobj;
+begin
+
+end;
+
+destructor Laboratorios.Destrua_se;
+begin
+
+end;
+
+function Laboratorios.getcodigo: integer;
+begin
+  result := codigo;
+end;
+
+function Laboratorios.getnome: string;
+begin
+  result := nome;
+end;
+
+procedure Laboratorios.setcodigo(pcodigo: integer);
+begin
+  codigo := pcodigo;
+end;
+
+procedure Laboratorios.setnome(pnome: string);
+begin
+  nome := pnome;
+end;
+
+end.

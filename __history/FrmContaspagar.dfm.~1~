@@ -1,0 +1,78 @@
+object FrmContasapagar: TFrmContasapagar
+  Left = 0
+  Top = 0
+  Caption = 'Contas a Pagar'
+  ClientHeight = 598
+  ClientWidth = 928
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    AlignWithMargins = True
+    Left = 0
+    Top = 0
+    Width = 929
+    Height = 34
+    Alignment = taCenter
+    Caption = 'CONTAS A PAGAR'
+    Color = clBlack
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clCream
+    Font.Height = -29
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 72
+    Top = 227
+    Width = 108
+    Height = 18
+    Caption = 'FORNECEDOR'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object FILTROS: TRadioGroup
+    Left = -5
+    Top = 40
+    Width = 185
+    Height = 129
+    Caption = 'FILTROS'
+    TabOrder = 0
+  end
+  object TRadioButton
+    Left = 8
+    Top = 64
+    Width = 137
+    Height = 17
+    Caption = 'BOLETOS EM ABERTO'
+    TabOrder = 1
+  end
+  object RadioButton1: TRadioButton
+    Left = 8
+    Top = 96
+    Width = 113
+    Height = 17
+    Caption = 'BOLETOS PAGOS'
+    TabOrder = 2
+  end
+  object RadioButton2: TRadioButton
+    Left = 8
+    Top = 135
+    Width = 113
+    Height = 17
+    Caption = 'TODOS'
+    TabOrder = 3
+  end
+end

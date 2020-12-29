@@ -1,0 +1,313 @@
+unit uDaoVenda_Produtos;
+
+interface
+
+uses udao, uVenda_Produtos, uDM, DB, uDaoCondicoes, uDaoclientes,uDaoProdutos, SysUtils, uDaoFormaPagamentos,
+ucontasreceber, uColecaocontasreceber, uItem, uColecaoProdutos, ucolecaoservicos, udaoservicos;
+
+type
+  Daovendas = class(dao)
+  private
+
+  protected
+    umdm: TDM;
+    umadaocondicao  : DaoCondicoes;
+    umadaocliente  : Daoclientes;
+    umadaoproduto       : DaoProdutos;
+    umadaoservico       : DaoServicos;
+    umadaoformapagamento : DaoFormaPagamentos;
+    umacontareceber : contasreceber;
+    umItem : Item;
+  public
+    constructor CrieObj;
+    destructor Destrua_se;
+    function Salvar(pObj: TObject): string; override;
+    function Carregar(pObj: TObject): string; override;
+    function Excluir(pObj: TObject): string; override;
+    function Pesquisar(pChave: string): string; override;
+    procedure setDM(pDM: TDM);
+    function getds: Tdatasource;
+    procedure setdaocondicao(pObj: TObject);
+    procedure setdaocliente (pObj : TObject);
+    procedure setdaoproduto (pObj : TObject);
+    procedure setdaoservico (pObj : TObject);
+    procedure setdaoformapagamento (pObj : TObject);
+    procedure atualizaestoque(pObj: TObject);
+  end;
+
+implementation
+
+{ Daovendas }
+
+procedure Daovendas.atualizaestoque(pObj: TObject);
+var mitem : Item;
+  I, k, tamanho, qtd_produto : integer;
+  mid_produto, mestoque_produto : STRING;
+  mcolecao_produto : ColecaoProdutos;
+  mvendas: venda_Produtos;
+  mestoque_posterior : integer;
+  mestoque_anterior : array[1..100] of integer;
+begin
+  mvendas := venda_Produtos(pObj);
+  qtd_produto := mvendas.getumacolecaoproduto.getQtd;
+  tamanho := mvendas.getumacolecaoproduto.getQtd;
+  for k:= 1 to tamanho do
+  begin
+    mcolecao_produto := ColecaoProdutos (mvendas.getumacolecaoproduto);
+    mitem := Item (mcolecao_produto.Carrega(k));
+    mid_produto := inttostr(mitem.getumproduto.getCodigo);
+    mestoque_produto := inttostr(mitem.getQtd);
+    umdm.dsetproduto.Active := false;
+    umdm.trans.Active := false;
+    umdm.dsetproduto.SelectSQL.Text := 'select * from produto WHERE id_produto =' + QuotedStr(mid_produto);
+    if not umdm.dsetproduto.Active then
+      umdm.dsetproduto.Open;
+    mestoque_anterior[k] := umdm.dsetprodutoESTOQUE.Value;
+  end;
+
+  for I:= 1 to qtd_produto do
+  begin
+    mcolecao_produto := ColecaoProdutos (mvendas.getumacolecaoproduto);
+    mitem := Item (mcolecao_produto.Carrega(I));
+    mid_produto := inttostr(mitem.getumproduto.getCodigo);
+    mestoque_produto := inttostr(mitem.getQtd);
+    mestoque_posterior := mestoque_anterior[i] - strtoint(mestoque_produto);
+    mestoque_produto := inttostr(mestoque_posterior);
+    umdm.dsetproduto.SelectSQL.Text := 'update produto SET estoque =' + QuotedStr(mestoque_produto) + 'WHERE id_produto =' + QuotedStr(mid_produto);
+    if not umdm.dsetproduto.Active then
+      umdm.dsetproduto.Open;
+    if not umdm.trans.Active then
+      umdm.trans.Active := true;
+    umdm.trans.Commit;
+  end;
+
+end;
+
+function Daovendas.Carregar(pObj: TObject): string;
+var
+  mnumero_nota, mcod_cliente,mserie, mmodelo : string;
+  mvendas: Venda_Produtos;
+begin
+  mvendas := Venda_Produtos(pObj);
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetvenda_produto.Active then
+    umdm.dsetvenda_produto.Open;
+  mvendas.setNumero_nota(umdm.dsetvenda_produtoNUMERO_NOTA.Value);
+  mvendas.setSerie(umdm.dsetvenda_produtosERIE.Value);
+  mvendas.setModelo(umdm.dsetvenda_produtoMODELO.Value);
+  mvendas.getumaCondicao.setCodigo(umdm.dsetvenda_produtoID_CONDICAO.Value);
+  mvendas.getumcliente.setCodigo(umdm.dsetvenda_produtoID_cliente.Value);
+  mvendas.setStatus(umdm.dsetvenda_produtosTATUS.Value);
+  mvendas.setData_venda(umdm.dsetvenda_produtoDATA_VENDA.Value);
+  mvendas.setData_emissao(umdm.dsetvenda_produtoDATA_EMISSAO.Value);
+  mvendas.setTotaldesconto(umdm.dsetvenda_produtoTOTAL_DESCONTO.Value);
+  mvendas.setdatacancelamento(umdm.dsetvenda_produtoDATA_CANCELAMENTO.Value);
+  mvendas.setTotalvenda(umdm.dsetvenda_produtoTOTAL_VENDA.Value);
+  mvendas.setTotalprodutos(umdm.dsetvenda_produtoTOTAL_PRODUTOS.Value);
+  mnumero_nota := inttostr(mvendas.getNumero_nota);
+  mserie := mvendas.getSerie;
+  mmodelo := mvendas.getModelo;
+  mcod_cliente := inttostr(mvendas.Getumcliente.getCodigo);
+  //---------------------------------------------------------------------------------------------------------
+  //AQUI EU RETORNO TODOS OS CONTAS A RECEBER PARA CARREGAR NO FORMULARIO
+  //---------------------------------------------------------------------------------------------------------
+  umdm.dsetcontasreceber.SelectSQL.Text := 'select * from contas_receber where numero_nota =' + QuotedStr(mnumero_nota) + 'AND SERIE=' + QuotedStr(mserie) + 'AND MODELO=' + QuotedStr(mmodelo) + 'AND ID_cliente=' + QuotedStr(mcod_cliente);
+  umdm.dsetcontasreceber.Open;
+
+  mvendas.getumacolecaocontasreceber.setQtd(0);
+  while not umdm.dsetcontasreceber.Eof do
+  begin
+    umacontareceber := contasreceber.Crieobj;
+    umacontareceber.setnumero_parcela(umdm.dsetcontasreceberNUMERO_PARCELA.Value);
+    umacontareceber.getumaformapagamento.setCodigo(umdm.dsetcontasreceberID_FORMAPAGAMENTO.Value);
+    umacontareceber.setdata_vencimento(umdm.dsetcontasreceberDATA_VENCIMENTO.Value);
+    umacontareceber.setvalor_parcela(umdm.dsetcontasreceberVALOR_PARCELA.Value);
+    mvendas.getumacolecaocontasreceber.insereFim(umacontareceber);
+    umdm.dsetcontasreceber.Next;
+  end;
+  //------------------------------------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------------------------------------
+  //AQUI EU RETORNO TODOS OS PRODUTOS DA VENDA PARA CARREGAR NO FORMULARIO
+  //---------------------------------------------------------------------------------------------------------
+  umdm.dsetitem_venda.SelectSQL.Text := 'select * from item_venda where numero_nota =' + QuotedStr(mnumero_nota) + 'AND SERIE=' + QuotedStr(mserie) + 'AND MODELO=' + QuotedStr(mmodelo) + 'AND ID_cliente=' + QuotedStr(mcod_cliente);
+  umdm.dsetitem_venda.Open;
+  mvendas.getumacolecaoproduto.setQtd(0);
+  while not umdm.dsetitem_venda.Eof do
+  begin
+    umitem := Item.Crieobj;
+    umitem.getumproduto.setCodigo(umdm.dsetitem_vendaID_PRODUTO.Value);
+    umitem.SetQtd(umdm.dsetitem_vendaQTD.Value);
+    umitem.getumproduto.setpreco_compra(umdm.dsetitem_vendaVALOR_UNITARIO.Value);
+    umitem.setvalor_total(umdm.dsetitem_vendaVALOR_TOTAL.Value);
+    mvendas.getumacolecaoproduto.insereFim(umitem);
+    umdm.dsetitem_venda.Next;
+  end;
+  //-------------------------------------------------------------------------------------------------------------------
+  end;
+
+constructor Daovendas.CrieObj;
+begin
+  umadaocondicao := DaoCondicoes.CrieObj;
+  umadaocliente := Daoclientes.CrieObj;
+  umadaoproduto := DaoProdutos.CrieObj;
+  umadaoservico := DaoServicos.CrieObj;
+  umadaoformapagamento := DaoFormaPagamentos.CrieObj;
+end;
+
+destructor Daovendas.Destrua_se;
+begin
+  umadaocondicao.Destrua_se;
+  umadaocliente.Destrua_se;
+  umadaoproduto.Destrua_se;
+  umadaoservico.Destrua_se;
+end;
+
+function Daovendas.Excluir(pObj: TObject): string;
+begin
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetvenda_produto.Active then
+    umdm.dsetvenda_produto.Open;
+  umdm.dsetvenda_produto.Delete;
+  umdm.trans.Commit;
+end;
+
+function Daovendas.getds: Tdatasource;
+begin
+  result := umdm.dsvenda_produto;
+end;
+
+function Daovendas.Pesquisar(pChave: string): string;
+var
+  mSQL: string;
+begin
+  if length(pChave) = 0 then
+    mSQL := 'select * from venda'
+  else if ehnumero(pChave) then
+    mSQL := 'select * from venda_produto where numero_nota =' + QuotedStr(pChave)
+  else
+    mSQL := 'select * from venda_produto where numero_nota =' + QuotedStr(pChave);
+  umdm.dsetvenda_produto.Active := false;
+  umdm.dsetvenda_produto.SelectSQL.Text := mSQL;
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetvenda_produto.Active then
+    umdm.dsetvenda_produto.Open;
+    result := '';
+end;
+
+function Daovendas.Salvar(pObj: TObject): string;
+var
+  mvendas: Venda_Produtos;
+  mdata : Tdate;
+  mContareceber: contasreceber;
+  mitem : Item;
+  I, tamanho, qtd_produto: integer;
+  mcolecao : Colecaocontasreceber;
+  mcolecao_produto : ColecaoProdutos;
+  mcolecao_servico : ColecaoServicos;
+begin
+  mvendas := Venda_Produtos(pObj);
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetvenda_produto.Active then
+    umdm.dsetvenda_produto.Open;
+    umdm.dsetvenda_produto.Insert;
+  umdm.dsetvenda_produtoNUMERO_NOTA.Value := mvendas.getNumero_nota;
+  umdm.dsetvenda_produtoSERIE.Value := mvendas.getSerie;
+  umdm.dsetvenda_produtoMODELO.Value := mvendas.getModelo;
+  umdm.dsetvenda_produtoID_CONDICAO.Value := mvendas.getumacondicao.getcodigo;
+  umdm.dsetvenda_produtoID_cliente.Value := mvendas.getumcliente.getCodigo;
+  umdm.dsetvenda_produtosTATUS.Value := mvendas.getStatus;
+  umdm.dsetvenda_produtoDATA_VENDA.Value := mvendas.getData_venda;
+  umdm.dsetvenda_produtoDATA_EMISSAO.Value := mvendas.getData_emissao;
+  umdm.dsetvenda_produtoTOTAL_DESCONTO.Value := mvendas.getTotaldesconto;
+  umdm.dsetvenda_produtoDATA_CANCELAMENTO.Value := mvendas.getDatacancelamento;
+  umdm.dsetvenda_produtoTOTAL_VENDA.Value := mvendas.getTotalvenda;
+  umdm.dsetvenda_produtoTOTAL_PRODUTOS.Value := mvendas.getTotalprodutos;
+  umdm.dsetvenda_produto.Post;
+  //------------------------------------------------------------------------------------------
+  //AQUI FAZ INSERÇÃO  DO CONTAS A RECEBER NO BANCO
+  //------------------------------------------------------------------------------------------
+  tamanho := mvendas.getumacolecaocontasreceber.getQtd;
+  for I:= 1 to tamanho do
+  begin
+    mcolecao := Colecaocontasreceber (mvendas.getumacolecaocontasreceber);
+    mContareceber := contasreceber (mcolecao.Carrega(I));
+    if not umdm.dsetcontasreceber.active then
+      umdm.dsetcontasreceber.Open;
+    umdm.dsetcontasreceber.Insert;
+    umdm.dsetcontasreceberNUMERO_NOTA.Value       := mvendas.getNumero_nota;
+    umdm.dsetcontasreceberSERIE.Value             := mvendas.getSerie;
+    umdm.dsetcontasreceberMODELO.Value            := mvendas.getModelo;
+    umdm.dsetcontasreceberID_cliente.Value        := mvendas.Getumcliente.getCodigo;
+    umdm.dsetcontasreceberDATA_EMISSAO.Value      := mvendas.getData_emissao;
+    umdm.dsetcontasreceberNUMERO_PARCELA.Value    := mContareceber.getnumero_parcela;
+    umdm.dsetcontasreceberVALOR_PARCELA.Value     := mContareceber.getvalor_parcela;
+    umdm.dsetcontasreceberDATA_VENCIMENTO.Value   := mContareceber.getdata_vencimento;
+    umdm.dsetcontasreceberDATA_PAGAMENTO.Value    := mContareceber.getdata_pagamento;
+    umdm.dsetcontasreceberJUROS.Value             := mContareceber.getjuros;
+    umdm.dsetcontasreceberMULTA.Value             := mContareceber.getmulta;
+    umdm.dsetcontasreceberVALOR_PAGO.Value        := mContareceber.getvalor_pago;
+    umdm.dsetcontasreceberID_FORMAPAGAMENTO.Value := mContareceber.getumaformapagamento.getCodigo;
+    umdm.dsetcontasreceberDESCONTO.Value          := mContareceber.getdesconto;
+    umdm.dsetcontasreceber.Post;
+  end;
+  //------------------------------------------------------------------------------------------
+  //AQUI FAZ INSERÇÃO  DO ITENS VENDA NO BANCO
+  //------------------------------------------------------------------------------------------
+  qtd_produto := mvendas.getumacolecaoproduto.getQtd;
+  for I:= 1 to qtd_produto do
+  begin
+    mcolecao_produto := ColecaoProdutos (mvendas.getumacolecaoproduto);
+    mitem := Item (mcolecao_produto.Carrega(I));
+    if not umdm.dsetitem_venda.active then
+      umdm.dsetitem_venda.Open;
+    umdm.dsetitem_venda.Insert;
+    umdm.dsetitem_vendaNUMERO_NOTA.Value       := mvendas.getNumero_nota;
+    umdm.dsetitem_vendasERIE.Value             := mvendas.getSerie;
+    umdm.dsetitem_vendaMODELO.Value            := mvendas.getModelo;
+    umdm.dsetitem_vendaID_cliente.Value     := mvendas.Getumcliente.getCodigo;
+    umdm.dsetitem_vendaID_PRODUTO.Value        := mitem.getumproduto.getCodigo;
+    umdm.dsetitem_vendaQTD.Value               := mitem.getQtd;
+    umdm.dsetitem_vendaVALOR_UNITARIO.Value          := mitem.getumproduto.getpreco_venda;
+    umdm.dsetitem_vendaVALOR_TOTAL.Value             := mitem.getvalor_total;
+    umdm.dsetitem_venda.Post;
+  end;
+  umdm.trans.Commit;
+  atualizaestoque(pObj);
+
+end;
+
+procedure Daovendas.setdaocondicao(pObj: TObject);
+begin
+  umadaocondicao := DaoCondicoes(pObj);
+end;
+
+procedure Daovendas.setdaoformapagamento(pObj: TObject);
+begin
+  umadaoformapagamento := DaoFormaPagamentos(pObj);
+end;
+
+procedure Daovendas.setdaocliente(pObj: TObject);
+begin
+  umadaocliente := Daoclientes(pObj);
+end;
+
+procedure Daovendas.setdaoproduto(pObj: TObject);
+begin
+  umadaoproduto := DaoProdutos(pObj);
+end;
+
+procedure Daovendas.setdaoservico(pObj: TObject);
+begin
+  umadaoservico := DaoServicos(pObj);
+end;
+
+procedure Daovendas.setDM(pDM: TDM);
+begin
+  umdm := pDM;
+end;
+
+end.

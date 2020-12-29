@@ -1,0 +1,70 @@
+unit uFrmConsultaFornecedor;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmConsulta, Vcl.ComCtrls, Vcl.StdCtrls;
+
+type
+  TFrmConsultaFornecedor = class(TFrmConsulta)
+  private
+    { Private declarations }
+  protected
+    procedure Novo; Override;
+    procedure Alterar; Override;
+    procedure Excluir; Override;
+    procedure Sair; Override;
+    procedure Pesquisar; Override;
+  public
+    { Public declarations }
+    procedure conhecaObj (pObj : TObject); Override;
+    procedure SetFrmCadastro (pObj : TObject); Override;
+  end;
+
+var
+  FrmConsultaFornecedor: TFrmConsultaFornecedor;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmConsultaFornecedor }
+
+procedure TFrmConsultaFornecedor.Alterar;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaFornecedor.conhecaObj(pObj: TObject);
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaFornecedor.Excluir;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaFornecedor.Novo;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaFornecedor.Pesquisar;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaFornecedor.Sair;
+begin
+  inherited;
+
+end;
+
+end.

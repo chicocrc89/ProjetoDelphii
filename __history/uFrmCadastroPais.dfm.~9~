@@ -1,0 +1,119 @@
+inherited FrmCadastroPais: TFrmCadastroPais
+  AlphaBlend = True
+  Caption = 'Cadastro Pa'#237's'
+  ExplicitTop = -7
+  ExplicitWidth = 858
+  ExplicitHeight = 596
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel [3]
+    Left = 8
+    Top = 72
+    Width = 32
+    Height = 18
+    Caption = 'PA'#205'S'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel [4]
+    Left = 8
+    Top = 144
+    Width = 26
+    Height = 18
+    Caption = 'DDI'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label3: TLabel [5]
+    Left = 8
+    Top = 208
+    Width = 44
+    Height = 18
+    Caption = 'SIGLA'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  inherited lblobs: TLabel
+    Top = 403
+    ExplicitTop = 403
+  end
+  inherited Label23: TLabel
+    Top = 403
+    ExplicitTop = 403
+  end
+  object Label9: TLabel [11]
+    Left = 46
+    Top = 62
+    Width = 9
+    Height = 23
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -19
+    Font.Name = 'Calibri'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label4: TLabel [12]
+    Left = 40
+    Top = 134
+    Width = 9
+    Height = 23
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -19
+    Font.Name = 'Calibri'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label5: TLabel [13]
+    Left = 58
+    Top = 198
+    Width = 9
+    Height = 23
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -19
+    Font.Name = 'Calibri'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  inherited edtcodusuario: TEdit
+    TabOrder = 6
+  end
+  object edtpais: TEdit
+    Left = 8
+    Top = 91
+    Width = 121
+    Height = 21
+    TabOrder = 5
+  end
+  object edtddi: TEdit
+    Left = 8
+    Top = 163
+    Width = 121
+    Height = 21
+    TabOrder = 3
+  end
+  object edtsigla: TEdit
+    Left = 8
+    Top = 227
+    Width = 121
+    Height = 21
+    TabOrder = 4
+  end
+end

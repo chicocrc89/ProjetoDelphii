@@ -1,0 +1,33 @@
+unit uFrmCadastroServicos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmCadastro, Vcl.StdCtrls, Vcl.Buttons,
+  Vcl.Mask;
+
+type
+  TFrmCadastroServicos = class(TFrmCadastro)
+    edtdescricao: TEdit;
+    Label1: TLabel;
+    Edit1: TEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    MaskEdit1: TMaskEdit;
+    Label4: TLabel;
+    MaskEdit2: TMaskEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmCadastroServicos: TFrmCadastroServicos;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,29 @@
+unit uFormaPagamentos;
+
+interface
+
+uses uGenerica;
+
+type
+  FormaPagamentos = class(Generica)
+
+  private
+
+  protected
+    pagamento: string;
+
+  public
+    Constructor Crieobj;
+    destructor Destrua_se;
+    procedure setpagamento(ppagamento: string);
+    procedure setumacondicao (pcondicao : Condicoes);
+    function getpagamento: string;
+    function getumacondicao : Condicoes;
+    function clone: FormaPagamentos;
+  end;
+
+implementation
+
+
+
+end.

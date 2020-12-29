@@ -1,0 +1,7 @@
+inherited FrmConsultaEntrada: TFrmConsultaEntrada
+  Caption = 'ENTRADA'
+  ExplicitWidth = 985
+  ExplicitHeight = 488
+  PixelsPerInch = 96
+  TextHeight = 13
+end

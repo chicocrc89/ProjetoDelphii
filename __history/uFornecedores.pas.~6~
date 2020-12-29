@@ -1,0 +1,170 @@
+unit uFornecedores;
+
+interface
+
+uses uGenerica, uCidades, uFormaPagamentos;
+
+type
+  Fornecedores = class(Generica)
+  private
+
+  protected
+    tp_fornecedor : string;
+    razao: string;
+    cnpj: string;
+    insc_est: string;
+    nome_fantasia : string;
+    tel_comercial : string;
+    celular : string;
+    endereco: string;
+    numero: integer;
+    bairro: string;
+    umacidade: Cidades;
+    umaformapagamento : FormaPagamentos;
+  public
+    constructor Crieobj;
+    destructor Destrua_se;
+    procedure setrazao(prazao: string);
+    procedure setcnpj(pcnpj: string);
+    procedure setinsc_est(pinsc_est: string);
+    procedure setendereco(pendereco: string);
+    procedure setnumero(pnumero: integer);
+    procedure setbairro(pbairro: string);
+    procedure setumacidade(pcidade: Cidades);
+    function getrazao: string;
+    function getcnpj: string;
+    function getinsc_est: string;
+    function getendereco: string;
+    function getnumero: integer;
+    function getbairro: string;
+    function getumacidade: Cidades;
+    function clone: Fornecedores;
+
+  end;
+
+implementation
+
+{ Fornecedores }
+
+function Fornecedores.clone: Fornecedores;
+begin
+  result := Fornecedores.Crieobj;
+  result.setCodigo(codigo);
+  result.setrazao(razao);
+  result.setcnpj(cnpj);
+  result.setinsc_est(insc_est);
+  result.setendereco(endereco);
+  result.setnumero(numero);
+  result.setbairro(bairro);
+  result.setumpais(umpais);
+  result.setumestado(umestado);
+  result.setumacidade(umacidade);
+  result.setCadastro(Cadastro);
+  result.setUlt_Alt(Ult_Alt);
+end;
+
+constructor Fornecedores.Crieobj;
+begin
+  umpais := Paises.Crieobj;
+  umestado := Estados.Crieobj;
+  umacidade := Cidades.Crieobj;
+end;
+
+destructor Fornecedores.Destrua_se;
+begin
+  umpais.Destrua_se;
+  umestado.Destrua_se;
+  umacidade.Destrua_se;
+end;
+
+function Fornecedores.getbairro: string;
+begin
+  result := bairro;
+end;
+
+function Fornecedores.getcnpj: string;
+begin
+  result := cnpj;
+end;
+
+function Fornecedores.getendereco: string;
+begin
+  result := endereco;
+end;
+
+function Fornecedores.getinsc_est: string;
+begin
+  result := insc_est;
+end;
+
+function Fornecedores.getrazao: string;
+begin
+  result := razao;
+end;
+
+function Fornecedores.getnumero: integer;
+begin
+  result := numero;
+end;
+
+function Fornecedores.getumacidade: Cidades;
+begin
+  result := umacidade;
+end;
+
+function Fornecedores.getumestado: Estados;
+begin
+  result := umestado;
+end;
+
+function Fornecedores.getumpais: Paises;
+begin
+  result := umpais;
+end;
+
+procedure Fornecedores.setbairro(pbairro: string);
+begin
+  bairro := pbairro;
+end;
+
+procedure Fornecedores.setcnpj(pcnpj: string);
+begin
+  cnpj := pcnpj;
+end;
+
+procedure Fornecedores.setendereco(pendereco: string);
+begin
+  endereco := pendereco;
+end;
+
+procedure Fornecedores.setinsc_est(pinsc_est: string);
+begin
+  insc_est := pinsc_est;
+end;
+
+procedure Fornecedores.setnumero(pnumero: integer);
+begin
+  numero := pnumero;
+end;
+
+procedure Fornecedores.setrazao(prazao: string);
+begin
+  razao := prazao;
+end;
+
+procedure Fornecedores.setumacidade(pcidade: Cidades);
+begin
+  umacidade := pcidade;
+end;
+
+procedure Fornecedores.setumestado(pestado: Estados);
+begin
+  umestado := pestado;
+end;
+
+procedure Fornecedores.setumpais(ppais: Paises);
+begin
+  umpais := ppais;
+end;
+
+end.

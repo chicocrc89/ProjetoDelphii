@@ -1,0 +1,102 @@
+inherited FrmCadastroServicos: TFrmCadastroServicos
+  Caption = 'Cadastro Servicos'
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel [8]
+    Left = 8
+    Top = 61
+    Width = 89
+    Height = 18
+    Caption = 'DESCRI'#199#195'O'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel [9]
+    Left = 8
+    Top = 245
+    Width = 33
+    Height = 18
+    Caption = 'OBS'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label3: TLabel [10]
+    Left = 8
+    Top = 125
+    Width = 58
+    Height = 18
+    Caption = 'CUSTO '
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label4: TLabel [11]
+    Left = 8
+    Top = 186
+    Width = 125
+    Height = 18
+    Caption = 'VALOR VENDA R$'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  inherited edtCodigo: TEdit
+    Width = 45
+    Enabled = False
+    ExplicitWidth = 45
+  end
+  inherited edtCadastro: TEdit
+    TabOrder = 5
+  end
+  inherited edtUlt_alt: TEdit
+    TabOrder = 6
+  end
+  inherited edtcodusuario: TEdit
+    TabOrder = 7
+  end
+  object edtdescricao: TEdit
+    Left = 8
+    Top = 80
+    Width = 289
+    Height = 21
+    TabOrder = 1
+  end
+  object edtobs: TEdit
+    Left = 8
+    Top = 264
+    Width = 321
+    Height = 21
+    TabOrder = 4
+    Text = 'edtdescricao'
+  end
+  object edtcusto: TMaskEdit
+    Left = 8
+    Top = 141
+    Width = 121
+    Height = 21
+    TabOrder = 2
+    Text = 'edtcusto'
+  end
+  object edtpreco_venda: TMaskEdit
+    Left = 8
+    Top = 202
+    Width = 125
+    Height = 21
+    TabOrder = 3
+    Text = 'MaskEdit1'
+  end
+end

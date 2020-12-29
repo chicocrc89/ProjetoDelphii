@@ -1,0 +1,13 @@
+inherited FrmCadastroEntrada: TFrmCadastroEntrada
+  Caption = 'ENTRADA / COMPRA'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited lblobs: TLabel
+    Top = 411
+    ExplicitTop = 411
+  end
+  inherited Label23: TLabel
+    Top = 411
+    ExplicitTop = 411
+  end
+end

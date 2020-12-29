@@ -1,0 +1,47 @@
+unit uFrmVendas;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Buttons,
+  Vcl.ExtCtrls, Vcl.Mask, Vcl.DBCtrls, Vcl.Samples.Spin;
+
+type
+  TForm1 = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    btncancelar: TSpeedButton;
+    btnfinalizavenda: TSpeedButton;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    SpeedButton1: TSpeedButton;
+    Label11: TLabel;
+    Label12: TLabel;
+    btnadicionar: TSpeedButton;
+    btnremove: TSpeedButton;
+    Label13: TLabel;
+    Label30: TLabel;
+    edtcodproduto: TEdit;
+    edtproduto: TEdit;
+    edtvalor: TEdit;
+    ListView1: TListView;
+    edtqtd: TSpinEdit;
+    edtund: TEdit;
+    edttotalproduto: TDBEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+end.

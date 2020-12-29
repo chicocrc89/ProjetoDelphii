@@ -1,0 +1,49 @@
+object FrmEntrada: TFrmEntrada
+  Left = 0
+  Top = 0
+  Caption = 'ENTRADA'
+  ClientHeight = 466
+  ClientWidth = 920
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 8
+    Top = 8
+    Width = 108
+    Height = 18
+    Caption = 'FORNECEDOR'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Edit1: TEdit
+    Left = 8
+    Top = 27
+    Width = 273
+    Height = 21
+    TabOrder = 0
+    Text = 'Edit1'
+  end
+  object DBGrid1: TDBGrid
+    Left = 8
+    Top = 72
+    Width = 904
+    Height = 313
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+end

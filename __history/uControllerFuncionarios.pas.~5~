@@ -1,0 +1,77 @@
+unit uControllerFuncionarios;
+
+interface
+  uses ucontroller, DB, uDM, uControllerCidades, uFuncionarios;
+  type ControllerFuncionarios = class(controller)
+  private
+
+  protected
+
+  public
+    constructor CrieObj;
+    destructor  Destrua_se;
+    function Salvar ( pObj :  TObject ):            string;    override;
+    function Carregar ( pObj : TObject ):           string;    override;
+    function Excluir ( pObj : TObject ):            string;    override;
+    function Pesquisar ( pChave : string):          string;    override;
+    procedure setDM (pDM : TDM);
+    function getds : Tdatasource;
+    procedure setctrlcidade (pObj : TObject);
+    function getctrlcidade : ControllerCidades;
+  end;
+implementation
+
+{ ControllerFuncionarios }
+
+function ControllerFuncionarios.Carregar(pObj: TObject): string;
+var mfuncionario : Funcionarios;
+begin
+
+end;
+
+constructor ControllerFuncionarios.CrieObj;
+begin
+
+end;
+
+destructor ControllerFuncionarios.Destrua_se;
+begin
+
+end;
+
+function ControllerFuncionarios.Excluir(pObj: TObject): string;
+begin
+
+end;
+
+function ControllerFuncionarios.getctrlcidade: ControllerCidades;
+begin
+
+end;
+
+function ControllerFuncionarios.getds: Tdatasource;
+begin
+
+end;
+
+function ControllerFuncionarios.Pesquisar(pChave: string): string;
+begin
+
+end;
+
+function ControllerFuncionarios.Salvar(pObj: TObject): string;
+begin
+
+end;
+
+procedure ControllerFuncionarios.setctrlcidade(pObj: TObject);
+begin
+
+end;
+
+procedure ControllerFuncionarios.setDM(pDM: TDM);
+begin
+
+end;
+
+end.

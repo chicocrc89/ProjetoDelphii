@@ -1,0 +1,316 @@
+unit uVendas;
+
+interface
+  uses uGenerica, uclientes, uCondicoes, ucolecaoprodutos, uProdutos, uColecaoContasreceber,
+  uFormaPagamentos, uServicos, ucolecaoservicos;
+  type vendas = class(generica)
+  private
+
+  protected
+    numero_nota :integer;
+    serie: string;
+    modelo: string;
+    status: string ;
+    data_venda: TDate;
+    data_emissao: TDate;
+    umcliente: clientes;
+    umacondicao: Condicoes;
+    totaldesconto: Currency;
+    datacancelamento: TDate;
+    totalvenda: Currency;
+    totalprodutos: Currency;
+    totalservicos: Currency;
+    umacolecaoproduto: Colecaoprodutos;
+    umacolecaoservico: Colecaoservicos;
+    umproduto : Produtos;
+    umservico : Servicos;
+    umacolecaocontasreceber : ColecaoContasReceber;
+    umaformapagamento : FormaPagamentos;
+  public
+    constructor Crieobj;
+    destructor Destrua_se;
+    procedure setNumero_nota(pNumero_nota:integer);
+    function  getNumero_nota:integer;
+    procedure setSerie (pSerie:string);
+    function  getSerie :string;
+    procedure setModelo (pModelo: string);
+    function  getModelo : string;
+    procedure setStatus (pStatus:string);
+    function  getStatus:string;
+    procedure setData_venda (pData_venda:TDate);
+    function  getData_venda : TDate;
+    procedure setData_emissao (pData_emissao:TDate);
+    function  getData_emissao:TDate;
+    procedure setumcliente(pcliente:clientes);
+    function  Getumcliente :clientes;
+    procedure setumaCondicao(pCondicao:Condicoes);
+    function  getumaCondicao: Condicoes;
+    procedure setTotaldesconto (pTotaldesconto:Currency);
+    function  getTotaldesconto :Currency;
+    procedure setdatacancelamento(pdatacancelamento : TDate);
+    function  getDatacancelamento :TDate;
+    procedure setTotalvenda (pTotalvenda:Currency);
+    function  getTotalvenda :Currency;
+    procedure setTotalprodutos (pTotalproduto:Currency);
+    function  getTotalprodutos  :Currency;
+    procedure setTotalservicos (pTotalservico:Currency);
+    function  getTotalservicos  :Currency;
+    procedure setumacolecaoproduto(pcolecaoproduto : Colecaoprodutos);
+    function  getumacolecaoproduto : Colecaoprodutos;
+    procedure setumacolecaoservico(pcolecaoservico : Colecaoservicos);
+    function  getumacolecaoservico : Colecaoservicos;
+    procedure setumproduto (pproduto : produtos);
+    function getumproduto : produtos;
+    procedure setumservico (pservico : servicos);
+    function getumservico : servicos;
+    procedure setumacolecaocontasreceber(pcolecaocontasreceber : ColecaoContasreceber);
+    function getumacolecaocontasreceber : ColecaoContasreceber;
+    procedure setumaformapagamento(pformapagamento : FormaPagamentos);
+    function getumaformapagamento : FormaPagamentos;
+    function clone : vendas;
+  end;
+
+implementation
+
+{ vendas }
+
+function vendas.clone: vendas;
+begin
+  result := vendas.Crieobj;
+  result.setNumero_nota(numero_nota);
+  result.setSerie(serie);
+  result.setModelo(modelo);
+  result.setStatus(status);
+  result.setData_venda(data_venda);
+  result.setData_emissao(data_emissao);
+  result.setumcliente(umcliente);
+  result.setumaCondicao(umacondicao);
+  result.setTotaldesconto(totaldesconto);
+  result.setdatacancelamento(datacancelamento);
+  result.setTotalVenda(totalvenda);
+  result.setTotalprodutos(totalprodutos);
+  result.setTotalservicos(totalservicos);
+  result.setumacolecaoproduto(umacolecaoproduto);
+  result.setumacolecaoservico(umacolecaoservico);
+  result.setumacolecaocontasreceber(umacolecaocontasreceber);
+  result.setumaformapagamento(umaformapagamento);
+  result.setCadastro(cadastro);
+  result.setUlt_Alt(ult_alt);
+end;
+
+constructor vendas.Crieobj;
+begin
+  umcliente := clientes.Crieobj;
+  umacolecaoproduto := ColecaoProdutos.crieObj;
+  umacolecaoservico := ColecaoServicos.crieObj;
+  umacondicao := Condicoes.crieobj;
+  umproduto := Produtos.Crieobj;
+  umservico := Servicos.Crieobj;
+  umacolecaoContasreceber := ColecaoContasreceber.crieObj;
+  umaformapagamento := FormaPagamentos.Crieobj;
+
+end;
+
+destructor vendas.Destrua_se;
+begin
+  umcliente.Destrua_se;
+  umacolecaoproduto.destrua_se;
+  umacolecaoservico.destrua_se;
+  umacondicao.destrua_se;
+  umproduto.Destrua_se;
+  umservico.Destrua_se;
+  umaColecaocontasreceber.destrua_se;
+  umaformapagamento.Destrua_se;
+end;
+
+function vendas.getDatacancelamento: TDate;
+begin
+  result := datacancelamento;
+end;
+
+function vendas.getData_emissao: TDate;
+begin
+  result := data_emissao;
+end;
+
+function vendas.getData_venda: TDate;
+begin
+  result := data_venda;
+end;
+
+function vendas.getModelo: string;
+begin
+  result := modelo;
+end;
+
+function vendas.getNumero_nota: integer;
+begin
+  result := numero_nota;
+end;
+
+function vendas.getSerie: string;
+begin
+  result := serie;
+end;
+
+function vendas.getStatus: string;
+begin
+  result := status;
+end;
+
+function vendas.getTotalvenda: Currency;
+begin
+  result := totalvenda;
+end;
+
+function vendas.getTotaldesconto: Currency;
+begin
+  result := totaldesconto;
+end;
+
+function vendas.getTotalprodutos: Currency;
+begin
+  result := totalprodutos;
+end;
+
+function vendas.getTotalservicos: Currency;
+begin
+  result := totalservicos;
+end;
+
+function vendas.getumacolecaocontasreceber: ColecaoContasreceber;
+begin
+  result := umacolecaocontasreceber;
+end;
+
+function vendas.getumacolecaoproduto: Colecaoprodutos;
+begin
+  result := umacolecaoproduto;
+end;
+
+function vendas.getumacolecaoservico: Colecaoservicos;
+begin
+  result := umacolecaoservico;
+end;
+
+function vendas.getumaCondicao: Condicoes;
+begin
+  result := umacondicao;
+end;
+
+function vendas.getumaformapagamento: FormaPagamentos;
+begin
+  result := umaformapagamento;
+end;
+
+function vendas.Getumcliente: clientes;
+begin
+  result := umcliente;
+end;
+
+function vendas.getumproduto: produtos;
+begin
+  result := umproduto;
+end;
+
+function vendas.getumservico: servicos;
+begin
+  result := umservico;
+end;
+
+procedure vendas.setdatacancelamento(pdatacancelamento: TDate);
+begin
+  datacancelamento := pdatacancelamento;
+end;
+
+procedure vendas.setData_emissao(pData_emissao: TDate);
+begin
+  data_emissao := pdata_emissao;
+end;
+
+procedure vendas.setData_venda(pData_venda: TDate);
+begin
+  data_venda := pdata_venda;
+end;
+
+procedure vendas.setModelo(pModelo: string);
+begin
+  modelo := pmodelo;
+end;
+
+procedure vendas.setNumero_nota(pNumero_nota: integer);
+begin
+  numero_nota := pnumero_nota;
+end;
+
+procedure vendas.setSerie(pSerie: string);
+begin
+  serie := pserie;
+end;
+
+procedure vendas.setStatus(pStatus: string);
+begin
+  status := pstatus;
+end;
+
+procedure vendas.setTotalvenda(pTotalvenda: Currency);
+begin
+  totalvenda := ptotalvenda;
+end;
+
+procedure vendas.setTotaldesconto(pTotaldesconto: Currency);
+begin
+  totaldesconto := ptotaldesconto;
+end;
+
+procedure vendas.setTotalprodutos(pTotalproduto: Currency);
+begin
+  totalprodutos := ptotalproduto;
+end;
+
+procedure vendas.setTotalservicos(pTotalservico: Currency);
+begin
+  totalservicos := ptotalservico;
+end;
+
+procedure vendas.setumacolecaocontasreceber(pcolecaocontasreceber: ColecaoContasreceber);
+begin
+  umacolecaocontasreceber := pcolecaocontasreceber;
+end;
+
+procedure vendas.setumacolecaoproduto(pcolecaoproduto: Colecaoprodutos);
+begin
+  umacolecaoproduto := pcolecaoproduto;
+end;
+
+procedure vendas.setumacolecaoservico(pcolecaoservico: Colecaoservicos);
+begin
+  umacolecaoservico := pcolecaoservico;
+end;
+
+procedure vendas.setumaCondicao(pCondicao: Condicoes);
+begin
+  umacondicao := pcondicao;
+end;
+
+procedure vendas.setumaformapagamento(pformapagamento: FormaPagamentos);
+begin
+  umaformapagamento := pformapagamento;
+end;
+
+procedure vendas.setumcliente(pcliente: clientes);
+begin
+  umcliente := pcliente;
+end;
+
+procedure vendas.setumproduto(pproduto: produtos);
+begin
+  umproduto := pproduto;
+end;
+
+procedure vendas.setumservico(pservico: servicos);
+begin
+  umservico := pservico;
+end;
+
+end.

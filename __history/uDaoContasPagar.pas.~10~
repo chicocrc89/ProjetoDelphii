@@ -1,0 +1,158 @@
+unit uDaoContasPagar;
+
+interface
+
+uses udao, ucontaspagar, uDM, DB, uDaoFornecedores, uDaoFormaPagamentos, SysUtils;
+
+type
+  Daocontaspagar = class(dao)
+  private
+
+  protected
+    umdm: TDM;
+    umadaofornecedor: DaoFornecedores;
+    umadaoformapagamento : DaoFormaPagamentos;
+  public
+    constructor CrieObj;
+    destructor Destrua_se;
+    function Salvar(pObj: TObject): string; override;
+    function Carregar(pObj: TObject): string; override;
+    function Excluir(pObj: TObject): string; override;
+    function Pesquisar(pChave: string): string; override;
+    procedure setDM(pDM: TDM);
+    function getds: Tdatasource;
+    procedure setdaoformapagamento(pObj: TObject);
+    procedure setdaofornecedor (pObj : TObject);
+  end;
+
+implementation
+
+{ Daocontaspagar }
+
+function Daocontaspagar.Carregar(pObj: TObject): string;
+var
+  mcontaspagar: contaspagar;
+begin
+  mcontaspagar := contaspagar(pObj);
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetcontaspagar.Active then
+    umdm.dsetcontaspagar.Open;
+  mcontaspagar.Setnumero_nota( umdm.dsetcontaspagarNUMERO_NOTA.Value);
+  mcontaspagar.Setserie(umdm.dsetcontaspagarSERIE.Value);
+  mcontaspagar.setmodelo(umdm.dsetcontaspagarMODELO.Value);
+  mcontaspagar.getumfornecedor.setCodigo(umdm.dsetcontaspagarID_FORNECEDOR.Value);
+  mcontaspagar.setdata_emissao(umdm.dsetcontaspagarDATA_EMISSAO.Value);
+  mcontaspagar.setnumero_parcela(umdm.dsetcontaspagarNUMERO_PARCELA.Value);
+  mcontaspagar.setvalor_parcela(umdm.dsetcontaspagarVALOR_PARCELA.Value);
+  mcontaspagar.setdata_vencimento(umdm.dsetcontaspagarDATA_VENCIMENTO.Value);
+  mcontaspagar.setdata_pagamento(umdm.dsetcontaspagarDATA_PAGAMENTO.Value);
+  mcontaspagar.setjuros(umdm.dsetcontaspagarJUROS.Value);
+  mcontaspagar.setmulta(umdm.dsetcontaspagarMULTA.Value);
+  mcontaspagar.setvalor_pago(umdm.dsetcontaspagarVALOR_PAGO.Value);
+  mcontaspagar.getumaformapagamento.setCodigo(umdm.dsetcontaspagarID_FORMAPAGAMENTO.Value);
+  mcontaspagar.setCadastro(umdm.dsetcontaspagarDATA_CADASTRO.Value);
+  mcontaspagar.setUlt_Alt(umdm.dsetcontaspagarULTIMA_ALTERACAO.Value);
+end;
+
+constructor Daocontaspagar.CrieObj;
+begin
+  umadaoformapagamento := DaoFormaPagamentos.CrieObj;
+  umadaofornecedor := DaoFornecedores.CrieObj;
+end;
+
+destructor Daocontaspagar.Destrua_se;
+begin
+  umadaoformapagamento.Destrua_se;
+  umadaofornecedor.Destrua_se;
+end;
+
+function Daocontaspagar.Excluir(pObj: TObject): string;
+begin
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetcontaspagar.Active then
+    umdm.dsetcontaspagar.Open;
+  umdm.dsetcontaspagar.Delete;
+  umdm.trans.Commit;
+end;
+
+function Daocontaspagar.getds: Tdatasource;
+begin
+  result := umdm.dscontaspagar;
+end;
+
+function Daocontaspagar.Pesquisar(pChave: string): string;
+var
+  mSQL: string;
+begin
+  if length(pChave) = 0 then
+    mSQL := 'select * from contaspagar'
+  else if ehnumero(pChave) then
+    mSQL := 'select * from contaspagar where numero_nota =' + QuotedStr(pChave)
+  else
+    mSQL := 'select * from contaspagar where razao =' + QuotedStr(pChave);
+  umdm.dsetcontaspagar.Active := false;
+  umdm.dsetcontaspagar.SelectSQL.Text := mSQL;
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetcontaspagar.Active then
+    umdm.dsetcontaspagar.Open;
+  result := '';
+end;
+
+function Daocontaspagar.Salvar(pObj: TObject): string;
+var
+  mcontaspagar: contaspagar;
+  mdata : Tdate;
+begin
+  mcontaspagar := contaspagar(pObj);
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetcontaspagar.Active then
+    umdm.dsetcontaspagar.Open;
+  if mcontaspagar.getnumero_nota > 0 then
+    umdm.dsetcontaspagar.Insert
+  else
+  begin
+    mdata := now;
+    umdm.dsetcontaspagar.Edit;
+  end;
+
+  umdm.dsetcontaspagarNUMERO_NOTA.Value := mcontaspagar.getnumero_nota;
+  umdm.dsetcontaspagarSERIE.Value := mcontaspagar.getserie;
+  umdm.dsetcontaspagarMODELO.Value := mcontaspagar.getmodelo;
+  umdm.dsetcontaspagarID_FORNECEDOR.Value := mcontaspagar.getumfornecedor.getCodigo;
+  umdm.dsetcontaspagarDATA_EMISSAO.Value := mcontaspagar.getdata_emissao;
+  umdm.dsetcontaspagarNUMERO_PARCELA.Value := mcontaspagar.getnumero_parcela;
+  umdm.dsetcontaspagarVALOR_PARCELA.Value := mcontaspagar.getvalor_parcela;
+  umdm.dsetcontaspagarDATA_VENCIMENTO.Value := mcontaspagar.getdata_vencimento;
+  umdm.dsetcontaspagarDATA_PAGAMENTO.Value := mcontaspagar.getdata_pagamento;
+  umdm.dsetcontaspagarJUROS.Value := mcontaspagar.getjuros;
+  umdm.dsetcontaspagarMULTA.Value := mcontaspagar.getmulta;
+  umdm.dsetcontaspagarVALOR_PAGO.Value := mcontaspagar.getvalor_pago;
+  umdm.dsetcontaspagarID_FORMAPAGAMENTO.Value := mcontaspagar.getumaformapagamento.getCodigo;
+  umdm.dsetcontaspagarULTIMA_ALTERACAO.Value := mdata;
+  umdm.dsetcontaspagarDATA_CADASTRO.Value := mcontaspagar.getCadastro;
+  umdm.dsetcontaspagarDESCONTO.Value := mcontaspagar.getdesconto;
+  umdm.dsetcontaspagar.Post;
+  umdm.trans.Commit;
+end;
+
+procedure Daocontaspagar.setdaoformapagamento(pObj: TObject);
+begin
+  umadaoformapagamento := DaoFormaPagamentos(pObj);
+end;
+
+
+procedure Daocontaspagar.setdaofornecedor(pObj: TObject);
+begin
+  umadaofornecedor := DaoFornecedores (pObj);
+end;
+
+procedure Daocontaspagar.setDM(pDM: TDM);
+begin
+  umdm := pDM;
+end;
+
+end.

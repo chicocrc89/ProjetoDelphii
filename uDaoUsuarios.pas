@@ -1,0 +1,130 @@
+unit uDaoUsuarios;
+
+interface
+
+uses udao, uusuarios, uDM, DB, uDaoFuncionarios, SysUtils;
+
+type
+  Daousuarios = class(dao)
+  private
+
+  protected
+    umdm: TDM;
+    umadaofuncionario: DaoFuncionarios;
+  public
+    constructor CrieObj;
+    destructor Destrua_se;
+    function Salvar(pObj: TObject): string; override;
+    function Carregar(pObj: TObject): string; override;
+    function Excluir(pObj: TObject): string; override;
+    function Pesquisar(pChave: string): string; override;
+    procedure setDM(pDM: TDM);
+    function getds: Tdatasource;
+    procedure setdaofuncionario(pObj: TObject);
+  end;
+
+implementation
+
+{ Daousuarios }
+
+function Daousuarios.Carregar(pObj: TObject): string;
+var
+  musuarios: usuarios;
+begin
+  musuarios := usuarios(pObj);
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetusuario.Active then
+    umdm.dsetusuario.Open;
+  musuarios.setCodigo(umdm.dsetusuarioID_USUARIO.Value);
+  musuarios.setusuario(umdm.dsetusuarioUSUARIO.Value);
+  musuarios.setnome(umdm.dsetusuarioNOME.Value);
+  musuarios.setsenha(umdm.dsetusuarioSENHA.Value);
+  musuarios.setpermissao(umdm.dsetusuarioPERMISSAO.Value);
+  musuarios.getumfuncionario.setCodigo(umdm.dsetusuarioID_FUNCIONARIO.Value);
+  musuarios.setstatus(umdm.dsetusuarioSTATUS.Value);
+end;
+
+constructor Daousuarios.CrieObj;
+begin
+  umadaofuncionario := DaoFuncionarios.CrieObj;
+end;
+
+destructor Daousuarios.Destrua_se;
+begin
+  umadaofuncionario.Destrua_se;
+end;
+
+function Daousuarios.Excluir(pObj: TObject): string;
+begin
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetusuario.Active then
+    umdm.dsetusuario.Open;
+  umdm.dsetusuario.Delete;
+  umdm.trans.Commit;
+end;
+
+function Daousuarios.getds: Tdatasource;
+begin
+  result := umdm.dsusuario;
+end;
+
+function Daousuarios.Pesquisar(pChave: string): string;
+var
+  mSQL: string;
+begin
+  if length(pChave) = 0 then
+    mSQL := 'select * from usuario order by usuario'
+  else if ehnumero(pChave) then
+    mSQL := 'select * from usuario where id_usuario =' + QuotedStr(pChave)
+  else
+    mSQL := 'select * from usuario where usuario =' + QuotedStr(pChave);
+  umdm.dsetusuario.Active := false;
+  umdm.dsetusuario.SelectSQL.Text := mSQL;
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetusuario.Active then
+    umdm.dsetusuario.Open;
+  result := '';
+end;
+
+function Daousuarios.Salvar(pObj: TObject): string;
+var
+  musuarios: usuarios;
+begin
+  musuarios := usuarios(pObj);
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetusuario.Active then
+    umdm.dsetusuario.Open;
+  if musuarios.getcodigo = 0 then
+    umdm.dsetusuario.Insert
+  else
+    umdm.dsetusuario.Edit;
+    umdm.dsetusuarioID_USUARIO.Value := musuarios.getcodigo;
+    umdm.dsetusuarioNOME.Value := musuarios.getnome;
+    umdm.dsetusuarioUSUARIO.Value := musuarios.getnome;
+    umdm.dsetusuarioSENHA.Value := musuarios.getsenha;
+    umdm.dsetusuarioPERMISSAO.Value := musuarios.getpermissao;
+    umdm.dsetusuarioID_FUNCIONARIO.Value := musuarios.getumfuncionario.getCodigo;
+    umdm.dsetusuarioSTATUS.Value := musuarios.getstatus;
+    umdm.dsetusuarioDATA_CADASTRO.Value := musuarios.getCadastro;
+    umdm.dsetusuarioULTIMA_ALTERACAO.Value := musuarios.getUlt_Alt;
+    umdm.dsetusuarioID_ALTEROU.Value := musuarios.getCodigo_Usuario;
+    umdm.dsetusuario.Post;
+    umdm.trans.Commit;
+
+end;
+
+procedure Daousuarios.setdaofuncionario(pObj: TObject);
+begin
+  umadaofuncionario := DaoFuncionarios(pObj);
+end;
+
+procedure Daousuarios.setDM(pDM: TDM);
+begin
+  umdm := pDM;
+end;
+
+end.

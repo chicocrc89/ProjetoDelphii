@@ -1,0 +1,121 @@
+unit uFrmCadastroCor;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmCadastro, Vcl.StdCtrls, Vcl.Buttons,
+  uCores, uControllerCores;
+
+type
+  TFrmCadastroCor = class(TFrmCadastro)
+    Label3: TLabel;
+    Label4: TLabel;
+    edtcor: TEdit;
+  protected
+    umactrlcor : ControllerCores;
+    umacor : Cores;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure ConhecaObj(pObj, pctrl: TObject); Override;
+    procedure Salvar; Override;
+    procedure Sair; Override;
+    procedure CarregaEdt; Override;
+    procedure LimpaEdt; Override;
+    procedure BloqueiaEdt; Override;
+    procedure DesbloqueiaEdt; Override;
+
+  end;
+
+var
+  FrmCadastroCor: TFrmCadastroCor;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmCadastroCor }
+
+
+{ TFrmCadastroCor }
+
+procedure TFrmCadastroCor.BloqueiaEdt;
+begin
+  inherited;
+  self.edtcor.Enabled := false;
+end;
+
+procedure TFrmCadastroCor.CarregaEdt;
+begin
+  inherited;
+  self.edtcodigo.Text := inttostr(umacor.getcodigo);
+  self.edtcor.Text := umacor.getcor;
+  self.edtCadastro.Text := datetostr(umacor.getCadastro);
+  self.edtUlt_alt.Text := datetostr(umacor.getUlt_Alt);
+end;
+
+procedure TFrmCadastroCor.ConhecaObj(pObj, pctrl: TObject);
+begin
+  inherited;
+  umacor := cores(pobj);
+  umactrlcor := controllercores (pctrl);
+  self.edtCodigo.Text := inttostr(self.umacor.getcodigo);
+  self.edtCadastro.Text := datetostr(umacor.getCadastro);
+  self.edtUlt_alt.Text := Datetostr(umacor.getUlt_Alt);
+end;
+
+procedure TFrmCadastroCor.DesbloqueiaEdt;
+begin
+  inherited;
+  self.edtcor.Enabled := true;
+end;
+
+procedure TFrmCadastroCor.LimpaEdt;
+begin
+  inherited;
+  self.edtcor.Clear;
+end;
+
+procedure TFrmCadastroCor.Sair;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroCor.Salvar;
+begin
+  inherited;
+  if self.btnSalvar.Caption = '&Excluir' then
+  begin
+    If Application.MessageBox('Confirma Exclusão ?', 'Cuidado !!!',
+      MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES Then
+    begin
+      self.umactrlcor.Excluir(umacor);
+      ShowMessage('Excluido com Sucesso!!!');
+      self.Sair;
+    end;
+  end
+  else
+  begin
+    if (self.edtcor.Text = '') then
+    begin
+      ShowMessage('Campo Cor precisa ser preenchido!!!');
+      self.edtcor.SetFocus;
+    end
+    else
+      begin
+        umacor.setcodigo(strtoint(self.edtcodigo.Text));
+        umacor.setcor(self.edtcor.Text);
+        umacor.setCadastro(StrToDate(self.edtCadastro.Text));
+        umacor.setUlt_Alt(StrToDate(self.edtUlt_alt.Text));
+        umactrlcor.Salvar(umacor.clone);
+        ShowMessage('Salvo com Sucesso!!!');
+        self.Sair;
+      end;
+  end;
+end;
+
+
+end.

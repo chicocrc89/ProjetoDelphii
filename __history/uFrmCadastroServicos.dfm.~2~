@@ -1,0 +1,93 @@
+inherited FrmCadastroServicos: TFrmCadastroServicos
+  Caption = 'Cadastro Servicos'
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel [8]
+    Left = 8
+    Top = 61
+    Width = 89
+    Height = 18
+    Caption = 'DESCRI'#199#195'O'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel [9]
+    Left = 8
+    Top = 245
+    Width = 33
+    Height = 18
+    Caption = 'OBS'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label3: TLabel [10]
+    Left = 8
+    Top = 125
+    Width = 58
+    Height = 18
+    Caption = 'CUSTO '
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label4: TLabel [11]
+    Left = 8
+    Top = 186
+    Width = 125
+    Height = 18
+    Caption = 'VALOR VENDA R$'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  inherited edtCodigo: TEdit
+    Width = 62
+    ExplicitWidth = 62
+  end
+  object edtdescricao: TEdit
+    Left = 8
+    Top = 80
+    Width = 289
+    Height = 21
+    TabOrder = 4
+    Text = 'edtdescricao'
+  end
+  object Edit1: TEdit
+    Left = 8
+    Top = 264
+    Width = 321
+    Height = 81
+    TabOrder = 5
+    Text = 'edtdescricao'
+  end
+  object MaskEdit1: TMaskEdit
+    Left = 8
+    Top = 141
+    Width = 121
+    Height = 21
+    TabOrder = 6
+    Text = 'MaskEdit1'
+  end
+  object MaskEdit2: TMaskEdit
+    Left = 8
+    Top = 202
+    Width = 125
+    Height = 21
+    TabOrder = 7
+    Text = 'MaskEdit1'
+  end
+end

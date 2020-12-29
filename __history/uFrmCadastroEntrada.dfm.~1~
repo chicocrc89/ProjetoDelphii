@@ -1,0 +1,5 @@
+inherited FrmCadastroEntrada: TFrmCadastroEntrada
+  Caption = 'ENTRADA / COMPRA'
+  PixelsPerInch = 96
+  TextHeight = 13
+end

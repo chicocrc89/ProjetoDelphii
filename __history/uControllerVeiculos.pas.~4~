@@ -1,0 +1,72 @@
+unit uControllerVeiculos;
+
+interface
+  uses ucontroller, uDM, DB, uVeiculos, uDaoVeiculos, uControllerModelos;
+  type ControllerVeiculos = class(controller)
+  private
+
+  protected
+    umadaoveiculo : DaoVeiculos;
+    umactrlmodelo : ControllerModelos;
+  public
+    constructor CrieObj;
+    destructor  Destrua_se;
+    function Salvar ( pObj :  TObject ):            string;    override;
+    function Carregar ( pObj : TObject ):           string;    override;
+    function Excluir ( pObj : TObject ):            string;    override;
+    function Pesquisar ( pChave : string):          string;    override;
+    procedure setDM (pDM : TDM);
+    function getds : Tdatasource;
+    procedure setctrlmodelo (pObj : TObject);
+    function getctrlmodelo : ControllerModelos;
+  end;
+
+implementation
+
+{ Controllerlaboratorios }
+
+function ControllerVeiculos.Carregar(pObj: TObject): string;
+var mveiculo : Veiculos;
+begin
+  self.umadaoveiculo.Carregar(pObj);
+  mveiculo := veiculos (pobj);
+  umaCtrlModelo.pesquisar(inttostr(mveiculo.getummodelo.getcodigo));
+  self.umactrlmodelo.Carregar(mveiculo.getummodelo);
+end;
+
+constructor ControllerVeiculos.CrieObj;
+begin
+
+end;
+
+destructor ControllerVeiculos.Destrua_se;
+begin
+
+end;
+
+function ControllerVeiculos.Excluir(pObj: TObject): string;
+begin
+
+end;
+
+function ControllerVeiculos.getds: Tdatasource;
+begin
+
+end;
+
+function ControllerVeiculos.Pesquisar(pChave: string): string;
+begin
+
+end;
+
+function ControllerVeiculos.Salvar(pObj: TObject): string;
+begin
+
+end;
+
+procedure ControllerVeiculos.setDM(pDM: TDM);
+begin
+
+end;
+
+end.

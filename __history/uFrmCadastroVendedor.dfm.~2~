@@ -1,0 +1,5 @@
+inherited FrmCadastroVendedor: TFrmCadastroVendedor
+  Caption = 'Cadastro Vendedor'
+  PixelsPerInch = 96
+  TextHeight = 13
+end

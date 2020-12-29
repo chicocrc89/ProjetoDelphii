@@ -1,0 +1,74 @@
+unit uFrmCadastroMarca;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmCadastro, Vcl.StdCtrls, Vcl.Buttons, uMarcas, uControllerMarcas;
+
+type
+  TFrmCadastroMarca = class(TFrmCadastro)
+    Label1: TLabel;
+    edtmarca: TEdit;
+    Label2: TLabel;
+  private
+    { Private declarations }
+  protected
+    umamarca : Marcas;
+    umactrlmarca : ControllerMarcas;
+  public
+    procedure ConhecaObj (pObj : TObject; pctrl : TObject);  Override;
+    procedure Salvar;                       Override;
+    procedure Sair;                         Override;
+    procedure CarregaEdt;                   Override;
+    procedure LimpaEdt;                     Override;
+    procedure BloqueiaEdt;                  Override;
+    procedure DesbloqueiaEdt;               Override;
+
+  end;
+
+var
+  FrmCadastroMarca: TFrmCadastroMarca;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmCadastroMarca }
+
+procedure TFrmCadastroMarca.BloqueiaEdt;
+begin
+
+end;
+
+procedure TFrmCadastroMarca.CarregaEdt;
+begin
+
+end;
+
+procedure TFrmCadastroMarca.ConhecaObj(pObj, pctrl: TObject);
+begin
+
+end;
+
+procedure TFrmCadastroMarca.DesbloqueiaEdt;
+begin
+
+end;
+
+procedure TFrmCadastroMarca.LimpaEdt;
+begin
+
+end;
+
+procedure TFrmCadastroMarca.Sair;
+begin
+
+end;
+
+procedure TFrmCadastroMarca.Salvar;
+begin
+
+end;
+
+end.

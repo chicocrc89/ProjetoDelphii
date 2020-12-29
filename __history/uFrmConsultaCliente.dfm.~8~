@@ -1,0 +1,122 @@
+inherited FrmConsultaCliente: TFrmConsultaCliente
+  Caption = 'Consulta Cliente'
+  ExplicitWidth = 993
+  ExplicitHeight = 596
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited DBGrid1: TDBGrid
+    DataSource = DM.dscliente
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ID_CLIENTE'
+        Title.Alignment = taCenter
+        Title.Caption = 'ID'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NOME'
+        Width = 235
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DATA_NASC'
+        Title.Alignment = taCenter
+        Title.Caption = 'NASCIMENTO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'SEXO'
+        Title.Alignment = taCenter
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'TPCLIENTE'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NACIONALIDADE'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CNPJ_CPF'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'INSCEST_RG'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'EMAIL'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'LIMITE'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CELULAR'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'TELEFONE'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'PONTO_REF'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ENDERECO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NUMERO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BAIRRO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ID_CIDADE'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ID_FORMAPAGAMENTO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'STATUS'
+        Visible = True
+      end>
+  end
+  object mmtablecliente: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Top = 424
+  end
+end

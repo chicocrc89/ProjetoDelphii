@@ -1,0 +1,110 @@
+unit uFrmCadastroMarca;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmCadastro, Vcl.StdCtrls, Vcl.Buttons,
+  uMarcas, uControllerMarcas;
+
+type
+  TFrmCadastroMarca = class(TFrmCadastro)
+    Label1: TLabel;
+    edtmarca: TEdit;
+    Label2: TLabel;
+  private
+    { Private declarations }
+  protected
+    umamarca: Marcas;
+    umactrlmarca: ControllerMarcas;
+  public
+    procedure ConhecaObj(pObj: TObject; pctrl: TObject); Override;
+    procedure Salvar; Override;
+    procedure Sair; Override;
+    procedure CarregaEdt; Override;
+    procedure LimpaEdt; Override;
+    procedure BloqueiaEdt; Override;
+    procedure DesbloqueiaEdt; Override;
+
+  end;
+
+var
+  FrmCadastroMarca: TFrmCadastroMarca;
+
+implementation
+
+{$R *.dfm}
+{ TFrmCadastroMarca }
+
+procedure TFrmCadastroMarca.BloqueiaEdt;
+begin
+  self.edtmarca.Enabled := false;
+end;
+
+procedure TFrmCadastroMarca.CarregaEdt;
+begin
+  self.edtCodigo.Text := inttoStr(umamarca.getcodigo);
+  self.edtmarca.Text := umamarca.getmarca;
+  self.edtCadastro.Text := DateToStr(umamarca.getCadastro);
+  self.edtUlt_alt.Text := DateToStr(umamarca.getUlt_Alt);
+end;
+
+procedure TFrmCadastroMarca.ConhecaObj(pObj, pctrl: TObject);
+begin
+  umamarca := Marcas(pObj);
+  umactrlmarca := ControllerMarcas(pctrl);
+  self.edtCodigo.Text := inttoStr(self.umamarca.getcodigo);
+  self.edtCadastro.Text := DateToStr(umamarca.getCadastro);
+  self.edtUlt_alt.Text := DateToStr(umamarca.getUlt_Alt);
+end;
+
+procedure TFrmCadastroMarca.DesbloqueiaEdt;
+begin
+  self.edtmarca.Enabled := true;
+end;
+
+procedure TFrmCadastroMarca.LimpaEdt;
+begin
+  self.edtmarca.Clear;
+end;
+
+procedure TFrmCadastroMarca.Sair;
+begin
+  inherited;
+end;
+
+procedure TFrmCadastroMarca.Salvar;
+begin
+  inherited;
+  if self.btnSalvar.Caption = '&Excluir' then
+  begin
+    If Application.MessageBox('Confirma Exclusão ?', 'Cuidado !!!',
+      MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES Then
+    begin
+      self.umactrlmarca.Excluir(umamarca);
+      ShowMessage('Excluido com Sucesso!!!');
+      self.Sair;
+    end;
+  end
+  else
+  begin
+    if (self.edtmarca.Text = '') then
+    begin
+      ShowMessage('Campo Marca precisa ser preenchido!!!');
+      self.edtmarca.SetFocus;
+    end
+    else
+    begin
+      umamarca.setcodigo(strtoint(self.edtCodigo.Text));
+      umamarca.setmarca(self.edtmarca.Text);
+      umamarca.setCadastro(StrToDate(self.edtCadastro.Text));
+      umamarca.setUlt_Alt(StrToDate(self.edtUlt_alt.Text));
+      umactrlmarca.Salvar(umamarca.clone);
+      ShowMessage('Salvo com Sucesso!!!');
+      self.Sair;
+    end;
+  end;
+end;
+
+end.

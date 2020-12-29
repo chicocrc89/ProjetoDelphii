@@ -1,0 +1,15 @@
+unit uItens;
+
+interface
+type Itens = Class
+  private
+
+  protected
+
+  public
+
+End;
+
+implementation
+
+end.

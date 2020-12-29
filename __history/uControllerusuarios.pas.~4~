@@ -1,0 +1,71 @@
+unit uControllerusuarios;
+
+interface
+
+uses ucontroller, DB, uDM, uUsuarios, uDaoUsuarios, uControllerFuncionarios;
+
+type
+  Controllerusuarios = class(controller)
+  private
+
+  protected
+  umadaousuario : DaoUsuarios;
+  umactrlfuncionario : ControllerFuncionarios;
+  public
+    constructor CrieObj;
+    destructor Destrua_se;
+    function Salvar(pObj: TObject): string; override;
+    function Carregar(pObj: TObject): string; override;
+    function Excluir(pObj: TObject): string; override;
+    function Pesquisar(pChave: string): string; override;
+    procedure setDM(pDM: TDM);
+    function getds: Tdatasource;
+    procedure setctrlfuncionario(pObj: TObject);
+    function getctrlfuncionario: ControllerFuncionarios;
+  end;
+
+implementation
+
+{ Controllerusuarios }
+
+function Controllerusuarios.Carregar(pObj: TObject): string;
+begin
+
+end;
+
+constructor Controllerusuarios.CrieObj;
+begin
+
+end;
+
+destructor Controllerusuarios.Destrua_se;
+begin
+
+end;
+
+function Controllerusuarios.Excluir(pObj: TObject): string;
+begin
+
+end;
+
+function Controllerusuarios.getds: Tdatasource;
+begin
+
+end;
+
+function Controllerusuarios.Pesquisar(pChave: string): string;
+begin
+
+end;
+
+function Controllerusuarios.Salvar(pObj: TObject): string;
+begin
+
+end;
+
+procedure Controllerusuarios.setDM(pDM: TDM);
+begin
+
+end;
+
+end.

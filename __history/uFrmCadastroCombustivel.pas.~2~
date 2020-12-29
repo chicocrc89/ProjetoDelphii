@@ -1,0 +1,27 @@
+unit uFrmCadastroCombustivel;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmCadastro, Vcl.StdCtrls, Vcl.Buttons;
+
+type
+  TFrmCadastroCombustivel = class(TFrmCadastro)
+    Label3: TLabel;
+    Label4: TLabel;
+    edtcombustivel: TEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmCadastroCombustivel: TFrmCadastroCombustivel;
+
+implementation
+
+{$R *.dfm}
+
+end.

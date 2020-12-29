@@ -1,0 +1,32 @@
+unit uCarros;
+
+interface
+  uses uGenerica;
+  type Carros = class(Generica)
+  private
+
+  protected
+    modelo : string;
+    marca  : string;
+    chassi : string;
+    placa  : string;
+    ano    : string;
+    cor    : string;
+    combustivel: string;
+
+  public
+    constructor Crieobj;
+    destructor Destrua_se;
+    procedure setcodigo (pcodigo : integer);
+    procedure setmodelo (pmodelo : string);
+    function getcodigo : integer;
+    function getmodelo : string;
+    function clone : carros;
+  end;
+
+implementation
+
+{ Laboratorios }
+
+
+end.

@@ -1,0 +1,294 @@
+unit uClientes;
+
+interface
+
+uses sysutils, uGenerica, uPaises, uEstados, uCidades, uCondicoes;
+
+type
+  Clientes = class(Generica)
+  private
+
+  protected
+    nome: string;
+    data_nasc: TDate;
+    sexo: string;
+    tpcliente: string;
+    nacionalidade: string;
+    cnpj_cpf: string;
+    inscest_rg: string;
+    email: string;
+    limite: real;
+    celular: string;
+    telefone: string;
+    ponto_ref: string;
+    endereco: string;
+    numero: integer;
+    bairro: string;
+    umacidade: Cidades;
+    umacondicao : Condicoes;
+    status: string;
+  public
+    constructor Crieobj;
+    destructor Destrua_se;
+    procedure setnome(pnome: string);
+    procedure setdata_nasc(pdata_nasc: TDate);
+    procedure setsexo(psexo: string);
+    procedure settpcliente(ptpcliente: string);
+    procedure setnacionalidade(pnacionalidade: string);
+    procedure setcnpj_cpf(pcnpj_cpf: string);
+    procedure setinscest_rg(pinscest_rg: string);
+    procedure setemail(pemail: string);
+    procedure setlimite(plimite: real);
+    procedure setcelular(pcelular: string);
+    procedure settelefone(ptelefone: string);
+    procedure setponto_ref(pponto_ref: string);
+    procedure setendereco(pendereco: string);
+    procedure setnumero(pnumero: integer);
+    procedure setbairro(pbairro: string);
+    procedure setumacidade(pcidade: Cidades);
+    procedure setumacondicao (pcondicao : Condicoes);
+    procedure setstatus(pstatus: string);
+    function getstatus: string;
+    function getnome: string;
+    function getdata_nasc: TDate;
+    function getsexo: string;
+    function gettpcliente: string;
+    function getnacionalidade: string;
+    function getcnpj_cpf: string;
+    function getinscest_rg: string;
+    function getemail: string;
+    function getlimite: real;
+    function getcelular: string;
+    function gettelefone: string;
+    function getponto_ref: string;
+    function getendereco: string;
+    function getnumero: integer;
+    function getbairro: string;
+    function getumacidade: Cidades;
+    function getumacondicao : Condicoes;
+    function clone: Clientes;
+  end;
+
+implementation
+
+{ Clientes }
+
+function Clientes.clone: Clientes;
+begin
+  result := Clientes.Crieobj;
+  result.setCodigo(codigo);
+  result.setnome(nome);
+  result.setdata_nasc(data_nasc);
+  result.setsexo(sexo);
+  result.settpcliente(tpcliente);
+  result.setnacionalidade(nacionalidade);
+  result.setcnpj_cpf(cnpj_cpf);
+  result.setinscest_rg(inscest_rg);
+  result.setemail(email);
+  result.setlimite(limite);
+  result.setcelular(celular);
+  result.settelefone(telefone);
+  result.setponto_ref(ponto_ref);
+  result.setendereco(endereco);
+  result.setnumero(numero);
+  result.setbairro(bairro);
+  result.setumacidade(umacidade);
+  result.setumacondicao(umacondicao);
+  result.setstatus(status);
+  result.setCadastro(Cadastro);
+  result.setUlt_Alt(Ult_Alt);
+end;
+
+constructor Clientes.Crieobj;
+begin
+  umacidade := Cidades.Crieobj;
+  umaformapagamento := FormaPagamentos.Crieobj;
+end;
+
+destructor Clientes.Destrua_se;
+begin
+  umacidade.Destrua_se;
+  umaformapagamento.Destrua_se;
+end;
+
+function Clientes.getbairro: string;
+begin
+  result := bairro;
+end;
+
+function Clientes.getcelular: string;
+begin
+  result := celular;
+end;
+
+function Clientes.getcnpj_cpf: string;
+begin
+  result := cnpj_cpf;
+end;
+
+function Clientes.getdata_nasc: TDate;
+begin
+  result := data_nasc;
+end;
+
+function Clientes.getemail: string;
+begin
+  result := email;
+end;
+
+function Clientes.getendereco: string;
+begin
+  result := endereco;
+end;
+
+function Clientes.getinscest_rg: string;
+begin
+  result := inscest_rg;
+end;
+
+function Clientes.getlimite: real;
+begin
+  result := limite;
+end;
+
+function Clientes.getnacionalidade: string;
+begin
+  result := nacionalidade;
+end;
+
+function Clientes.getnome: string;
+begin
+  result := nome;
+end;
+
+function Clientes.getnumero: integer;
+begin
+  result := numero;
+end;
+
+function Clientes.getponto_ref: string;
+begin
+  result := ponto_ref;
+end;
+
+function Clientes.getsexo: string;
+begin
+  result := sexo;
+end;
+
+function Clientes.getstatus: string;
+begin
+  result := status;
+end;
+
+function Clientes.gettelefone: string;
+begin
+  result := telefone;
+end;
+
+function Clientes.gettpcliente: string;
+begin
+  result := tpcliente;
+end;
+
+function Clientes.getumacidade: Cidades;
+begin
+  result := umacidade;
+end;
+
+function Clientes.getumaformapagamento: FormaPagamentos;
+begin
+  result := umaformapagamento;
+end;
+
+procedure Clientes.setbairro(pbairro: string);
+begin
+  bairro := pbairro;
+end;
+
+procedure Clientes.setcelular(pcelular: string);
+begin
+  celular := pcelular;
+end;
+
+procedure Clientes.setcnpj_cpf(pcnpj_cpf: string);
+begin
+  cnpj_cpf := pcnpj_cpf;
+end;
+
+procedure Clientes.setdata_nasc(pdata_nasc: TDate);
+begin
+  data_nasc := pdata_nasc;
+end;
+
+procedure Clientes.setemail(pemail: string);
+begin
+  email := pemail;
+end;
+
+procedure Clientes.setendereco(pendereco: string);
+begin
+  endereco := pendereco;
+end;
+
+procedure Clientes.setinscest_rg(pinscest_rg: string);
+begin
+  inscest_rg := pinscest_rg;
+end;
+
+procedure Clientes.setlimite(plimite: real);
+begin
+  limite := plimite;
+end;
+
+procedure Clientes.setnacionalidade(pnacionalidade: string);
+begin
+  nacionalidade := pnacionalidade;
+end;
+
+procedure Clientes.setnome(pnome: string);
+begin
+  nome := pnome;
+end;
+
+procedure Clientes.setnumero(pnumero: integer);
+begin
+  numero := pnumero;
+end;
+
+procedure Clientes.setponto_ref(pponto_ref: string);
+begin
+  ponto_ref := pponto_ref;
+end;
+
+procedure Clientes.setsexo(psexo: string);
+begin
+  sexo := psexo;
+end;
+
+procedure Clientes.setstatus(pstatus: string);
+begin
+  status := pstatus;
+end;
+
+procedure Clientes.settelefone(ptelefone: string);
+begin
+  telefone := ptelefone;
+end;
+
+procedure Clientes.settpcliente(ptpcliente: string);
+begin
+  tpcliente := ptpcliente;
+end;
+
+procedure Clientes.setumacidade(pcidade: Cidades);
+begin
+  umacidade := pcidade;
+end;
+
+procedure Clientes.setumaformapagamento(pformapagamento: FormaPagamentos);
+begin
+  umaformapagamento := pformapagamento;
+end;
+
+end.

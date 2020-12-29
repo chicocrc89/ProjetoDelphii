@@ -1,0 +1,74 @@
+unit uEstados;
+
+interface
+  uses upaises, uGenerica;
+  type Estados = class(Generica)
+  private
+
+  protected
+    estado : string;
+    UF     : string;
+    umpais : paises;
+  public
+    constructor Crieobj;
+    destructor Destrua_se;
+    procedure setestado (pestado : string);
+    procedure setUF (pUF : string);
+    procedure setumpais (ppais : Paises);
+    function getestado : string;
+    function getUF : string;
+    function getumpais : Paises;
+    function clone : Estados;
+  end;
+
+
+implementation
+
+{ Estados }
+
+function Estados.clone: Estados;
+begin
+  estados := Estados.crieobj;
+end;
+
+constructor Estados.Crieobj;
+begin
+  umpais := Paises.crieobj;
+end;
+
+destructor Estados.Destrua_se;
+begin
+
+end;
+
+function Estados.getestado: string;
+begin
+
+end;
+
+function Estados.getUF: string;
+begin
+
+end;
+
+function Estados.getumpais: Paises;
+begin
+
+end;
+
+procedure Estados.setestado(pestado: string);
+begin
+
+end;
+
+procedure Estados.setUF(pUF: string);
+begin
+
+end;
+
+procedure Estados.setumpais(ppais: Paises);
+begin
+
+end;
+
+end.

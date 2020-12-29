@@ -1,0 +1,69 @@
+inherited FrmCadastroGrupo: TFrmCadastroGrupo
+  Caption = 'ZZZZZ'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited lblCodigo: TLabel
+    Top = 8
+    Width = 62
+    Height = 18
+    Caption = 'CODIGO'
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ExplicitTop = 8
+    ExplicitWidth = 62
+    ExplicitHeight = 18
+  end
+  inherited lblDtCadastro: TLabel
+    Width = 123
+    Height = 18
+    Caption = 'DATA CADASTRO'
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ExplicitWidth = 123
+    ExplicitHeight = 18
+  end
+  inherited lblDtUlt_alt: TLabel
+    Width = 146
+    Height = 18
+    Caption = 'ULTIMA ALTERA'#199#195'O'
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ExplicitWidth = 146
+    ExplicitHeight = 18
+  end
+  object Label1: TLabel [3]
+    Left = 8
+    Top = 80
+    Width = 56
+    Height = 18
+    Caption = 'GRUPO'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  inherited edtCodigo: TEdit
+    Top = 27
+    ExplicitTop = 27
+  end
+  inherited edtUlt_alt: TEdit
+    Width = 146
+    ExplicitWidth = 146
+  end
+  object edtgrupo: TEdit
+    Left = 8
+    Top = 99
+    Width = 249
+    Height = 21
+    Alignment = taCenter
+    TabOrder = 3
+  end
+end

@@ -1,0 +1,76 @@
+unit uFrmConsultaLaboratorio;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmConsulta, Vcl.ComCtrls, Vcl.StdCtrls;
+
+type
+  TFrmConsultaLaboratorio = class(TFrmConsulta)
+  private
+    { Private declarations }
+  protected
+    procedure Novo; Override;
+    procedure Alterar; Override;
+    procedure Excluir; Override;
+    procedure Sair; Override;
+    procedure Pesquisar; Override;
+  public
+    { Public declarations }
+    procedure conhecaObj (pObj : TObject); Override;
+    procedure SetFrmCadastro (pObj : TObject); Override;
+  end;
+
+var
+  FrmConsultaLaboratorio: TFrmConsultaLaboratorio;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmConsultaLaboratorio }
+
+procedure TFrmConsultaLaboratorio.Alterar;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaLaboratorio.conhecaObj(pObj: TObject);
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaLaboratorio.Excluir;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaLaboratorio.Novo;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaLaboratorio.Pesquisar;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaLaboratorio.Sair;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaLaboratorio.SetFrmCadastro(pObj: TObject);
+begin
+  inherited;
+
+end;
+
+end.

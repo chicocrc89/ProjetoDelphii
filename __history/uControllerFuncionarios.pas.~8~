@@ -1,0 +1,81 @@
+unit uControllerFuncionarios;
+
+interface
+  uses ucontroller, DB, uDM, uControllerCidades, uFuncionarios, uDaoFuncionarios, SysUltils;
+  type ControllerFuncionarios = class(controller)
+  private
+
+  protected
+    umadaofuncionario : DaoFuncionarios;
+    umactrlcidade : ControllerCidades;
+  public
+    constructor CrieObj;
+    destructor  Destrua_se;
+    function Salvar ( pObj :  TObject ):            string;    override;
+    function Carregar ( pObj : TObject ):           string;    override;
+    function Excluir ( pObj : TObject ):            string;    override;
+    function Pesquisar ( pChave : string):          string;    override;
+    procedure setDM (pDM : TDM);
+    function getds : Tdatasource;
+    procedure setctrlcidade (pObj : TObject);
+    function getctrlcidade : ControllerCidades;
+  end;
+implementation
+
+{ ControllerFuncionarios }
+
+function ControllerFuncionarios.Carregar(pObj: TObject): string;
+var mfuncionario : Funcionarios;
+begin
+  self.umadaofuncionario.Carregar(pObj);
+  mfuncionario := Funcionarios (pObj);
+  umactrlcidade.Pesquisar(inttostr(mfuncionario.getumacidade.getCodigo));
+  self.umactrlcidade.Carregar(mfuncionario.getumacidade);
+end;
+
+constructor ControllerFuncionarios.CrieObj;
+begin
+  self.umadaofuncionario := DaoFuncionarios.CrieObj;
+end;
+
+destructor ControllerFuncionarios.Destrua_se;
+begin
+  self.umadaofuncionario.Destrua_se;
+end;
+
+function ControllerFuncionarios.Excluir(pObj: TObject): string;
+begin
+  self.umadaofuncionario.Excluir(pObj);
+end;
+
+function ControllerFuncionarios.getctrlcidade: ControllerCidades;
+begin
+  result := umactrlcidade;
+end;
+
+function ControllerFuncionarios.getds: Tdatasource;
+begin
+  result := umadaofuncionario.getds;
+end;
+
+function ControllerFuncionarios.Pesquisar(pChave: string): string;
+begin
+  self.umadaofuncionario.Pesquisar(pChave);
+end;
+
+function ControllerFuncionarios.Salvar(pObj: TObject): string;
+begin
+  self.umadaofuncionario.Salvar(pObj);
+end;
+
+procedure ControllerFuncionarios.setctrlcidade(pObj: TObject);
+begin
+  umactrlcidade := ControllerCidades (pObj);
+end;
+
+procedure ControllerFuncionarios.setDM(pDM: TDM);
+begin
+  self.umadaofuncionario.setDM(pDM);
+end;
+
+end.

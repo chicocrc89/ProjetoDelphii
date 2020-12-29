@@ -1,0 +1,17 @@
+unit uMarcas;
+
+interface
+  uses uGenerica;
+  type
+    Marcas = class(Generica)
+  private
+
+  protected
+
+  public
+
+  end;
+
+implementation
+
+end.

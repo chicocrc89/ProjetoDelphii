@@ -1,0 +1,130 @@
+unit uFrmConsultaVendas;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmConsulta, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, uVendas, uControllerVendas, uFrmCadastroVendas, uDM;
+
+type
+  TFrmConsultaVendas = class(TFrmConsulta)
+    procedure btnNovoClick(Sender: TObject);
+private
+    { Private declarations }
+  protected
+    umFrmCadastrovenda: TFrmCadastrovendas;
+    umdm: TDM;
+    umavenda: vendas;
+    umactrlvenda: Controllervendas;
+    procedure Novo;
+    procedure Alterar;
+    procedure Excluir;
+    procedure Sair;
+    procedure Pesquisar;
+  public
+    { Public declarations }
+    procedure conhecaObj(pObj: TObject; pctrl: TObject);
+    procedure SetFrmCadastro(pObj: TObject);
+
+  end;
+
+var
+  FrmConsultaVendas: TFrmConsultaVendas;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmConsultaVendas }
+
+procedure TFrmConsultaVendas.Alterar;
+begin
+  inherited;
+  self.umactrlvenda.Carregar(umavenda);
+  self.umFrmCadastrovenda.conhecaObj(umavenda, umactrlvenda);
+  self.umFrmCadastrovenda.CarregaEdt;
+  self.umFrmCadastrovenda.ListView1.Clear;
+  self.umFrmCadastrovenda.ListView2.Clear;
+  self.umFrmCadastrovenda.carregaLV;
+  self.umFrmCadastrovenda.carregaLV2;
+  umFrmCadastrovenda.ShowModal;
+  self.Pesquisar;
+end;
+
+procedure TFrmConsultaVendas.btnNovoClick(Sender: TObject);
+begin
+  Novo;
+end;
+
+procedure TFrmConsultaVendas.conhecaObj(pObj, pctrl: TObject);
+begin
+  inherited;
+  umavenda := vendas(pObj);
+  umactrlvenda := Controllervendas(pctrl);
+  self.umFrmCadastrovenda.conhecaObj(umavenda, umactrlvenda);
+  self.Pesquisar;
+  self.DBGrid1.DataSource := umactrlvenda.getds;
+end;
+
+procedure TFrmConsultaVendas.Excluir;
+var
+  mtitulo: string;
+begin
+  inherited;
+  self.umactrlvenda.Carregar(umavenda);
+  self.umFrmCadastrovenda.conhecaObj(umavenda, umactrlvenda);
+  self.umFrmCadastrovenda.limpaedt;
+  self.umFrmCadastrovenda.CarregaEdt;
+  self.umFrmCadastrovenda.bloqueiaedt;
+  mtitulo := umFrmCadastrovenda.btnSalvar.Caption;
+  umFrmCadastrovenda.btnSalvar.Caption := '&Excluir';
+  umFrmCadastrovenda.ShowModal;
+  self.umFrmCadastrovenda.DesbloqueiaEdt;
+  umFrmCadastrovenda.btnSalvar.Caption := mtitulo;
+  self.Pesquisar;
+end;
+
+procedure TFrmConsultaVendas.Novo;
+begin
+  self.umavenda.setcodigo(0);
+  self.umFrmCadastrovenda.edtserie.Text := inttostr(1);
+  self.umFrmCadastrovenda.edtmodelo.Text := inttostr(55);
+  self.umFrmCadastrovenda.edttotalproduto.Text := floattostr(0.00);
+  self.umFrmCadastrovenda.edttotalservico.Text := floattostr(0.00);
+  self.umFrmCadastrovenda.edttotaldesconto.Text := floattostr(0.00);
+  self.umFrmCadastrovenda.btnadicionar.Enabled := true;
+  self.umFrmCadastrovenda.btnremove.Enabled := true;
+  self.umavenda.setData_venda(Date);
+  self.umavenda.setData_emissao(Date);
+  self.umFrmCadastrovenda.limpaedt;
+  self.umFrmCadastrovenda.DesbloqueiaEdt;
+  self.umFrmCadastrovenda.conhecaObj(umavenda, umactrlvenda);
+  self.umFrmCadastrovenda.ShowModal;
+  self.Pesquisar;
+end;
+
+procedure TFrmConsultaVendas.Pesquisar;
+var
+  mMSG: string;
+begin
+  inherited;
+  mMSG := umactrlvenda.Pesquisar(self.edtPesquisar.Text);
+  if mMSG <> '' then
+    ShowMessage('venda ' + self.edtPesquisar.Text + ' NÃO ENCONTRADA');
+end;
+
+procedure TFrmConsultaVendas.Sair;
+begin
+  inherited;
+  if self.btnsair.Caption = 'SELECIONAR' then
+    umactrlvenda.Carregar(umavenda);
+end;
+
+procedure TFrmConsultaVendas.SetFrmCadastro(pObj: TObject);
+begin
+  inherited;
+  umFrmCadastrovenda := TFrmCadastrovendas(pObj);
+end;
+
+end.

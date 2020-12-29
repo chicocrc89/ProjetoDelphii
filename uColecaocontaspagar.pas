@@ -1,0 +1,47 @@
+unit uColecaocontaspagar;
+
+interface
+  uses SysUtils, uColecao, ucontaspagar;
+  type colecaocontaspagar = Class(colecao)
+  private
+
+  protected
+
+  public
+    function Pesquisa( pcontapagar: integer; pQuero: boolean ): integer;
+end;
+
+implementation
+
+function colecaocontaspagar.Pesquisa(pcontapagar: integer; pQuero: boolean): integer;
+var k : integer;
+begin
+     k:= 1;
+     if qtd <= 0 then
+        result:= 1
+     else
+     begin
+         while ( k <= qtd ) and ( pcontapagar > contaspagar(itens[k]).getnumero_parcela) do
+                inc(k);
+         if ( k > qtd) then begin
+             if pQuero then
+                result:= 0
+             else
+                result:= k;
+         end
+         else {nao cheguei ao final - posso ter encontrado ou nao}
+         if (pcontapagar = contaspagar (itens[k]).getnumero_parcela) then begin
+             if pQuero then
+                result:= k
+             else
+                result:= 0;
+         end else
+         if pQuero then
+            result:= 0
+         else
+            result:= k;
+     end;
+end;
+
+end.
+

@@ -1,0 +1,37 @@
+unit uFrmConsultaCombustivel;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmConsulta, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, uControllerCombustiveis, uCombustiveis, uFrmCadastroCombustivel, uDM;
+
+type
+  TFrmConsultaCombustivel = class(TFrmConsulta)
+  private
+    { Private declarations }
+  protected
+    umFrmCadastroCombustivel: TFrmCadastroCombustivel;
+    umcombustivel: Combustiveis;
+    umactrlcombustivel: Controllercombustiveis;
+    umdm: TDM;
+    procedure Novo; Override;
+    procedure Alterar; Override;
+    procedure Excluir; Override;
+    procedure Sair; Override;
+    procedure Pesquisar; Override;
+  public
+    { Public declarations }
+    procedure conhecaObj(pObj: TObject; pctrl: TObject); Override;
+    procedure SetFrmCadastro(pObj: TObject); Override;
+  end;
+
+var
+  FrmConsultaCombustivel: TFrmConsultaCombustivel;
+
+implementation
+
+{$R *.dfm}
+
+end.

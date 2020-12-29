@@ -1,0 +1,92 @@
+unit uParcelas;
+
+interface
+  uses uGenerica, uFormaPagamentos;
+  type Parcelas = class(Generica)
+  private
+
+  protected
+    numero_parcela : integer;
+    dias_prazo     : integer;
+    perc_parcela   : real;
+    umaformapagamento : FormaPagamentos;
+  public
+    constructor Crieobj;
+    destructor Destrua_se;
+    procedure setnumero_parcela (pnumero_parcela : integer);
+    procedure setdias_prazo (pdias_prazo : integer);
+    procedure setperc_parcela (pperc_parcela : real);
+    procedure setumaformapagamento (pformapagamento : FormaPagamentos);
+    function getnumero_parcela : integer;
+    function getdias_prazo : integer;
+    function getperc_parcela : real;
+    function getumaformapagamento : FormaPagamentos;
+    function clone : Parcelas;
+  end;
+
+implementation
+
+{ Parcelas }
+
+function Parcelas.clone: Parcelas;
+begin
+  result := parcelas.Crieobj;
+  result.setnumero_parcela(numero_parcela);
+  result.setdias_prazo(dias_prazo);
+  result.setperc_parcela(perc_parcela);
+  result.setumaformapagamento(umaformapagamento);
+  result.setCadastro(Cadastro);
+  result.setUlt_Alt(Ult_Alt);
+end;
+
+constructor Parcelas.Crieobj;
+begin
+  self.umaformapagamento := FormaPagamentos.Crieobj;
+end;
+
+destructor Parcelas.Destrua_se;
+begin
+  self.umaformapagamento.Destrua_se;
+end;
+
+function Parcelas.getdias_prazo: integer;
+begin
+  result := dias_prazo;
+end;
+
+function Parcelas.getnumero_parcela: integer;
+begin
+  result := numero_parcela;
+end;
+
+function Parcelas.getperc_parcela: real;
+begin
+  result := perc_parcela;
+end;
+
+function Parcelas.getumaformapagamento: FormaPagamentos;
+begin
+  result := umaformapagamento;
+end;
+
+procedure Parcelas.setdias_prazo(pdias_prazo: integer);
+begin
+  dias_prazo := pdias_prazo;
+end;
+
+procedure Parcelas.setnumero_parcela(pnumero_parcela: integer);
+begin
+  numero_parcela := pnumero_parcela;
+end;
+
+procedure Parcelas.setperc_parcela(pperc_parcela: real);
+begin
+  perc_parcela := pperc_parcela;
+end;
+
+procedure Parcelas.setumaformapagamento(pformapagamento: FormaPagamentos);
+begin
+  umaformapagamento := pformapagamento;
+end;
+
+end.

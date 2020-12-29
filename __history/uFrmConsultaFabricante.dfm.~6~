@@ -1,0 +1,25 @@
+inherited FrmConsultaFabricante: TFrmConsultaFabricante
+  Caption = 'Consulta Fabricante'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited DBGrid1: TDBGrid
+    DataSource = dsfabricante
+    Columns = <>
+  end
+  object mmtablefabricante: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 32
+    Top = 432
+  end
+  object dsfabricante: TDataSource
+    DataSet = mmtablefabricante
+    Left = 88
+    Top = 432
+  end
+end

@@ -1,0 +1,40 @@
+inherited FrmCadastroFormaPagamento: TFrmCadastroFormaPagamento
+  Caption = 'Cadastro de Forma de Pagamento'
+  ClientWidth = 843
+  ExplicitWidth = 859
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel [8]
+    Left = 8
+    Top = 72
+    Width = 177
+    Height = 18
+    Caption = 'FORMA DE PAGAMENTO'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  inherited edtCodigo: TEdit
+    Width = 62
+    ExplicitWidth = 62
+  end
+  inherited edtCadastro: TEdit
+    TabOrder = 2
+  end
+  inherited edtUlt_alt: TEdit
+    TabOrder = 3
+  end
+  inherited edtcodusuario: TEdit
+    TabOrder = 4
+  end
+  object edtformapag: TEdit
+    Left = 8
+    Top = 91
+    Width = 178
+    Height = 21
+    TabOrder = 1
+  end
+end

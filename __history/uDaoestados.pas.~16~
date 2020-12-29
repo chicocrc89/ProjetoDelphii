@@ -1,0 +1,115 @@
+unit uDaoestados;
+
+interface
+  uses udao, uDM, DB, uDaoPaises, uEstados, uPaises, SysUtils;
+  type Daoestados = class(dao)
+  private
+
+  protected
+    umadaopais : DaoPaises;
+    umdm : TDM;
+  public
+    constructor CrieObj;
+    destructor  Destrua_se;
+    function Salvar ( pObj :  TObject ):         string;    override;
+    function Carregar ( pObj : TObject ):        string;    override;
+    function Excluir ( pObj : TObject ):         string;    override;
+    function Pesquisar ( pChave : string):       string;    override;
+    procedure setDM (pDM : TDM);
+    function getds : Tdatasource;
+    procedure setdaopais (pObj : TObject);
+
+  end;
+
+implementation
+
+{ Daoestados }
+
+function Daoestados.Carregar(pObj: TObject): string;
+var mestados : Estados;
+begin
+  mestados := Estados (pObj);
+  if not umDM.trans.Active then
+      umDM.trans.Active := true;
+   if not umDM.dsetcidade.Active then
+      umDM.dsetestado.Open;
+   mestados.setCodigo(umdm.dsetestadoID_ESTADO.Value);
+   mestados.setestado(umdm.dsetestadoESTADO.Value);
+   mestados.setUF(umdm.dsetestadoUF.Value);
+   mestados.getumpais.setCodigo(umdm.dsetestadoID_PAIS.Value);
+   umadaopais.Carregar(mestados.getumpais);
+end;
+
+constructor Daoestados.CrieObj;
+begin
+  umadaopais := DaoPaises.CrieObj;
+end;
+
+destructor Daoestados.Destrua_se;
+begin
+  umadaopais.Destrua_se;
+end;
+
+function Daoestados.Excluir(pObj: TObject): string;
+begin
+  if not umDM.trans.Active then
+      umDM.trans.Active := true;
+   if not umDM.dsetestado.Active then
+      umDM.dsetestado.Open;
+   umDM.dsetestado.Delete;
+   umDM.trans.Commit;
+end;
+
+function Daoestados.getds: Tdatasource;
+begin
+  result := umdm.dsestado;
+end;
+
+function Daoestados.Pesquisar(pChave: string): string;
+var mSQL : string;
+begin
+  if length(pchave) = 0 then
+    mSQL := 'select * from estado order by estado'
+  else
+    mSql:='select * from estado where estado =' + QuotedStr(pchave);
+    umDM.dsetestado.Active := false;
+    umDM.dsetestado.SelectSQL.Text := mSQL;
+    if not umDM.trans.Active then
+      umDM.trans.Active := true;
+    if not umDM.dsetestado.Active then
+      umDM.dsetestado.Open;
+    result := '';
+
+end;
+
+function Daoestados.Salvar(pObj: TObject): string;
+var mestados : Estados;
+begin
+   mestados := Estados (pObj);
+   if not umDM.trans.Active then
+      umDM.trans.Active := true;
+   if not umDM.dsetestado.Active then
+      umDM.dsetestado.Open;
+   if mestados.getcodigo = 0 then
+      umDM.dsetestado.Insert
+   else
+      umDM.DSetestado.Edit;
+      umdm.dsetestadoID_ESTADO.Value := mestados.getCodigo;
+      umdm.dsetestadoESTADO.Value := mestados.getestado;
+      umdm.dsetestadoUF.Value  := mestados.getUF;
+      umdm.dsetestadoID_PAIS.Value := mestados.getumpais.getCodigo;
+      umDM.dsetestado.Post;
+      umDM.trans.Commit;
+end;
+
+procedure Daoestados.setdaopais(pObj: TObject);
+begin
+  umadaopais := DaoPaises (pObj);
+end;
+
+procedure Daoestados.setDM(pDM: TDM);
+begin
+  umdm := pDM;
+end;
+
+end.

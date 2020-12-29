@@ -1,0 +1,7 @@
+inherited FrmConsultaFormaPagamento: TFrmConsultaFormaPagamento
+  Caption = 'Consulta de Forma de Pagamento'
+  ExplicitWidth = 985
+  ExplicitHeight = 585
+  PixelsPerInch = 96
+  TextHeight = 13
+end

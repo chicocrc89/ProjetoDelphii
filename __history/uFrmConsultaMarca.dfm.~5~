@@ -1,0 +1,11 @@
+inherited FrmConsultaMarca: TFrmConsultaMarca
+  Caption = 'Consulta Marca'
+  ExplicitLeft = -138
+  ExplicitWidth = 985
+  ExplicitHeight = 585
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited btnPesquisar: TSpeedButton
+    OnClick = btnPesquisarClick
+  end
+end

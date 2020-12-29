@@ -1,0 +1,72 @@
+unit uPaises;
+
+interface
+  uses uGenerica;
+  type Paises = class(Generica)
+  private
+
+  protected
+    pais  : string;
+    DDI   : string;
+    sigla : string;
+
+  public
+
+    procedure setpais (ppais : string);
+    procedure setDDI (pDDI : string);
+    procedure setsigra (psigla : string);
+    function getpais : string;
+    function getDDI : string;
+    function getsigla : string;
+    function clone : paises;
+
+end;
+
+implementation
+
+{ Paises }
+
+function Paises.clone: paises;
+begin
+  result := paises.Crieobj;
+  result.setpais(pais);
+  result.setDDI(DDI);
+  result.setsigra(sigla);
+end;
+
+destructor Paises.Destrua_se;
+begin
+
+end;
+
+function Paises.getDDI: string;
+begin
+  result := DDI;
+end;
+
+function Paises.getpais: string;
+begin
+  result := pais;
+end;
+
+function Paises.getsigla: string;
+begin
+  result := sigla;
+end;
+
+procedure Paises.setDDI(pDDI: string);
+begin
+  DDI := pDDI;
+end;
+
+procedure Paises.setpais(ppais: string);
+begin
+  pais := ppais;
+end;
+
+procedure Paises.setsigra(psigla: string);
+begin
+  sigla := psigla;
+end;
+
+end.

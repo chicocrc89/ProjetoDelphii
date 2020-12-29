@@ -1,0 +1,24 @@
+unit uFrmConsultaLaboratorio;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmConsulta, Vcl.ComCtrls, Vcl.StdCtrls;
+
+type
+  TFrmConsultaLaboratorio = class(TFrmConsulta)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmConsultaLaboratorio: TFrmConsultaLaboratorio;
+
+implementation
+
+{$R *.dfm}
+
+end.

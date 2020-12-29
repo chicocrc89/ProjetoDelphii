@@ -1,0 +1,249 @@
+unit uFrmCadastroUsuario;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmCadastro, Vcl.StdCtrls, Vcl.Buttons,
+  Vcl.ExtCtrls, uUsuarios, uControllerUsuarios, uFrmConsultaFuncionario;
+
+type
+  TFrmCadastroUsuario = class(TFrmCadastro)
+    Label1: TLabel;
+    edtnome: TEdit;
+    edtusuario: TEdit;
+    Label2: TLabel;
+    edtsenha1: TEdit;
+    Label3: TLabel;
+    edtsenha2: TEdit;
+    Label4: TLabel;
+    status: TRadioGroup;
+    Label9: TLabel;
+    Label6: TLabel;
+    permissao: TRadioGroup;
+    Label5: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label14: TLabel;
+    btnPesquisar: TSpeedButton;
+    edtcodfuncionario: TEdit;
+    edtfuncionario: TEdit;
+    procedure btnPesquisarClick(Sender: TObject);
+    procedure edtcodfuncionarioExit(Sender: TObject);
+  private
+    { Private declarations }
+  protected
+    umusuario : Usuarios;
+    umactrlusuario : ControllerUsuarios;
+    umfrmconsultafuncionario : TFrmConsultaFuncionario;
+  public
+    { Public declarations }
+    procedure ConhecaObj(pObj: TObject; pctrl: TObject); Override;
+    procedure Salvar; Override;
+    procedure Sair; Override;
+    procedure CarregaEdt; Override;
+    procedure LimpaEdt; Override;
+    procedure BloqueiaEdt; Override;
+    procedure DesbloqueiaEdt; Override;
+    procedure setfrmconsulta(pObj : TObject);
+  end;
+
+var
+  FrmCadastroUsuario: TFrmCadastroUsuario;
+
+implementation
+
+{$R *.dfm}
+{ TFrmCadastroUsuario }
+
+procedure TFrmCadastroUsuario.BloqueiaEdt;
+begin
+  inherited;
+  self.edtnome.Enabled := false;
+  self.edtusuario.Enabled := false;
+  self.edtsenha1.Enabled := false;
+  self.edtsenha2.Enabled := false;
+  self.edtcodfuncionario.Enabled := false;
+  self.edtfuncionario.Enabled := false;
+end;
+
+procedure TFrmCadastroUsuario.btnPesquisarClick(Sender: TObject);
+var
+  mbotao: string;
+begin
+  inherited;
+  mbotao := umfrmconsultafuncionario.btnSair.Caption;
+  umfrmconsultafuncionario.btnSair.Caption := 'SELECIONAR';
+  umfrmconsultafuncionario.ConhecaObj(umusuario.getumfuncionario,
+    umactrlusuario.getctrlfuncionario);
+  umfrmconsultafuncionario.ShowModal;
+
+  umfrmconsultafuncionario.btnSair.Caption := mbotao;
+  self.edtcodfuncionario.Text := inttostr(umusuario.getumfuncionario.getcodigo);
+  self.edtfuncionario.Text := umusuario.getumfuncionario.getnome;
+end;
+
+procedure TFrmCadastroUsuario.CarregaEdt;
+begin
+  inherited;
+  self.edtCodigo.Text := inttostr(umusuario.getCodigo);
+  self.edtnome.Text := umusuario.getnome;
+  self.edtusuario.Text := umusuario.getusuario;
+  self.edtsenha1.Text := umusuario.getsenha;
+  self.edtsenha2.Text := umusuario.getsenha;
+  self.edtcodfuncionario.Text := inttostr(umusuario.getumfuncionario.getCodigo);
+  self.edtfuncionario.Text := umusuario.getumfuncionario.getnome;
+  if umusuario.getstatus = 'A' then
+  begin
+    self.status.ItemIndex := 0;
+  end
+  else
+  begin
+    self.status.ItemIndex := 1;
+  end;
+end;
+
+procedure TFrmCadastroUsuario.ConhecaObj(pObj: TObject; pctrl: TObject);
+begin
+  inherited;
+  umusuario := Usuarios(pObj);
+  umactrlusuario := ControllerUsuarios(pctrl);
+  self.edtCodigo.Text := inttostr(self.umusuario.getcodigo);
+  self.edtcodusuario.Text := inttostr(self.umusuario.getCodigo_Usuario);
+  self.edtCadastro.Text := DateToStr(self.umusuario.getCadastro);
+  self.edtUlt_alt.Text := DateToStr(self.umusuario.getUlt_Alt);
+end;
+
+procedure TFrmCadastroUsuario.DesbloqueiaEdt;
+begin
+  inherited;
+  self.edtnome.Enabled := true;
+  self.edtusuario.Enabled := true;
+  self.edtsenha1.Enabled := true;
+  self.edtsenha2.Enabled := true;
+  self.edtcodfuncionario.Enabled := true;
+  self.edtfuncionario.Enabled := true;
+end;
+
+procedure TFrmCadastroUsuario.edtcodfuncionarioExit(Sender: TObject);
+var
+  mMSG: string;
+begin
+  inherited;
+  mMSG := umactrlusuario.getctrlfuncionario.Pesquisar(self.edtcodfuncionario.Text);
+  umactrlusuario.getctrlfuncionario.Carregar(umusuario.getumfuncionario);
+  self.edtcodfuncionario.Text := inttostr(umusuario.getumfuncionario.getcodigo);
+  self.edtfuncionario.Text := umusuario.getumfuncionario.getnome;
+  if self.edtcodfuncionario.Text = inttostr(0) then
+  begin
+    ShowMessage('Funcionario não encontrado');
+    self.edtcodfuncionario.SetFocus;
+  end;
+end;
+
+procedure TFrmCadastroUsuario.LimpaEdt;
+begin
+  inherited;
+  self.edtnome.Clear;
+  self.edtusuario.Clear;
+  self.edtsenha1.Clear;
+  self.edtsenha2.Clear;
+  self.edtcodfuncionario.Clear;
+  self.edtfuncionario.Clear;
+end;
+
+procedure TFrmCadastroUsuario.Sair;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroUsuario.Salvar;
+begin
+  inherited;
+  if self.btnSalvar.Caption = '&Excluir' then
+  begin
+    If Application.MessageBox('Confirma Exclusão ?', 'Cuidado !!!',
+      MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES Then
+    begin
+      self.umactrlusuario.Excluir(umusuario);
+      ShowMessage('Excluido com Sucesso!!!');
+      self.Sair;
+    end;
+  end
+  else
+  begin
+    if (self.edtnome.Text = '') then
+    begin
+      ShowMessage('Campo Nome precisa ser preenchido!!!');
+      self.edtnome.SetFocus;
+    end
+    else if (self.edtusuario.Text = '') then
+    begin
+      ShowMessage('Campo Usuario precisa ser preenchido!!!');
+      self.edtusuario.SetFocus;
+    end
+    else if (self.edtsenha1.Text = '') then
+    begin
+      ShowMessage('Campo Senha precisa ser preenchido!!!');
+      self.edtsenha1.SetFocus;
+    end
+    else if (self.edtsenha2.Text = '') then
+    begin
+      ShowMessage('Campo Confirmaçao de Senha precisa ser preenchido!!!');
+      self.edtsenha2.SetFocus;
+    end
+    else if self.status.ItemIndex < 0 then
+    begin
+      ShowMessage('Campo Status precisa ser selecionado!!!');
+      self.status.SetFocus;
+    end
+    else if self.permissao.ItemIndex < 0 then
+    begin
+      ShowMessage('Campo Permissão precisa ser selecionado!!!');
+      self.permissao.SetFocus;
+    end
+    else if not(self.edtsenha1.Text = self.edtsenha2.Text) then
+    begin
+      ShowMessage('Campos de Senhas precisam ser IGUAIS!!!');
+      self.edtsenha2.SetFocus;
+    end
+    else
+    begin
+      umusuario.setcodigo(strtoint(self.edtCodigo.Text));
+      umusuario.setusuario(self.edtusuario.Text);
+      umusuario.setnome(self.edtnome.Text);
+      umusuario.setsenha(self.edtsenha1.Text);
+      umusuario.setCadastro(StrToDate(self.edtCadastro.Text));
+      umusuario.setUlt_Alt(StrToDate(self.edtUlt_alt.Text));
+      umusuario.setCodigo_Usuario(strtoint(self.edtcodusuario.Text));
+      if self.status.ItemIndex = 0 then
+      begin
+        umusuario.setstatus('A');
+      end
+      else
+      begin
+        umusuario.setstatus('I');
+      end;
+      if self.permissao.ItemIndex = 0 then
+        umusuario.setpermissao('ADMIN')
+      else if (self.permissao.ItemIndex = 1) then
+        umusuario.setpermissao('OPERACIONAL')
+      else
+        umusuario.setstatus('BASICO');
+      umactrlusuario.Salvar(umusuario.clone);
+      ShowMessage('Salvo com Sucesso!!!');
+      self.Sair;
+    end;
+  end;
+end;
+
+procedure TFrmCadastroUsuario.setfrmconsulta(pObj: TObject);
+begin
+  umfrmconsultafuncionario := TFrmConsultaFuncionario (pObj);
+end;
+
+end.

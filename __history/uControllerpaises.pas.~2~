@@ -1,0 +1,21 @@
+unit uControllerpaises;
+
+interface
+  uses uController;
+  type Controllerpais = class(controller)
+  private
+
+  protected
+
+  public
+    constructor CrieObj;
+    destructor  Destrua_se;
+    function Salvar ( pObj :  TObject ):            string;    override;
+    function Carregar ( pObj : TObject ):           string;    override;
+    function Excluir ( pObj : TObject ):            string;    override;
+    function Pesquisar ( pChave : string):          string;    override;
+  end;
+
+implementation
+
+end.

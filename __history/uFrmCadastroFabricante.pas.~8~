@@ -1,0 +1,81 @@
+unit uFrmCadastroFabricante;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmCadastro, Vcl.StdCtrls, Vcl.Buttons;
+
+type
+  TFrmCadastroFabricante = class(TFrmCadastro)
+    Label1: TLabel;
+    edtcnpj: TEdit;
+    edtfabricante: TEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure ConhecaObj (pObj : TObject; pctrl: TObject);  Override;
+    procedure Salvar;                       Override;
+    procedure Sair;                         Override;
+    procedure CarregaEdt;                   Override;
+    procedure LimpaEdt;                     Override;
+    procedure BloqueiaEdt;                  Override;
+    procedure DesbloqueiaEdt;               Override;
+
+  end;
+
+var
+  FrmCadastroFabricante: TFrmCadastroFabricante;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmCadastroFabricante }
+
+procedure TFrmCadastroFabricante.BloqueiaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroFabricante.CarregaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroFabricante.ConhecaObj(pObj: TObject; pctrl: TObject);
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroFabricante.DesbloqueiaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroFabricante.LimpaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroFabricante.Sair;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroFabricante.Salvar;
+begin
+  inherited;
+
+end;
+
+end.

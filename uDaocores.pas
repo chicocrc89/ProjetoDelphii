@@ -1,0 +1,118 @@
+unit uDaocores;
+
+interface
+
+uses udao, uDM, DB, ucores, SysUtils;
+
+type
+  Daocores = class(dao)
+  private
+
+  protected
+    umdm: TDM;
+  public
+    constructor CrieObj;
+    destructor Destrua_se;
+    function Salvar(pObj: TObject): string; override;
+    function Carregar(pObj: TObject): string; override;
+    function Excluir(pObj: TObject): string; override;
+    function Pesquisar(pChave: string): string; override;
+    procedure setDM(pDM: TDM);
+    function getds: Tdatasource;
+  end;
+
+implementation
+
+{ Daocores }
+
+function Daocores.Carregar(pObj: TObject): string;
+var
+  mcores: cores;
+begin
+  mcores := cores(pObj);
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetcor.Active then
+    umdm.dsetcor.Open;
+  mcores.setCodigo(umdm.dsetcorID_cor.Value);
+  mcores.setcor(umdm.dsetcorcor.Value);
+  mcores.setCadastro(umdm.dsetcorDATA_CADASTRO.Value);
+  mcores.setUlt_Alt(umdm.dsetcidadeULTIMA_ALTERACAO.Value);
+
+end;
+
+constructor Daocores.CrieObj;
+begin
+
+end;
+
+destructor Daocores.Destrua_se;
+begin
+
+end;
+
+function Daocores.Excluir(pObj: TObject): string;
+begin
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetcor.Active then
+    umdm.dsetcor.Open;
+  umdm.dsetcor.Delete;
+  umdm.trans.Commit;
+end;
+
+function Daocores.getds: Tdatasource;
+begin
+  result := umdm.dscor;
+end;
+
+function Daocores.Pesquisar(pChave: string): string;
+var
+  mSQL: string;
+begin
+  if length(pChave) = 0 then
+    mSQL := 'select * from cor order by cor'
+  else if ehnumero(pChave) then
+    mSQL := 'select * from cor where id_cor =' + QuotedStr(pChave)
+  else
+    mSQL := 'select * from cor where cor =' + QuotedStr(pChave);
+  umdm.dsetcor.Active := false;
+  umdm.dsetcor.SelectSQL.Text := mSQL;
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetcor.Active then
+    umdm.dsetcor.Open;
+  result := '';
+end;
+
+function Daocores.Salvar(pObj: TObject): string;
+var
+  mcores: cores;
+  mdata : Tdate;
+begin
+  mcores := cores(pObj);
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetcor.Active then
+    umdm.dsetcor.Open;
+  if mcores.getcodigo = 0 then
+    umdm.dsetcor.Insert
+  else
+  begin
+    umdm.dsetcor.Edit;
+    mdata := now;
+  end;
+    umdm.dsetcorID_cor.Value := mcores.getcodigo;
+    umdm.dsetcorcor.Value := mcores.getcor;
+    umdm.dsetcorDATA_CADASTRO.Value := mcores.getCadastro;
+    umdm.dsetcorULTIMA_ALTERACAO.Value := mdata;
+    umdm.dsetcor.Post;
+    umdm.trans.Commit;
+end;
+
+procedure Daocores.setDM(pDM: TDM);
+begin
+  umdm := pDM;
+end;
+
+end.

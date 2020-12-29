@@ -1,0 +1,99 @@
+unit uFrmCadastroVendedor;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmCadastro, Vcl.StdCtrls, Vcl.Buttons,
+  Vcl.ExtCtrls;
+
+type
+  TFrmCadastroVendedor = class(TFrmCadastro)
+    Label1: TLabel;
+    edtnome: TEdit;
+    edtcomissao: TEdit;
+    Label2: TLabel;
+    edtcargo: TEdit;
+    Label5: TLabel;
+    RadioGroup1: TRadioGroup;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    edtcodcidade: TEdit;
+    edtcidade: TEdit;
+    edtddd: TEdit;
+    Button3: TButton;
+    edtendereco: TEdit;
+    edtnumero: TEdit;
+    edtbairro: TEdit;
+    status: TRadioGroup;
+    Label6: TLabel;
+    Label3: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure ConhecaObj (pObj : TObject; pctrl: TObject);  Override;
+    procedure Salvar;                       Override;
+    procedure Sair;                         Override;
+    procedure CarregaEdt;                   Override;
+    procedure LimpaEdt;                     Override;
+    procedure BloqueiaEdt;                  Override;
+    procedure DesbloqueiaEdt;               Override;
+  end;
+
+var
+  FrmCadastroVendedor: TFrmCadastroVendedor;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmCadastroVendedor }
+
+procedure TFrmCadastroVendedor.BloqueiaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroVendedor.CarregaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroVendedor.ConhecaObj(pObj: TObject; pctrl: TObject);
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroVendedor.DesbloqueiaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroVendedor.LimpaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroVendedor.Sair;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroVendedor.Salvar;
+begin
+  inherited;
+
+end;
+
+end.

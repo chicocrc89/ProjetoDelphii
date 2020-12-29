@@ -1,0 +1,191 @@
+unit uProdutos;
+
+interface
+  uses uGenerica, uGrupos, uFabricantes;
+  type Produtos = class(Generica)
+  private
+
+  protected
+    produto_id    : integer;
+    descricao     : string;
+    umfabricante  : fabricantes;
+    barras        : string;
+    umgrupo       : grupos;
+    preco_compra  : real;
+    preco_venda   : real;
+    margem        : real;
+    estoque       : integer;
+    dtalteracao   : TDate;
+    dtcadastro    : TDate;
+  public
+    constructor Crieobj;
+    destructor Destrua_se;
+    procedure setproduto_id (pproduto_id : integer);
+    procedure setdescricao (pdescricao : string);
+    procedure setumfabricante (pfabricante : fabricantes);
+    procedure setbarras (pbarras : string);
+    procedure setumgrupo (pgrupo : grupos);
+    procedure setpreco_compra (ppreco_compra : real);
+    procedure setpreco_venda (ppreco_venda : real);
+    procedure setmargem (pmargem : real);
+    procedure setestoque (pestoque : integer);
+    procedure setdtalteracao (pdtalteracao : Tdate);
+    procedure setdtcadastro (pdtcadastro : Tdate);
+    function getproduto_id : integer;
+    function getdescricao : string;
+    function getumfabricante : fabricantes;
+    function getbarras : string;
+    function getumgrupo : grupos;
+    function getpreco_compra : real;
+    function getpreco_venda : real;
+    function getmargem : real;
+    function getestoque : integer;
+    function getdtalteracao : Tdate;
+    function getdtcadastro : Tdate;
+    function clone : Produtos;
+
+  end;
+
+implementation
+
+{ Produto }
+
+function Produtos.clone: Produtos;
+begin
+  result := Produtos.Crieobj;
+  result.setproduto_id(produto_id);
+  result.setdescricao(descricao);
+  result.setumfabricante(umfabricante);
+  result.setbarras(barras);
+  result.setumgrupo(umgrupo);
+  result.setpreco_compra(preco_compra);
+  result.setpreco_venda(preco_venda);
+  result.setmargem(margem);
+  result.setestoque(estoque);
+  result.setdtalteracao(dtalteracao);
+  result.setdtcadastro(dtcadastro);
+end;
+
+constructor Produtos.Crieobj;
+begin
+  umgrupo := Grupos.Crieobj;
+  umfabricante := Fabricantes.Crieobj;
+end;
+
+destructor Produtos.Destrua_se;
+begin
+  umgrupo.Destrua_se;
+  umfabricante.Destrua_se;
+end;
+
+function Produtos.getbarras: string;
+begin
+  result := barras;
+end;
+
+function Produtos.getdescricao: string;
+begin
+  result := descricao;
+end;
+
+function Produtos.getdtalteracao: Tdate;
+begin
+  result := dtalteracao;
+end;
+
+function Produtos.getdtcadastro: Tdate;
+begin
+  result := dtcadastro;
+end;
+
+function Produtos.getestoque: integer;
+begin
+  result := estoque
+end;
+
+function Produtos.getumfabricante: fabricantes;
+begin
+  result := umfabricante;
+end;
+
+function Produtos.getumgrupo: grupos;
+begin
+  result := umgrupo;
+end;
+
+function Produtos.getmargem: real;
+begin
+  result := margem;
+end;
+
+function Produtos.getpreco_compra: real;
+begin
+  result := preco_compra;
+end;
+
+function Produtos.getpreco_venda: real;
+begin
+  result := preco_venda;
+end;
+
+function Produtos.getProduto_id: integer;
+begin
+  result := Produto_id;
+end;
+
+procedure Produtos.setbarras(pbarras: string);
+begin
+  barras := pbarras;
+end;
+
+procedure Produtos.setdescricao(pdescricao: string);
+begin
+  descricao := pdescricao;
+end;
+
+procedure Produtos.setdtalteracao(pdtalteracao: Tdate);
+begin
+  dtalteracao := pdtalteracao;
+end;
+
+procedure Produtos.setdtcadastro(pdtcadastro: Tdate);
+begin
+  dtcadastro := pdtcadastro;
+end;
+
+procedure Produtos.setestoque(pestoque: integer);
+begin
+  estoque := pestoque;
+end;
+
+procedure Produtos.setumfabricante(pfabricante: fabricantes);
+begin
+  umfabricante := pfabricante;
+end;
+
+procedure Produtos.setumgrupo(pgrupo: grupos);
+begin
+  umgrupo := pgrupo;
+end;
+
+procedure Produtos.setmargem(pmargem: real);
+begin
+  margem := pmargem;
+end;
+
+procedure Produtos.setpreco_compra(ppreco_compra: real);
+begin
+  preco_compra := ppreco_compra;
+end;
+
+procedure Produtos.setpreco_venda(ppreco_venda: real);
+begin
+  preco_venda := ppreco_venda;
+end;
+
+procedure Produtos.setProduto_id(pProduto_id: integer);
+begin
+  Produto_id := pProduto_id;
+end;
+
+end.

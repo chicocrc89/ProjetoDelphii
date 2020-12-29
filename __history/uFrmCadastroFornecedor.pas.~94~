@@ -1,0 +1,374 @@
+unit uFrmCadastroFornecedor;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmCadastro, Vcl.StdCtrls,
+  Vcl.ExtCtrls,
+  Vcl.Buttons, System.Actions, Vcl.ActnList, Vcl.CheckLst,
+  uFrmconsultacidade, uFrmConsultaformapagamento, uFornecedores, uControllerFornecedores;
+
+type
+  TFrmCadastroFornecedor = class(TFrmCadastro)
+    Label1: TLabel;
+    edtrazaosocial: TEdit;
+    lbltipo: TLabel;
+    edtcnpj: TEdit;
+    Label3: TLabel;
+    edtinscestadual: TEdit;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    edtcodcidade: TEdit;
+    edtcidade: TEdit;
+    edtddd: TEdit;
+    Label14: TLabel;
+    edtendereco: TEdit;
+    Label15: TLabel;
+    edtnumero: TEdit;
+    Label16: TLabel;
+    edtbairro: TEdit;
+    opcoes: TRadioGroup;
+    Label2: TLabel;
+    edtcelular: TEdit;
+    edttelefone: TEdit;
+    Label5: TLabel;
+    status: TRadioGroup;
+    Label4: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label17: TLabel;
+    edtnome_fantasia: TEdit;
+    btnPesquisacidade: TSpeedButton;
+    Label24: TLabel;
+    Label25: TLabel;
+    Label27: TLabel;
+    edtcodcondicao: TEdit;
+    edtcondicao: TEdit;
+    btnpesquisacondicao: TSpeedButton;
+    Label18: TLabel;
+    procedure opcoesClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btnpesquisacondicaoClick(Sender: TObject);
+    procedure btnPesquisacidadeClick(Sender: TObject);
+    procedure edtcodcidadeExit(Sender: TObject);
+    procedure edtcodcondicaoChange(Sender: TObject);
+  private
+
+  protected
+    umfrmconsultacidade: TFrmConsultaCidade;
+    umfrmconsultaformapagamento: TFrmconsultaformapagamento;
+    umfornecedor : Fornecedores;
+    umactrlfornecedor : ControllerFornecedores;
+  public
+    procedure ConhecaObj(pObj: TObject; pctrl: TObject); Override;
+    procedure Salvar; Override;
+    procedure Sair; Override;
+    procedure CarregaEdt; Override;
+    procedure LimpaEdt; Override;
+    procedure BloqueiaEdt; Override;
+    procedure DesbloqueiaEdt; Override;
+    procedure SetFrmConsulta(pObj: TObject);
+    procedure SetFrmConsultapagamento(pObj: TObject);
+  end;
+
+var
+  FrmCadastroFornecedor: TFrmCadastroFornecedor;
+
+implementation
+
+{$R *.dfm}
+{ TFrmCadastroFornecedor }
+
+procedure TFrmCadastroFornecedor.BloqueiaEdt;
+begin
+  inherited;
+  self.edtrazaosocial.Enabled := false;
+  self.edtcnpj.Enabled := false;
+  self.edtinscestadual.Enabled := false;
+  self.edtcodcidade.Enabled := false;
+  self.edtcidade.Enabled := false;
+  self.edtddd.Enabled := false;
+  self.edtendereco.Enabled := false;
+  self.edtnumero.Enabled := false;
+  self.edtbairro.Enabled := false;
+  self.edtcodcondicao.Enabled := false;
+  self.edtcondicao.Enabled := false;
+end;
+
+procedure TFrmCadastroFornecedor.CarregaEdt;
+begin
+  inherited;
+  if umfornecedor.getstatus = 'A' then
+  begin
+    self.status.ItemIndex := 0;
+  end
+  else
+  begin
+    self.status.ItemIndex := 1;
+  end;
+   if umfornecedor.gettp_fornecedor = 'F' then
+  begin
+    self.opcoes.ItemIndex := 0;
+  end
+  else
+  begin
+    self.opcoes.ItemIndex := 1;
+  end;
+  self.edtCodigo.Text := inttostr(umfornecedor.getcodigo);
+  self.edtrazaosocial.Text := umfornecedor.getrazao;
+  self.edtcnpj.Text := umfornecedor.getcnpj;
+  self.edtnome_fantasia.Text := umfornecedor.getnome_fantasia;
+  self.edtinscestadual.Text := umfornecedor.getinsc_est;
+  self.edtcodcidade.Text := inttostr(umfornecedor.getumacidade.getcodigo);
+  self.edtcidade.Text := umfornecedor.getumacidade.getcidade;
+  self.edtddd.Text := umfornecedor.getumacidade.getDDD;
+  self.edtendereco.Text := umfornecedor.getendereco;
+  self.edtnumero.Text := inttostr(umfornecedor.getnumero);
+  self.edtbairro.Text := umfornecedor.getbairro;
+  self.edtcelular.Text := umfornecedor.getceular;
+  self.edttelefone.Text := umfornecedor.gettel_comercial;
+  self.edtcodcondicao.Text := inttostr(umfornecedor.getumacondicao.getcodigo);
+  self.edtcondicao.Text := umfornecedor.getumacondicao.getcondicao;
+  self.edtCadastro.Text := DateToStr(umfornecedor.getCadastro);
+  self.edtUlt_alt.Text := DateToStr(umfornecedor.getUlt_Alt);
+end;
+
+procedure TFrmCadastroFornecedor.ConhecaObj(pObj: TObject; pctrl: TObject);
+begin
+  inherited;
+  umfornecedor := Fornecedores(pObj);
+  umactrlfornecedor := ControllerFornecedores(pctrl);
+  self.edtCodigo.Text := inttostr(self.umfornecedor.getcodigo);
+  self.edtCadastro.Text := DateToStr(self.umfornecedor.getCadastro);
+  self.edtUlt_alt.Text := DateToStr(self.umfornecedor.getUlt_Alt);
+end;
+
+procedure TFrmCadastroFornecedor.DesbloqueiaEdt;
+begin
+  inherited;
+  self.edtrazaosocial.Enabled := true;
+  self.edtcnpj.Enabled := true;
+  self.edtinscestadual.Enabled := true;
+  self.edtcodcidade.Enabled := true;
+  self.edtcidade.Enabled := true;
+  self.edtddd.Enabled := true;
+  self.edtendereco.Enabled := true;
+  self.edtnumero.Enabled := true;
+  self.edtbairro.Enabled := true;
+  self.edtcodcondicao.Enabled := true;
+  self.edtcondicao.Enabled := true;
+end;
+
+procedure TFrmCadastroFornecedor.edtcodcidadeExit(Sender: TObject);
+var
+  mMSG: string;
+begin
+  inherited;
+  mMSG := umactrlfornecedor.getctrlcidade.Pesquisar(self.edtcodcidade.Text);
+  umactrlfornecedor.getctrlcidade.Carregar(umfornecedor.getumacidade);
+  self.edtcodcidade.Text := inttostr(umfornecedor.getumacidade.getcodigo);
+  self.edtcidade.Text := umfornecedor.getumacidade.getcidade;
+  if self.edtcodcidade.Text = inttostr(0) then
+  begin
+    ShowMessage('Cidade não encontrada');
+    self.edtcodcidade.SetFocus;
+  end;
+end;
+
+procedure TFrmCadastroFornecedor.FormCreate(Sender: TObject);
+begin
+  inherited;
+  self.opcoes.ItemIndex := 0;
+  self.status.ItemIndex := 0;
+end;
+
+procedure TFrmCadastroFornecedor.LimpaEdt;
+begin
+  inherited;
+  self.edtrazaosocial.Clear;
+  self.edtcnpj.Clear;
+  self.edtinscestadual.Clear;
+  self.edtnome_fantasia.Clear;
+  self.edtcodcidade.Clear;
+  self.edtcidade.Clear;
+  self.edtddd.Clear;
+  self.edttelefone.Clear;
+  self.edtcelular.Clear;
+  self.edtendereco.Clear;
+  self.edtnumero.Clear;
+  self.edtbairro.Clear;
+  self.edtcodformapagamento.Clear;
+  self.edtformapagamento.Clear;
+end;
+
+procedure TFrmCadastroFornecedor.opcoesClick(Sender: TObject);
+begin
+  inherited;
+  if opcoes.ItemIndex = 0 then
+    lbltipo.Caption := 'CPF'
+  else
+    lbltipo.Caption := 'CNPJ';
+end;
+
+procedure TFrmCadastroFornecedor.Sair;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroFornecedor.Salvar;
+begin
+  inherited;
+  if self.btnSalvar.Caption = '&Excluir' then
+  begin
+    If Application.MessageBox('Confirma Exclusão ?', 'Cuidado !!!',
+      MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES Then
+    begin
+      self.umactrlfornecedor.Excluir(umfornecedor);
+      ShowMessage('Excluido com Sucesso!!!');
+      self.Sair;
+    end;
+  end
+  else
+  begin
+    if self.status.ItemIndex < 0 then
+    begin
+      ShowMessage('Campo Status precisa ser selecionado!!!');
+      self.status.SetFocus;
+    end
+    else if (self.edtrazaosocial.Text = '') then
+    begin
+      ShowMessage('Campo Razão Social precisa ser preenchido!!!');
+      self.edtrazaosocial.SetFocus;
+    end
+    else if (self.edtcnpj.Text = '') then
+    begin
+      ShowMessage('Campo CNPJ precisa ser preenchido!!!');
+      self.edtcnpj.SetFocus
+    end
+    else if (self.edtinscestadual.Text = '') then
+    begin
+      ShowMessage('Campo Insc. Est. precisa ser preenchido!!!');
+      self.edtinscestadual.SetFocus;
+    end
+    else if (self.edtcodcidade.Text = '') then
+    begin
+      ShowMessage('Campo Codigo Cidade precisa ser preenchido!!!');
+      self.edtcodcidade.SetFocus;
+    end
+    else if (self.edtendereco.Text = '') then
+    //begin
+      //ShowMessage('Campo Endereço precisa ser preenchido!!!');
+      //self.edtendereco.SetFocus;
+    //end
+    //else if (self.edtnumero.Text = '') then
+    //begin
+      //ShowMessage('Campo Numero precisa ser preenchido!!!');
+      //self.edtnumero.SetFocus;
+    //end
+    //else if (self.edtbairro.Text = '') then
+    //begin
+      //ShowMessage('Campo Bairro precisa ser preenchido!!!');
+      //self.edtbairro.SetFocus;
+    //end
+    //else if (self.edttelefone.Text = '') then
+    //begin
+      //ShowMessage('Campo Telefone precisa ser preenchido!!!');
+      //self.edttelefone.SetFocus;
+    //end
+    //else if (self.edtcelular.Text = '') then
+    //begin
+      //ShowMessage('Campo Celular precisa ser preenchido!!!');
+      //self.edtcelular.SetFocus;
+    //end
+    else if (self.edtcodformapagamento.Text = '') then
+    begin
+      ShowMessage('Campo Forma de Pagamento precisa ser preenchido!!!');
+      self.edtcodformapagamento.SetFocus;
+    end
+    else
+    begin
+      umfornecedor.setcodigo(strtoint(self.edtCodigo.Text));
+      umfornecedor.setrazao(self.edtrazaosocial.Text);
+      umfornecedor.setcnpj(self.edtcnpj.Text);
+      umfornecedor.setnome_fantasia(self.edtnome_fantasia.Text);
+      umfornecedor.setinsc_est(self.edtinscestadual.Text);
+      umfornecedor.getumacondicao.setcodigo(strtoint(self.edtcodformapagamento.Text));
+      umfornecedor.setendereco(self.edtendereco.Text);
+      umfornecedor.setnumero(strtoint(self.edtnumero.Text));
+      umfornecedor.setbairro(self.edtbairro.Text);
+      umfornecedor.getumacidade.setcodigo(strtoint(self.edtcodcidade.Text));
+      umfornecedor.setcelular(self.edtcelular.Text);
+      umfornecedor.settel_comercial(self.edttelefone.Text);
+      if self.status.ItemIndex = 0 then
+      begin
+        umfornecedor.setstatus('A');
+      end
+      else
+      begin
+        umfornecedor.setstatus('I');
+      end;
+      if self.opcoes.ItemIndex = 0 then
+      begin
+        umfornecedor.settp_fornecedor('F');
+      end
+      else
+      begin
+        umfornecedor.settp_fornecedor('J');
+      end;
+      umfornecedor.setCadastro(StrToDate(self.edtCadastro.Text));
+      umfornecedor.setUlt_Alt(StrToDate(self.edtUlt_alt.Text));
+      umactrlfornecedor.Salvar(umfornecedor.clone);
+      ShowMessage('Salvo com Sucesso!!!');
+      self.Sair;
+    end;
+  end;
+
+end;
+
+procedure TFrmCadastroFornecedor.SetFrmConsulta(pObj: TObject);
+begin
+  umfrmconsultacidade := TFrmConsultaCidade(pObj);
+end;
+
+procedure TFrmCadastroFornecedor.SetFrmConsultapagamento(pObj: TObject);
+begin
+  umfrmconsultaformapagamento := TFrmConsultaFormaPagamento (pObj);
+end;
+
+procedure TFrmCadastroFornecedor.btnPesquisacidadeClick(Sender: TObject);
+var
+  mbotao: string;
+begin
+  inherited;
+  mbotao := umfrmconsultacidade.btnSair.Caption;
+  umfrmconsultacidade.btnSair.Caption := 'SELECIONAR';
+  umfrmconsultacidade.ConhecaObj(umfornecedor.getumacidade, umactrlfornecedor.getctrlcidade);
+  umfrmconsultacidade.ShowModal;
+
+  umfrmconsultacidade.btnSair.Caption := mbotao;
+  self.edtcodcidade.Text := inttostr(umfornecedor.getumacidade.getcodigo);
+  self.edtcidade.Text := umfornecedor.getumacidade.getcidade;
+  self.edtddd.Text := umfornecedor.getumacidade.getDDD;
+end;
+
+procedure TFrmCadastroFornecedor.btnpesquisacondicaoClick(Sender: TObject);
+var
+  mbotao: string;
+begin
+  inherited;
+  mbotao := umfrmconsultaformapagamento.btnSair.Caption;
+  umfrmconsultaformapagamento.btnSair.Caption := 'SELECIONAR';
+  umfrmconsultaformapagamento.ConhecaObj(umfornecedor.getumacondicao,umactrlfornecedor.getctrlcondicao);
+  umfrmconsultaformapagamento.ShowModal;
+
+  umfrmconsultaformapagamento.btnSair.Caption := mbotao;
+  self.edtcodcondicao.Text := inttostr(umfornecedor.getumacondicao.getcodigo);
+  self.edtcondicao.Text := umfornecedor.getumacondicao.getcondicao;
+end;
+
+end.

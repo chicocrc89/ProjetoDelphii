@@ -1,0 +1,98 @@
+unit uServicos;
+
+interface
+
+uses uGenerica;
+
+type
+  servicos = class(Generica)
+  private
+
+  protected
+    descricao: string;
+    custo : real;
+    preco_venda: real;
+    obs : string;
+  public
+    constructor Crieobj;
+    destructor Destrua_se;
+    procedure setdescricao(pdescricao: string);
+    procedure setcusto(pcusto : real);
+    procedure setpreco_venda(ppreco_venda: real);
+    procedure setobs(pobs : string);
+    function getdescricao: string;
+    function getcusto : real;
+    function getpreco_venda: real;
+    function getobs : string;
+    function clone: servicos;
+
+  end;
+
+implementation
+
+{ Produto }
+
+function servicos.clone: servicos;
+begin
+  result := servicos.Crieobj;
+  result.setCodigo(codigo);
+  result.setdescricao(descricao);
+  result.setcusto(custo);
+  result.setobs(obs);
+  result.setpreco_venda(preco_venda);
+  result.setCadastro(Cadastro);
+  result.setUlt_Alt(Ult_Alt);
+end;
+
+constructor servicos.Crieobj;
+begin
+
+end;
+
+destructor servicos.Destrua_se;
+begin
+
+end;
+
+function servicos.getcusto: real;
+begin
+  result := custo;
+end;
+
+function servicos.getdescricao: string;
+begin
+  result := descricao;
+end;
+
+function servicos.getobs: string;
+begin
+  result := obs;
+end;
+
+function servicos.getpreco_venda: real;
+begin
+  result := preco_venda;
+end;
+
+procedure servicos.setcusto(pcusto: real);
+begin
+  custo := pcusto;
+end;
+
+procedure servicos.setdescricao(pdescricao: string);
+begin
+  descricao := pdescricao;
+end;
+
+procedure servicos.setobs(pobs: string);
+begin
+  obs := pobs;
+end;
+
+procedure servicos.setpreco_venda(ppreco_venda: real);
+begin
+  preco_venda := ppreco_venda;
+end;
+
+
+end.

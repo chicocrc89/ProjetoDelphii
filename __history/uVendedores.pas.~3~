@@ -1,0 +1,179 @@
+unit uVendedores;
+
+interface
+  uses uGenerica, uPaises, uEstados, uCidades;
+  type Vendedores = class(Generica)
+  private
+
+  protected
+    nome      : string;
+    cpf       : string;
+    rg        : string;
+    datanasc  : Tdate;
+    endereco  : string;
+    numero    : integer;
+    bairro    :string;
+    umpais    : Paises;
+    umestado  : Estados;
+    umacidade  : Cidades;
+  public
+    constructor Crieobj;
+    destructor Destrua_se;
+    procedure setnome (pnome : string);
+    procedure setcpf (pcpf : string);
+    procedure setrg (prg : string);
+    procedure setdatanasc (pdatanasc : Tdate);
+    procedure setendereco (pendereco : string);
+    procedure setnumero (pnumero : integer);
+    procedure setbairro (pbairro : string);
+    procedure setumpais (ppais : Paises);
+    procedure setumestado (pestado : Estados);
+    procedure setumacidade (pcidade : Cidades);
+    function getnome : string;
+    function getcpf : string;
+    function getrg : string;
+    function getdatanasc : Tdate;
+    function getendereco : string;
+    function getnumero : integer;
+    function getbairro : string;
+    function getumpais : Paises;
+    function getumestado : Estados;
+    function getumacidade : Cidades;
+    function clone : Vendedores;
+end;
+
+implementation
+
+{ Vendedores }
+
+function Vendedores.clone: Vendedores;
+begin
+  result := Vendedores.Crieobj;
+  result.setCodigo(codigo);
+  result.setnome(nome);
+  result.setcpf(cpf);
+  result.setrg(rg);
+  result.setdatanasc(datanasc);
+  result.setendereco(endereco);
+  result.setnumero(numero);
+  result.setbairro(bairro);
+  result.setumpais(umpais);
+  result.setumestado(umestado);
+  result.setumacidade(umacidade);
+end;
+
+constructor Vendedores.Crieobj;
+begin
+  umpais := Paises.Crieobj;
+  umestado := Estados.Crieobj;
+  umacidade := Cidades.Crieobj;
+end;
+
+destructor Vendedores.Destrua_se;
+begin
+  umpais.Destrua_se;
+  umestado.Destrua_se;
+  umacidade.Destrua_se
+end;
+
+function Vendedores.getbairro: string;
+begin
+  result := bairro;
+end;
+
+function Vendedores.getcpf: string;
+begin
+  result := cpf;
+end;
+
+function Vendedores.getdatanasc: Tdate;
+begin
+  result := datanasc;
+end;
+
+function Vendedores.getendereco: string;
+begin
+  result := endereco;
+end;
+
+function Vendedores.getnome: string;
+begin
+  result := nome;
+end;
+
+function Vendedores.getnumero: integer;
+begin
+  result := numero;
+end;
+
+function Vendedores.getrg: string;
+begin
+  result := rg;
+end;
+
+function Vendedores.getumacidade: Cidades;
+begin
+  result := umacidade;
+end;
+
+function Vendedores.getumestado: Estados;
+begin
+  result := umestado;
+end;
+
+function Vendedores.getumpais: Paises;
+begin
+  result := umpais;
+end;
+
+procedure Vendedores.setbairro(pbairro: string);
+begin
+  bairro := pbairro;
+end;
+
+procedure Vendedores.setcpf(pcpf: string);
+begin
+  cpf := pcpf;
+end;
+
+procedure Vendedores.setdatanasc(pdatanasc: Tdate);
+begin
+  datanasc := pdatanasc;
+end;
+
+procedure Vendedores.setendereco(pendereco: string);
+begin
+  endereco := pendereco;
+end;
+
+procedure Vendedores.setnome(pnome: string);
+begin
+  nome := pnome;
+end;
+
+procedure Vendedores.setnumero(pnumero: integer);
+begin
+  numero := pnumero;
+end;
+
+procedure Vendedores.setrg(prg: string);
+begin
+  rg := prg;
+end;
+
+procedure Vendedores.setumacidade(pcidade: Cidades);
+begin
+  umacidade := pcidade;
+end;
+
+procedure Vendedores.setumestado(pestado: Estados);
+begin
+  umestado := pestado;
+end;
+
+procedure Vendedores.setumpais(ppais: Paises);
+begin
+  umpais := ppais;
+end;
+
+end.

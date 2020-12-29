@@ -1,0 +1,119 @@
+unit uFrmConsultaFabricante;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmConsulta, Vcl.ComCtrls,
+  Vcl.StdCtrls, uFrmCadastroFabricante,
+  Data.DB, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids,
+  Vcl.Buttons, uFabricantes, uControllerFabricantes, uDM;
+
+type
+  TFrmConsultaFabricante = class(TFrmConsulta)
+  private
+    { Private declarations }
+  protected
+    umFrmCadastroFabricante: TFrmCadastroFabricante;
+    umfabricante : Fabricantes;
+    umactrlfabricante : ControllerFabricantes;
+    umdm : TDM;
+    procedure Novo; Override;
+    procedure Alterar; Override;
+    procedure Excluir; Override;
+    procedure Sair; Override;
+    procedure Pesquisar; Override;
+  public
+    { Public declarations }
+    procedure conhecaObj(pObj: TObject; pctrl: TObject); Override;
+    procedure SetFrmCadastro(pObj: TObject); Override;
+
+  end;
+
+var
+  FrmConsultaFabricante: TFrmConsultaFabricante;
+
+implementation
+
+{$R *.dfm}
+{ TFrmConsultaFabricante }
+
+procedure TFrmConsultaFabricante.Alterar;
+begin
+  inherited;
+  self.umactrlfabricante.Carregar(umfabricante);
+  self.umFrmCadastroFabricante.LimpaEdt;
+  self.umFrmCadastroFabricante.ConhecaObj(umfabricante, umactrlfabricante);
+  self.umFrmCadastroFabricante.CarregaEdt;
+  umFrmCadastroFabricante.ShowModal;
+  self.Pesquisar;
+end;
+
+procedure TFrmConsultaFabricante.conhecaObj(pObj: TObject; pctrl: TObject);
+begin
+  inherited;
+  umfabricante := Fabricantes (pObj);
+  umactrlfabricante := ControllerFabricantes (pctrl);
+  self.umFrmCadastroFabricante.ConhecaObj(umfabricante, umactrlfabricante);
+  self.Pesquisar;
+  self.DBGrid1.DataSource := umactrlfabricante.getds;
+end;
+
+procedure TFrmConsultaFabricante.Excluir;
+var
+  mtitulo: string;
+begin
+  inherited;
+  self.umactrlfabricante.Carregar(umfabricante);
+  self.umFrmCadastroFabricante.conhecaObj(umfabricante, umactrlfabricante);
+  self.umFrmCadastroFabricante.limpaedt;
+  self.umFrmCadastroFabricante.carregaedt;
+  self.umFrmCadastroFabricante.bloqueiaedt;
+  mtitulo := umFrmCadastroFabricante.btnSalvar.Caption;
+  umFrmCadastroFabricante.btnSalvar.Caption := '&Excluir';
+  umFrmCadastroFabricante.ShowModal;
+  self.umFrmCadastroFabricante.DesbloqueiaEdt;
+  umFrmCadastroFabricante.btnSalvar.Caption := mtitulo;
+  self.Pesquisar;
+end;
+
+procedure TFrmConsultaFabricante.Novo;
+begin
+  inherited;
+  self.umfabricante.setcodigo(0);
+  self.umfabricante.setCadastro(Date);
+  self.umfabricante.setUlt_Alt(Date);
+  self.umFrmCadastroFabricante.LimpaEdt;
+  self.umFrmCadastroFabricante.ConhecaObj(umfabricante, umactrlfabricante);
+  umFrmCadastroFabricante.ShowModal;
+  self.Pesquisar;
+end;
+
+procedure TFrmConsultaFabricante.Pesquisar;
+var
+  mMSG: string;
+begin
+  inherited;
+  mMSG := umactrlfabricante.Pesquisar(self.edtPesquisar.Text);
+  if mMSG <> '' then
+    ShowMessage('FABRICANTE' + self.edtPesquisar.Text + 'NÃO ENCONTRADO');
+end;
+
+procedure TFrmConsultaFabricante.Sair;
+begin
+  if self.btnSair.Caption = 'SELECIONAR' then
+    umactrlfabricante.Carregar(umfabricante);
+  inherited;
+
+end;
+
+procedure TFrmConsultaFabricante.SetFrmCadastro(pObj: TObject);
+begin
+  inherited;
+  umFrmCadastroFabricante := TFrmCadastroFabricante(pObj);
+end;
+
+end.

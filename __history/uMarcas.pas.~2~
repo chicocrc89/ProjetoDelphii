@@ -1,0 +1,23 @@
+unit uMarcas;
+
+interface
+  uses uGenerica;
+  type
+    Marcas = class(Generica)
+  private
+
+  protected
+    marca : string;
+  public
+    constructor crieobj;
+    destructor Destrua_se;
+    procedure setcodigo (pcodigo : integer);
+    procedure setmarca (pmarca : string);
+    function getcodigo : integer;
+    function getmarca : string;
+    function clone : marcas;
+  end;
+
+implementation
+
+end.

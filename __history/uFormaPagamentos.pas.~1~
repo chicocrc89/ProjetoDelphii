@@ -1,0 +1,11 @@
+unit uFormaPagamentos;
+
+interface
+  uses uGenerica;
+  type FormaPagamentos = class(Generica)
+
+  end;
+
+implementation
+
+end.

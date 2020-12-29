@@ -1,0 +1,32 @@
+inherited FrmConsultaCondicao: TFrmConsultaCondicao
+  Caption = 'Consulta Condicao'
+  ClientWidth = 978
+  ExplicitWidth = 994
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited DBGrid1: TDBGrid
+    Top = 35
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ID_CONDICAO'
+        Title.Caption = 'CODIGO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CONDICAO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'JURO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NUM_PARC'
+        Visible = True
+      end>
+  end
+end

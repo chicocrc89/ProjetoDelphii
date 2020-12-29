@@ -1,0 +1,116 @@
+unit uControllerServicos;
+
+interface
+
+uses uDM, DB, ucontroller, uDaoservicos, uservicos, SysUtils;
+
+type
+  Controllerservicos = class(controller)
+  private
+
+  protected
+    umadaoservico       : Daoservicos;
+  public
+    constructor CrieObj;
+    destructor Destrua_se;
+    function Salvar(pObj: TObject): string; override;
+    function Carregar(pObj: TObject): string; override;
+    function Excluir(pObj: TObject): string; override;
+    function Pesquisar(pChave: string): string; override;
+    procedure setDM(pDM: TDM);
+    function getds: Tdatasource;
+    procedure setctrlfabricante(pObj: TObject);
+    function getctrlfabricante: ControllerFabricantes;
+    procedure setctrlfornecedor(pObj: TObject);
+    function getctrlfornecedor: ControllerFornecedores;
+    procedure setctrlgrupo(pObj: TObject);
+    function getctrlgrupo: ControllerGrupos;
+  end;
+
+implementation
+
+{ Controllerservicos }
+
+
+{ Controllerservicos }
+
+function Controllerservicos.Carregar(pObj: TObject): string;
+var
+  mservico: servicos;
+begin
+  self.umadaoservico.Carregar(pObj);
+  mservico := servicos(pObj);
+  umactrlfabricante.Pesquisar(inttostr(mservico.getumfabricante.getcodigo));
+  self.umactrlfabricante.Carregar(mservico.getumfabricante);
+  umactrlfornecedor.Pesquisar(inttostr(mservico.getumfornecedor.getCodigo));
+  self.umactrlfornecedor.Carregar(mservico.getumfornecedor);
+  self.umactrlgrupo.Pesquisar(inttostr(mservico.getumgrupo.getCodigo));
+  umactrlgrupo.Carregar(mservico.getumgrupo);
+end;
+
+constructor Controllerservicos.CrieObj;
+begin
+  self.umadaoservico := Daoservicos.CrieObj;
+end;
+
+destructor Controllerservicos.Destrua_se;
+begin
+  self.umadaoservico.Destrua_se;
+end;
+
+function Controllerservicos.Excluir(pObj: TObject): string;
+begin
+  self.umadaoservico.Excluir(pObj);
+end;
+
+function Controllerservicos.getctrlfabricante: ControllerFabricantes;
+begin
+  result := umactrlfabricante;
+end;
+
+function Controllerservicos.getctrlfornecedor: ControllerFornecedores;
+begin
+  result := umactrlfornecedor;
+end;
+
+function Controllerservicos.getctrlgrupo: ControllerGrupos;
+begin
+  result := umactrlgrupo;
+end;
+
+function Controllerservicos.getds: Tdatasource;
+begin
+  result := umadaoservico.getds;
+end;
+
+function Controllerservicos.Pesquisar(pChave: string): string;
+begin
+  self.umadaoservico.Pesquisar(pChave);
+end;
+
+function Controllerservicos.Salvar(pObj: TObject): string;
+begin
+  self.umadaoservico.Salvar(pObj);
+end;
+
+procedure Controllerservicos.setctrlfabricante(pObj: TObject);
+begin
+  umactrlfabricante := ControllerFabricantes(pObj);
+end;
+
+procedure Controllerservicos.setctrlfornecedor(pObj: TObject);
+begin
+  umactrlfornecedor := ControllerFornecedores(pObj);
+end;
+
+procedure Controllerservicos.setctrlgrupo(pObj: TObject);
+begin
+  umactrlgrupo := ControllerGrupos(pObj);
+end;
+
+procedure Controllerservicos.setDM(pDM: TDM);
+begin
+  self.umadaoservico.setDM(pDM);
+end;
+
+end.

@@ -1,0 +1,77 @@
+unit uFrmConsultaUsuario;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmConsulta, Vcl.ComCtrls, Vcl.StdCtrls;
+
+type
+  TFrmConsultaUsuario = class(TFrmConsulta)
+  private
+    { Private declarations }
+  protected
+    procedure Novo; Override;
+    procedure Alterar; Override;
+    procedure Excluir; Override;
+    procedure Sair; Override;
+    procedure Pesquisar; Override;
+  public
+    { Public declarations }
+    procedure conhecaObj (pObj : TObject); Override;
+    procedure SetFrmCadastro (pObj : TObject); Override;
+
+  end;
+
+var
+  FrmConsultaUsuario: TFrmConsultaUsuario;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmConsultaUsuario }
+
+procedure TFrmConsultaUsuario.Alterar;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaUsuario.conhecaObj(pObj: TObject);
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaUsuario.Excluir;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaUsuario.Novo;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaUsuario.Pesquisar;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaUsuario.Sair;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaUsuario.SetFrmCadastro(pObj: TObject);
+begin
+  inherited;
+
+end;
+
+end.

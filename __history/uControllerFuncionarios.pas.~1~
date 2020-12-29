@@ -1,0 +1,64 @@
+unit uControllervendedores;
+
+interface
+  uses ucontroller, DB, uDM;
+  type Controllervendedores = class(controller)
+  private
+
+  protected
+
+  public
+    constructor CrieObj;
+    destructor  Destrua_se;
+    function Salvar ( pObj :  TObject ):            string;    override;
+    function Carregar ( pObj : TObject ):           string;    override;
+    function Excluir ( pObj : TObject ):            string;    override;
+    function Pesquisar ( pChave : string):          string;    override;
+    procedure setDM (pDM : TDM);
+    function getds : Tdatasource;
+  end;
+implementation
+
+{ Controllervendedores }
+
+function Controllervendedores.Carregar(pObj: TObject): string;
+begin
+
+end;
+
+constructor Controllervendedores.CrieObj;
+begin
+
+end;
+
+destructor Controllervendedores.Destrua_se;
+begin
+
+end;
+
+function Controllervendedores.Excluir(pObj: TObject): string;
+begin
+
+end;
+
+function Controllervendedores.getds: Tdatasource;
+begin
+
+end;
+
+function Controllervendedores.Pesquisar(pChave: string): string;
+begin
+
+end;
+
+function Controllervendedores.Salvar(pObj: TObject): string;
+begin
+
+end;
+
+procedure Controllervendedores.setDM(pDM: TDM);
+begin
+
+end;
+
+end.

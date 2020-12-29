@@ -1,0 +1,16 @@
+inherited FrmConsultaFornecedor: TFrmConsultaFornecedor
+  Caption = 'Consulta Fornecedor'
+  PixelsPerInch = 96
+  TextHeight = 13
+  object mmtablefornecedor: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 72
+    Top = 432
+  end
+end

@@ -1,0 +1,22 @@
+inherited FrmCadastroGrupo: TFrmCadastroGrupo
+  Caption = 'Cadastro Grupo'
+  ExplicitWidth = 799
+  ExplicitHeight = 526
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel [3]
+    Left = 8
+    Top = 96
+    Width = 29
+    Height = 13
+    Caption = 'Grupo'
+  end
+  object edtgrupo: TEdit
+    Left = 8
+    Top = 115
+    Width = 249
+    Height = 30
+    Alignment = taCenter
+    TabOrder = 5
+  end
+end

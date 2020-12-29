@@ -1,0 +1,181 @@
+inherited FrmCadastroEstado: TFrmCadastroEstado
+  Caption = 'Cadastro Estado'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited lblCodigo: TLabel
+    Top = 8
+    Width = 62
+    Height = 18
+    Caption = 'CODIGO'
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ExplicitTop = 8
+    ExplicitWidth = 62
+    ExplicitHeight = 18
+  end
+  inherited lblDtCadastro: TLabel
+    Width = 123
+    Height = 18
+    Caption = 'DATA CADASTRO'
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ExplicitWidth = 123
+    ExplicitHeight = 18
+  end
+  inherited lblDtUlt_alt: TLabel
+    Width = 146
+    Height = 18
+    Caption = 'ULTIMA ALTERA'#199#195'O'
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ExplicitWidth = 146
+    ExplicitHeight = 18
+  end
+  object Label1: TLabel [3]
+    Left = 8
+    Top = 64
+    Width = 61
+    Height = 18
+    Caption = 'ESTADO'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel [4]
+    Left = 8
+    Top = 120
+    Width = 20
+    Height = 18
+    Caption = 'UF'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label6: TLabel [5]
+    Left = 8
+    Top = 192
+    Width = 62
+    Height = 18
+    Caption = 'CODIGO'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label7: TLabel [6]
+    Left = 96
+    Top = 192
+    Width = 32
+    Height = 18
+    Caption = 'PA'#205'S'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label8: TLabel [7]
+    Left = 368
+    Top = 192
+    Width = 26
+    Height = 18
+    Caption = 'DDI'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label3: TLabel [8]
+    Left = 432
+    Top = 192
+    Width = 44
+    Height = 18
+    Caption = 'SIGLA'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  inherited edtCodigo: TEdit
+    Top = 27
+    ExplicitTop = 27
+  end
+  inherited edtCadastro: TEdit
+    Width = 123
+    ExplicitWidth = 123
+  end
+  inherited edtUlt_alt: TEdit
+    Width = 146
+    ExplicitWidth = 146
+  end
+  object edtestado: TEdit
+    Left = 8
+    Top = 83
+    Width = 465
+    Height = 21
+    TabOrder = 3
+  end
+  object edtuf: TEdit
+    Left = 8
+    Top = 139
+    Width = 121
+    Height = 21
+    TabOrder = 4
+  end
+  object edtcodpais: TEdit
+    Left = 8
+    Top = 211
+    Width = 69
+    Height = 21
+    TabOrder = 5
+  end
+  object edtpais: TEdit
+    Left = 96
+    Top = 211
+    Width = 249
+    Height = 21
+    TabOrder = 7
+  end
+  object edtddi: TEdit
+    Left = 368
+    Top = 211
+    Width = 41
+    Height = 21
+    TabOrder = 9
+  end
+  object btnpesquisar: TButton
+    Left = 496
+    Top = 192
+    Width = 75
+    Height = 42
+    Caption = 'BUSCAR PA'#205'S'
+    TabOrder = 6
+    OnClick = btnpesquisarClick
+  end
+  object edtsigla: TEdit
+    Left = 432
+    Top = 211
+    Width = 44
+    Height = 21
+    TabOrder = 8
+  end
+end

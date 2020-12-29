@@ -1,0 +1,94 @@
+inherited FrmCadastroPais: TFrmCadastroPais
+  Caption = 'Cadastro Pa'#237's'
+  ExplicitWidth = 799
+  ExplicitHeight = 526
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited lblCodigo: TLabel
+    Top = 8
+    Width = 62
+    Height = 18
+    Caption = 'CODIGO'
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ExplicitTop = 8
+    ExplicitWidth = 62
+    ExplicitHeight = 18
+  end
+  inherited lblDtCadastro: TLabel
+    Width = 123
+    Height = 18
+    Caption = 'DATA CADASTRO'
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ExplicitWidth = 123
+    ExplicitHeight = 18
+  end
+  inherited lblDtUlt_alt: TLabel
+    Width = 146
+    Height = 18
+    Caption = 'ULTIMA ALTERA'#199#195'O'
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ExplicitWidth = 146
+    ExplicitHeight = 18
+  end
+  object Label1: TLabel [3]
+    Left = 8
+    Top = 72
+    Width = 32
+    Height = 18
+    Caption = 'PA'#205'S'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel [4]
+    Left = 8
+    Top = 144
+    Width = 26
+    Height = 18
+    Caption = 'DDI'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  inherited edtCodigo: TEdit
+    Top = 27
+    ExplicitTop = 27
+  end
+  inherited edtCadastro: TEdit
+    Width = 123
+    ExplicitWidth = 123
+  end
+  inherited edtUlt_alt: TEdit
+    Width = 146
+    ExplicitWidth = 146
+  end
+  object edtpais: TEdit
+    Left = 8
+    Top = 91
+    Width = 121
+    Height = 21
+    TabOrder = 5
+  end
+  object edtddi: TEdit
+    Left = 8
+    Top = 163
+    Width = 121
+    Height = 21
+    TabOrder = 6
+  end
+end

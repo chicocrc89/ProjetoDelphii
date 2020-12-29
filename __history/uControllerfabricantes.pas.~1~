@@ -1,0 +1,64 @@
+unit uControllerfabricantes;
+
+interface
+  uses uDM, DB, uController;
+  type Controllerfabricantes = class(controller)
+  private
+
+  protected
+
+  public
+    constructor CrieObj;
+    destructor  Destrua_se;
+    function Salvar ( pObj :  TObject ):            string;    override;
+    function Carregar ( pObj : TObject ):           string;    override;
+    function Excluir ( pObj : TObject ):            string;    override;
+    function Pesquisar ( pChave : string):          string;    override;
+    procedure setDM (pDM : TDM);
+    function getds : Tdatasource;
+  end;
+implementation
+
+{ Controllerfabricantes }
+
+function Controllerfabricantes.Carregar(pObj: TObject): string;
+begin
+
+end;
+
+constructor Controllerfabricantes.CrieObj;
+begin
+
+end;
+
+destructor Controllerfabricantes.Destrua_se;
+begin
+
+end;
+
+function Controllerfabricantes.Excluir(pObj: TObject): string;
+begin
+
+end;
+
+function Controllerfabricantes.getds: Tdatasource;
+begin
+
+end;
+
+function Controllerfabricantes.Pesquisar(pChave: string): string;
+begin
+
+end;
+
+function Controllerfabricantes.Salvar(pObj: TObject): string;
+begin
+
+end;
+
+procedure Controllerfabricantes.setDM(pDM: TDM);
+begin
+
+end;
+
+end.

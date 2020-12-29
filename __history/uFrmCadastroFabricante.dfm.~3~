@@ -1,0 +1,43 @@
+inherited FrmCadastroFabricante: TFrmCadastroFabricante
+  Caption = 'Cadastro Fabricante'
+  ExplicitWidth = 799
+  ExplicitHeight = 526
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel [3]
+    Left = 8
+    Top = 88
+    Width = 25
+    Height = 13
+    Caption = 'CNPJ'
+  end
+  object Label2: TLabel [4]
+    Left = 8
+    Top = 168
+    Width = 51
+    Height = 13
+    Caption = 'Fabricante'
+  end
+  inherited edtCodigo: TEdit
+    Width = 65
+    Height = 30
+    ExplicitWidth = 65
+    ExplicitHeight = 30
+  end
+  object edtcnpj: TEdit
+    Left = 8
+    Top = 107
+    Width = 177
+    Height = 30
+    Alignment = taCenter
+    TabOrder = 5
+  end
+  object edtfabricante: TEdit
+    Left = 8
+    Top = 187
+    Width = 313
+    Height = 30
+    Alignment = taCenter
+    TabOrder = 6
+  end
+end

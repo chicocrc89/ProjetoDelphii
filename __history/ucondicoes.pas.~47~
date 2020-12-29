@@ -1,0 +1,79 @@
+unit ucondicoes;
+
+interface
+  uses ugenerica, uColecaoParcelas;
+  type Condicoes = class(generica)
+  private
+
+  protected
+    condicao        : string;
+    num_parcelas    : integer;
+    juros           : real;
+    umacolecaop     : ColecaoParcelas;
+  public
+    constructor crieobj;
+    destructor destrua_se;
+    procedure setjuros (pjuros: real);
+    procedure setnum_parcelas (pnum_parcelas : integer);
+    procedure setumacolecaop (pcolecao : ColecaoParcelas);
+    function getumacolecaop : ColecaoParcelas;
+    function getjuros : real;
+    function getnum_parcelas : integer;
+    function clone : condicoes;
+  end;
+
+implementation
+
+{ Condicoes }
+
+function Condicoes.clone: condicoes;
+begin
+  result := condicoes.crieobj;
+  result.setCodigo(codigo);
+  result.setcondicao(condicao);
+  result.setparcelas(parcelas);
+
+  result.setumacolecaop(umacolecaop);
+end;
+
+constructor Condicoes.crieobj;
+begin
+  umacolecaop := ColecaoParcelas.crieObj;
+end;
+
+destructor Condicoes.destrua_se;
+begin
+  umacolecaop.destrua_se;
+end;
+
+function Condicoes.getcondicao: string;
+begin
+  result := condicao;
+end;
+
+function Condicoes.getparcelas: integer;
+begin
+  result := parcelas;
+end;
+
+function Condicoes.getumacolecaop: ColecaoParcelas;
+begin
+  result := umacolecaop;
+end;
+
+procedure Condicoes.setcondicao(pcondicao: string);
+begin
+  condicao := pcondicao;
+end;
+
+procedure Condicoes.setparcelas(pparcelas: integer);
+begin
+  parcelas := pparcelas;
+end;
+
+procedure Condicoes.setumacolecaop(pcolecao: ColecaoParcelas);
+begin
+  umacolecaop := pcolecao;
+end;
+
+end.

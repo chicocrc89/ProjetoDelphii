@@ -1,0 +1,12 @@
+inherited FrmConsultaFuncionario: TFrmConsultaFuncionario
+  Caption = 'Consulta Funcionario'
+  ExplicitLeft = -171
+  ExplicitTop = -67
+  ExplicitWidth = 985
+  ExplicitHeight = 585
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited btnPesquisar: TSpeedButton
+    OnClick = btnPesquisarClick
+  end
+end

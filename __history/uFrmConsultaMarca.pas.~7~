@@ -1,0 +1,125 @@
+unit uFrmConsultaMarca;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmConsulta, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, uDM, uFrmCadastroMarca, uMarcas, uControllerMarcas;
+
+type
+  TFrmConsultaMarca = class(TFrmConsulta)
+    procedure btnPesquisarClick(Sender: TObject);
+  private
+    { Private declarations }
+  protected
+    umFrmCadastroMarca : TFrmCadastroMarca;
+    umamarca : Marcas;
+    umactrlmarca : Controllermarcas;
+    umdm : TDM;
+    procedure Novo; Virtual;
+    procedure Alterar; Virtual;
+    procedure Excluir; Virtual;
+    procedure Sair; Virtual;
+    procedure Pesquisar; Virtual;
+
+  public
+    procedure conhecaObj (pObj : TObject; pctrl: TObject); Virtual;
+    procedure SetFrmCadastro (pObj : TObject); Virtual;
+
+  end;
+
+var
+  FrmConsultaMarca: TFrmConsultaMarca;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmConsultaMarca }
+
+procedure TFrmConsultaMarca.Alterar;
+begin
+  inherited;
+  self.umactrlmarca.Carregar(umamarca);
+  self.umfrmcadastromarca.limpaedt;
+  self.umfrmcadastromarca.conhecaobj(umamarca, umactrlmarca);
+  self.umfrmcadastromarca.carregaedt;
+  self.umfrmcadastromarca.ShowModal;
+  self.Pesquisar;
+end;
+
+procedure TFrmConsultaMarca.btnPesquisarClick(Sender: TObject);
+begin
+  inherited;
+  self.Pesquisar;
+end;             TMyClass = class(TComponent)
+                 private
+                   { private declarations }
+                 protected
+                   { protected declarations }
+                 public
+                   { public declarations }
+
+                 published
+                   { published declarations }
+                 end;
+
+procedure TFrmConsultaMarca.conhecaObj(pObj, pctrl: TObject);
+begin
+  inherited;
+  umamarca := Marcas (pobj);
+  umactrlmarca := Controllermarcas (pctrl);
+  self.umfrmcadastromarca.ConhecaObj(umamarca, umactrlmarca);
+  self.Pesquisar;
+  self.DBGrid1.DataSource := umactrlmarca.getds;
+end;
+
+procedure TFrmConsultaMarca.Excluir;
+var mtitulo : string;
+begin
+  inherited;
+  self.umactrlmarca.Carregar(umamarca);
+  self.umFrmCadastromarca.conhecaobj(umamarca, umactrlmarca);
+  self.umFrmCadastromarca.limpaedt;
+  self.umFrmCadastromarca.carregaedt;
+  self.umFrmCadastromarca.bloqueiaedt;
+  mtitulo := umFrmCadastromarca.btnSalvar.Caption;
+  umFrmCadastromarca.btnSalvar.Caption := '&Excluir';
+  umFrmCadastromarca.ShowModal;
+  self.umFrmCadastromarca.DesbloqueiaEdt;
+  umFrmCadastromarca.btnSalvar.Caption := mtitulo;
+  self.Pesquisar;
+end;
+
+procedure TFrmConsultaMarca.Novo;
+begin
+  inherited;
+  self.umamarca.setcodigo(0);
+  self.umFrmCadastromarca.limpaedt;
+  self.umFrmCadastromarca.conhecaobj(umamarca, umactrlmarca);
+  self.umFrmCadastromarca.ShowModal;
+  self.Pesquisar;
+end;
+
+procedure TFrmConsultaMarca.Pesquisar;
+var mMSG : string;
+begin
+  inherited;
+  mMSG := umactrlmarca.Pesquisar(self.edtPesquisar.Text);
+  if mMSG <> '' then
+     ShowMessage('MARCA'+Self.edtPesquisar.Text+'NÃO ENCONTRADO');
+end;
+
+procedure TFrmConsultaMarca.Sair;
+begin
+  if self.btnSair.Caption = 'SELECIONAR' then
+    umactrlmarca.Carregar(umamarca);
+end;
+
+procedure TFrmConsultaMarca.SetFrmCadastro(pObj: TObject);
+begin
+  umFrmCadastroMarca := TFrmCadastroMarca (pObj);
+end;
+
+end.

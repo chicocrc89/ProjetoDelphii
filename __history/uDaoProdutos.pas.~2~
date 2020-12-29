@@ -1,0 +1,169 @@
+unit uDaoprodutos;
+
+interface
+
+uses udao, uprodutos, uDM, DB, uDaoCidades, uDaoFormaPagamentos, SysUtils;
+
+type
+  Daoprodutos = class(dao)
+  private
+
+  protected
+    umdm: TDM;
+    umadaocidade: DaoCidades;
+    umadaoformapagamento : DaoFormaPagamentos;
+  public
+    constructor CrieObj;
+    destructor Destrua_se;
+    function Salvar(pObj: TObject): string; override;
+    function Carregar(pObj: TObject): string; override;
+    function Excluir(pObj: TObject): string; override;
+    function Pesquisar(pChave: string): string; override;
+    procedure setDM(pDM: TDM);
+    function getds: Tdatasource;
+    procedure setdaocidade(pObj: TObject);
+    procedure setdaoformapagamento (pObj : TObject);
+  end;
+
+implementation
+
+{ Daoprodutos }
+
+function Daoprodutos.Carregar(pObj: TObject): string;
+var
+  mprodutos: produtos;
+begin
+  mprodutos := produtos(pObj);
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetcliente.Active then
+    umdm.dsetcliente.Open;
+  mprodutos.setCodigo(umdm.dsetclienteID_CLIENTE.Value);
+  mprodutos.setnome(umdm.dsetclienteNOME.Value);
+  mprodutos.setdata_nasc(umdm.dsetclienteDATA_NASC.Value);
+  mprodutos.settpcliente(umdm.dsetclienteTPCLIENTE.Value);
+  mprodutos.setsexo(umdm.dsetprodutosEXO.Value);
+  mprodutos.setnacionalidade(umdm.dsetclienteNACIONALIDADE.Value);
+  mprodutos.setcnpj_cpf(umdm.dsetclienteCNPJ_CPF.Value);
+  mprodutos.setinscest_rg(umdm.dsetclienteINSCEST_RG.Value);
+  mprodutos.setemail(umdm.dsetclienteEMAIL.Value);
+  mprodutos.setlimite(umdm.dsetclienteLIMITE.Value);
+  mprodutos.setcelular(umdm.dsetclienteCELULAR.Value);
+  mprodutos.settelefone(umdm.dsetclienteTELEFONE.Value);
+  mprodutos.setponto_ref(umdm.dsetclientePONTO_REF.Value);
+  mprodutos.setendereco(umdm.dsetclienteENDERECO.Value);
+  mprodutos.setnumero(umdm.dsetclienteNUMERO.Value);
+  mprodutos.setbairro(umdm.dsetclienteBAIRRO.Value);
+  mprodutos.getumacidade.setCodigo(umdm.dsetclienteID_CIDADE.Value);
+  mprodutos.getumaformapagamento.setCodigo(umdm.dsetclienteID_FORMAPAGAMENTO.Value);
+  mprodutos.setstatus(umdm.dsetprodutosTATUS.Value);
+  mprodutos.setCadastro(umdm.dsetclienteDATA_CADASTRO.Value);
+  mprodutos.setUlt_Alt(umdm.dsetclienteULTIMA_ALTERACAO.Value);
+end;
+
+constructor Daoprodutos.CrieObj;
+begin
+  umadaocidade := DaoCidades.CrieObj;
+  umadaoformapagamento := DaoFormaPagamentos.CrieObj;
+end;
+
+destructor Daoprodutos.Destrua_se;
+begin
+  umadaocidade.Destrua_se;
+  umadaoformapagamento.Destrua_se;
+end;
+
+function Daoprodutos.Excluir(pObj: TObject): string;
+begin
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetcliente.Active then
+    umdm.dsetcliente.Open;
+  umdm.dsetcliente.Delete;
+  umdm.trans.Commit;
+end;
+
+function Daoprodutos.getds: Tdatasource;
+begin
+  result := umdm.dscliente;
+end;
+
+function Daoprodutos.Pesquisar(pChave: string): string;
+var
+  mSQL: string;
+begin
+  if length(pChave) = 0 then
+    mSQL := 'select * from cliente'
+  else if ehnumero(pChave) then
+    mSQL := 'select * from cliente where id_cliente =' + QuotedStr(pChave)
+  else
+    mSQL := 'select * from cliente where nome =' + QuotedStr(pChave);
+  umdm.dsetcliente.Active := false;
+  umdm.dsetcliente.SelectSQL.Text := mSQL;
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetcliente.Active then
+    umdm.dsetcliente.Open;
+  result := '';
+end;
+
+function Daoprodutos.Salvar(pObj: TObject): string;
+var
+  mprodutos: produtos;
+  mdata : Tdate;
+begin
+  mprodutos := produtos(pObj);
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetcliente.Active then
+    umdm.dsetcliente.Open;
+  if mprodutos.getcodigo = 0 then
+    umdm.dsetcliente.Insert
+  else
+  begin
+    mdata := now;
+    umdm.dsetcliente.Edit;
+  end;
+
+  umdm.dsetclienteID_CLIENTE.Value := mprodutos.getcodigo;
+  umdm.dsetclienteNOME.Value := mprodutos.getnome;
+  umdm.dsetclienteDATA_NASC.Value := mprodutos.getdata_nasc;
+  umdm.dsetclienteTPCLIENTE.Value := mprodutos.gettpcliente;
+  umdm.dsetprodutosEXO.Value := mprodutos.getsexo;
+  umdm.dsetclienteNACIONALIDADE.Value := mprodutos.getnacionalidade;
+  umdm.dsetclienteCNPJ_CPF.Value := mprodutos.getcnpj_cpf;
+  umdm.dsetclienteINSCEST_RG.Value := mprodutos.getinscest_rg;
+  umdm.dsetclienteEMAIL.Value := mprodutos.getemail;
+  umdm.dsetclienteLIMITE.Value := mprodutos.getlimite;
+  umdm.dsetclienteCELULAR.Value := mprodutos.getcelular;
+  umdm.dsetclienteTELEFONE.Value := mprodutos.gettelefone;
+  umdm.dsetclientePONTO_REF.Value := mprodutos.getponto_ref;
+  umdm.dsetclienteENDERECO.Value := mprodutos.getendereco;
+  umdm.dsetclienteNUMERO.Value := mprodutos.getnumero;
+  umdm.dsetclienteBAIRRO.Value := mprodutos.getbairro;
+  umdm.dsetclienteID_CIDADE.Value := mprodutos.getumacidade.getcodigo;
+  umdm.dsetclienteID_FORMAPAGAMENTO.Value := mprodutos.getumaformapagamento.getCodigo;
+  umdm.dsetprodutosTATUS.Value := mprodutos.getstatus;
+  umdm.dsetclienteULTIMA_ALTERACAO.Value := mdata;
+  umdm.dsetclienteDATA_CADASTRO.Value := mprodutos.getCadastro;
+  umdm.dsetcliente.Post;
+  umdm.trans.Commit;
+end;
+
+procedure Daoprodutos.setdaocidade(pObj: TObject);
+begin
+  umadaocidade := DaoCidades(pObj);
+end;
+
+
+procedure Daoprodutos.setdaoformapagamento(pObj: TObject);
+begin
+  umadaoformapagamento := DaoFormaPagamentos (pObj);
+end;
+
+procedure Daoprodutos.setDM(pDM: TDM);
+begin
+  umdm := pDM;
+end;
+
+end.

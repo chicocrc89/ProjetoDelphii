@@ -1,0 +1,444 @@
+unit uFrmCadastroProduto;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmCadastro, Vcl.StdCtrls, Vcl.Buttons,
+  Vcl.ExtCtrls, uProdutos, uFrmConsultaFornecedor, uFrmConsultaFabricante, uFrmConsultaGrupo,
+  uControllerProdutos;
+
+type
+  TFrmCadastroProduto = class(TFrmCadastro)
+    Label1: TLabel;
+    edtbarras: TEdit;
+    Label2: TLabel;
+    edtproduto: TEdit;
+    Label3: TLabel;
+    edtprecocompra: TEdit;
+    Label4: TLabel;
+    edtprecovenda: TEdit;
+    Label6: TLabel;
+    edtmargem: TEdit;
+    tipoproduto: TRadioGroup;
+    Label11: TLabel;
+    Label12: TLabel;
+    edtcodfabricante: TEdit;
+    edtfabricante: TEdit;
+    status: TRadioGroup;
+    Label9: TLabel;
+    Label5: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
+    edtestoque: TEdit;
+    btnPesquisarFabricante: TSpeedButton;
+    Label20: TLabel;
+    Label21: TLabel;
+    Label24: TLabel;
+    edtcodfornecedor: TEdit;
+    edtfornecedor: TEdit;
+    btnpesquisarfornecedor: TSpeedButton;
+    Label13: TLabel;
+    Label22: TLabel;
+    Label25: TLabel;
+    edtcodgrupo: TEdit;
+    edtgrupo: TEdit;
+    btnpesquisargrupo: TSpeedButton;
+    Label26: TLabel;
+    edtobs: TEdit;
+    Label27: TLabel;
+    edtcustoproduto: TEdit;
+    Label19: TLabel;
+    comboboxunidade: TComboBox;
+    procedure FormCreate(Sender: TObject);
+    procedure btnPesquisarFabricanteClick(Sender: TObject);
+    procedure btnpesquisarfornecedorClick(Sender: TObject);
+    procedure btnpesquisargrupoClick(Sender: TObject);
+    procedure edtcodfabricanteExit(Sender: TObject);
+    procedure edtcodfornecedorExit(Sender: TObject);
+    procedure edtcodgrupoExit(Sender: TObject);
+  private
+    { Private declarations }
+  protected
+    umfrmconsultafabricante: TFrmConsultaFabricante;
+    umfrmconsultafornecedor: TFrmconsultafornecedor;
+    umfrmconsultagrupo : TFrmconsultagrupo;
+    umproduto : produtos;
+    umactrlproduto : Controllerprodutos;
+  public
+    procedure ConhecaObj(pObj: TObject; pctrl: TObject); Override;
+    procedure Salvar; Override;
+    procedure Sair; Override;
+    procedure CarregaEdt; Override;
+    procedure LimpaEdt; Override;
+    procedure BloqueiaEdt; Override;
+    procedure DesbloqueiaEdt; Override;
+    procedure SetFrmConsulta(pObj: TObject);
+    procedure SetFrmConsultaFornecedor(pObj: TObject);
+    procedure SetFrmConsultaGrupo(pObj: TObject);
+  end;
+
+var
+  FrmCadastroproduto: TFrmCadastroproduto;
+
+implementation
+
+{$R *.dfm}
+{ TFrmCadastroproduto }
+
+procedure TFrmCadastroproduto.BloqueiaEdt;
+begin
+  inherited;
+  self.edtbarras.Enabled := false;
+  self.edtproduto.Enabled := false;
+  self.edtprecocompra.Enabled := false;
+  self.edtprecovenda.Enabled := false;
+  self.edtmargem.Enabled := false;
+  self.edtcodfabricante.Enabled := false;
+  self.edtfabricante.Enabled := false;
+  self.edtestoque.Enabled := false;
+  self.edtcodfornecedor.Enabled := false;
+  self.edtfornecedor.Enabled := false;
+  self.edtcodgrupo.Enabled := false;
+  self.edtgrupo.Enabled := false;
+  self.edtobs.Enabled := false;
+  self.status.Enabled := false;
+  self.edtcustoproduto.Enabled := false;
+  self.comboboxunidade.Enabled := false;
+  self.tipoproduto.Enabled := false;
+end;
+
+procedure TFrmCadastroProduto.btnPesquisarFabricanteClick(Sender: TObject);
+var
+  mbotao: string;
+begin
+  inherited;
+  mbotao := umfrmconsultafabricante.btnSair.Caption;
+  umfrmconsultafabricante.btnSair.Caption := 'SELECIONAR';
+  umfrmconsultafabricante.ConhecaObj(umproduto.getumfabricante, umactrlproduto.getctrlfabricante);
+  umfrmconsultafabricante.ShowModal;
+
+  umfrmconsultafabricante.btnSair.Caption := mbotao;
+  self.edtcodfabricante.Text := inttostr(umproduto.getumfabricante.getcodigo);
+  self.edtfabricante.Text := umproduto.getumfabricante.getfabricante;
+end;
+
+procedure TFrmCadastroProduto.btnpesquisarfornecedorClick(Sender: TObject);
+var
+  mbotao: string;
+begin
+  inherited;
+  mbotao := umfrmconsultafornecedor.btnSair.Caption;
+  umfrmconsultafornecedor.btnSair.Caption := 'SELECIONAR';
+  umfrmconsultafornecedor.ConhecaObj(umproduto.getumfornecedor, umactrlproduto.getctrlfornecedor);
+  umfrmconsultafornecedor.ShowModal;
+
+  umfrmconsultafornecedor.btnSair.Caption := mbotao;
+  self.edtcodfornecedor.Text := inttostr(umproduto.getumfornecedor.getcodigo);
+  self.edtfornecedor.Text := umproduto.getumfornecedor.getrazao;
+end;
+
+procedure TFrmCadastroProduto.btnpesquisargrupoClick(Sender: TObject);
+var
+  mbotao: string;
+begin
+  inherited;
+  mbotao := umfrmconsultagrupo.btnSair.Caption;
+  umfrmconsultagrupo.btnSair.Caption := 'SELECIONAR';
+  umfrmconsultagrupo.ConhecaObj(umproduto.getumgrupo, umactrlproduto.getctrlgrupo);
+  umfrmconsultagrupo.ShowModal;
+
+  umfrmconsultagrupo.btnSair.Caption := mbotao;
+  self.edtcodgrupo.Text := inttostr(umproduto.getumgrupo.getcodigo);
+  self.edtgrupo.Text := umproduto.getumgrupo.getgrupo;
+end;
+
+procedure TFrmCadastroproduto.CarregaEdt;
+begin
+  inherited;
+  if umproduto.getstatus = 'A' then
+  begin
+    self.status.ItemIndex := 0;
+  end
+  else
+  begin
+    self.status.ItemIndex := 1;
+  end;
+  if umproduto.getund = 'UND' then
+  begin
+    self.status.ItemIndex := 0;
+  end
+  else
+  begin
+    self.status.ItemIndex := 1;
+  end;
+   if umproduto.gettp_produto = 'M' then
+  begin
+    self.tipoproduto.ItemIndex := 0;
+  end
+  else if umproduto.gettp_produto = 'S' then
+  begin
+    self.tipoproduto.ItemIndex := 1;
+  end
+  else
+  begin
+    self.tipoproduto.ItemIndex := 2;
+  end;
+  self.edtCodigo.Text := inttostr(umproduto.getcodigo);
+  self.edtbarras.Text := umproduto.getbarras;
+  self.edtproduto.Text := umproduto.getdescricao;
+  self.edtcustoproduto.Text := floattostr(umproduto.getcusto);
+  self.edtprecocompra.Text := floattostr(umproduto.getpreco_compra);
+  self.edtmargem.Text := floattostr(umproduto.getmargem);
+  self.edtprecovenda.Text := floattostr(umproduto.getpreco_venda);
+  self.edtcodfabricante.Text := inttostr(umproduto.getumfabricante.getcodigo);
+  self.edtfabricante.Text := umproduto.getumfabricante.getfabricante;
+  self.edtcodfornecedor.Text := inttostr(umproduto.getumfornecedor.getcodigo);
+  self.edtfornecedor.Text := umproduto.getumfornecedor.getrazao;
+  self.edtcodgrupo.Text := inttostr(umproduto.getumgrupo.getcodigo);
+  self.edtgrupo.Text := umproduto.getumgrupo.getgrupo;
+  self.edtestoque.Text := inttostr(umproduto.getestoque);
+  self.edtCadastro.Text := DateToStr(umproduto.getCadastro);
+  self.edtUlt_alt.Text := DateToStr(umproduto.getUlt_Alt);
+end;
+
+procedure TFrmCadastroproduto.ConhecaObj(pObj: TObject; pctrl: TObject);
+begin
+  inherited;
+  umproduto := produtos(pObj);
+  umactrlproduto := Controllerprodutos(pctrl);
+  self.edtCodigo.Text := inttostr(self.umproduto.getcodigo);
+  self.edtmargem.Text := floattostr(self.umproduto.getmargem);
+  self.edtCadastro.Text := DateToStr(self.umproduto.getCadastro);
+  self.edtUlt_alt.Text := DateToStr(self.umproduto.getUlt_Alt);
+end;
+
+procedure TFrmCadastroproduto.DesbloqueiaEdt;
+begin
+  inherited;
+  self.edtbarras.Enabled := true;
+  self.edtproduto.Enabled := true;
+  self.edtprecocompra.Enabled := true;
+  self.edtprecovenda.Enabled := true;
+  self.edtmargem.Enabled := true;
+  self.edtcodfabricante.Enabled := true;
+  self.edtfabricante.Enabled := true;
+  self.edtcodfornecedor.Enabled := true;
+  self.edtfornecedor.Enabled := true;
+  self.edtcodgrupo.Enabled := true;
+  self.edtgrupo.Enabled := true;
+  self.edtobs.Enabled := true;
+  self.status.Enabled := true;
+  self.edtcustoproduto.Enabled := true;
+  self.comboboxunidade.Enabled := true;
+  self.tipoproduto.Enabled := true;
+end;
+
+procedure TFrmCadastroProduto.edtcodfabricanteExit(Sender: TObject);
+var
+  mMSG: string;
+begin
+  inherited;
+  mMSG := umactrlproduto.getctrlfabricante.Pesquisar(self.edtcodfabricante.Text);
+  umactrlproduto.getctrlfabricante.Carregar(umproduto.getumfabricante);
+  self.edtcodfabricante.Text := inttostr(umproduto.getumfabricante.getcodigo);
+  self.edtfabricante.Text := umproduto.getumfabricante.getfabricante;
+  if self.edtcodfabricante.Text = inttostr(0) then
+  begin
+    ShowMessage('Fabricante não encontrado');
+    self.edtcodfabricante.SetFocus;
+  end;
+end;
+
+procedure TFrmCadastroProduto.edtcodfornecedorExit(Sender: TObject);
+var
+  mMSG: string;
+begin
+  inherited;
+  mMSG := umactrlproduto.getctrlfornecedor.Pesquisar(self.edtcodfornecedor.Text);
+  umactrlproduto.getctrlfornecedor.Carregar(umproduto.getumfornecedor);
+  self.edtcodfornecedor.Text := inttostr(umproduto.getumfornecedor.getcodigo);
+  self.edtfornecedor.Text := umproduto.getumfornecedor.getrazao;
+  if self.edtcodfornecedor.Text = inttostr(0) then
+  begin
+    ShowMessage('Fornecedor não encontrado');
+    self.edtcodfornecedor.SetFocus;
+  end;
+end;
+
+procedure TFrmCadastroProduto.edtcodgrupoExit(Sender: TObject);
+var
+  mMSG: string;
+begin
+  inherited;
+  mMSG := umactrlproduto.getctrlgrupo.Pesquisar(self.edtcodgrupo.Text);
+  umactrlproduto.getctrlgrupo.Carregar(umproduto.getumgrupo);
+  self.edtcodgrupo.Text := inttostr(umproduto.getumgrupo.getcodigo);
+  self.edtgrupo.Text := umproduto.getumgrupo.getgrupo;
+  if self.edtcodgrupo.Text = inttostr(0) then
+  begin
+    ShowMessage('grupo não encontrado');
+    self.edtcodgrupo.SetFocus;
+  end;
+end;
+
+procedure TFrmCadastroproduto.FormCreate(Sender: TObject);
+begin
+  inherited;
+  self.status.ItemIndex := 0;
+  self.tipoproduto.ItemIndex := 0;
+end;
+
+procedure TFrmCadastroproduto.LimpaEdt;
+begin
+  inherited;
+  self.edtbarras.clear;
+  self.edtproduto.clear;
+  self.edtprecocompra.clear;
+  self.edtprecovenda.clear;
+  self.edtmargem.clear;
+  self.edtcodfabricante.clear;
+  self.edtfabricante.clear;
+  self.edtestoque.clear;
+  self.edtcodfornecedor.clear;
+  self.edtfornecedor.clear;
+  self.edtcodgrupo.clear;
+  self.edtgrupo.clear;
+  self.edtobs.clear;
+  self.edtcustoproduto.clear;
+  self.comboboxunidade.clear;
+end;
+
+procedure TFrmCadastroproduto.Sair;
+begin
+  inherited;
+end;
+
+procedure TFrmCadastroproduto.Salvar;
+begin
+  inherited;
+  if self.btnSalvar.Caption = '&Excluir' then
+  begin
+    If Application.MessageBox('Confirma Exclusão ?', 'Cuidado !!!',
+      MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES Then
+    begin
+      self.umactrlproduto.Excluir(umproduto);
+      ShowMessage('Excluido com Sucesso!!!');
+      self.Sair;
+    end;
+  end
+  else
+  begin
+    if self.status.ItemIndex < 0 then
+    begin
+      ShowMessage('Campo Status precisa ser selecionado!!!');
+      self.status.SetFocus;
+    end
+    else if self.tipoproduto.ItemIndex < 0 then
+    begin
+      ShowMessage('Campo Tipo de Produto precisa ser selecionado!!!');
+      self.tipoproduto.SetFocus;
+    end
+    else if (self.edtbarras.Text = '') then
+    begin
+      ShowMessage('Campo Codigo de Barras precisa ser preenchido!!!');
+      self.edtbarras.SetFocus;
+    end
+    else if (self.edtproduto.Text = '') then
+    begin
+      ShowMessage('Campo Produto precisa ser preenchido!!!');
+      self.edtproduto.SetFocus
+    end
+    else if (self.edtcodfabricante.Text = '') then
+    begin
+      ShowMessage('Campo Fabricante precisa ser preenchido!!!');
+      self.edtcodfabricante.SetFocus;
+    end
+    else if (self.edtcustoproduto.Text = '') then
+    begin
+      ShowMessage('Campo Custo precisa ser preenchido!!!');
+      self.edtcustoproduto.SetFocus;
+    end
+    else if (self.edtprecocompra.Text = '') then
+    begin
+      ShowMessage('Campo Preço de Compra precisa ser preenchido!!!');
+      self.edtprecocompra.SetFocus;
+    end
+    else if (self.edtprecovenda.Text = '') then
+    begin
+      ShowMessage('Campo Preço de Venda precisa ser preenchido!!!');
+      self.edtprecovenda.SetFocus;
+    end
+    else
+    begin
+      umproduto.setcodigo(strtoint(self.edtCodigo.Text));
+      umproduto.setbarras(self.edtbarras.Text);
+      umproduto.setdescricao(self.edtproduto.Text);
+      umproduto.getumfabricante.setcodigo(strtoint(self.edtcodfabricante.Text));
+      umproduto.getumfornecedor.setcodigo(strtoint(self.edtcodfornecedor.Text));
+      umproduto.getumgrupo.setcodigo(strtoint(self.edtcodgrupo.Text));
+      umproduto.setcusto(strtofloat(self.edtcustoproduto.Text));
+      umproduto.setpreco_compra(strtofloat(self.edtprecocompra.Text));
+      umproduto.setmargem(strtofloat(self.edtmargem.Text));
+      umproduto.setpreco_venda(strtofloat(self.edtprecovenda.Text));
+      umproduto.setobs(self.edtobs.Text);
+      if self.status.ItemIndex = 0 then
+      begin
+        umproduto.setstatus('A');
+      end
+      else
+      begin
+        umproduto.setstatus('I');
+      end;
+      if self.tipoproduto.ItemIndex = 0 then
+      begin
+        umproduto.settp_produto('M');
+      end
+      else if self.tipoproduto.ItemIndex = 1 then
+      begin
+        umproduto.settp_produto('S');
+      end
+      else
+      begin
+        umproduto.settp_produto('U');
+      end;
+      if self.comboboxunidade.ItemIndex = 0 then
+      begin
+        umproduto.setund('UND');
+      end
+      else
+      begin
+        umproduto.setund('CX');
+      end;
+      umproduto.setCadastro(StrToDate(self.edtCadastro.Text));
+      umproduto.setUlt_Alt(StrToDate(self.edtUlt_alt.Text));
+      umactrlproduto.Salvar(umproduto.clone);
+      ShowMessage('Salvo com Sucesso!!!');
+      self.Sair;
+    end;
+  end;
+
+end;
+
+procedure TFrmCadastroproduto.SetFrmConsulta(pObj: TObject);
+begin
+  umfrmconsultafabricante := TFrmConsultaFabricante(pObj);
+end;
+
+procedure TFrmCadastroproduto.SetFrmConsultafornecedor(pObj: TObject);
+begin
+  umfrmconsultafornecedor := TFrmConsultaFornecedor (pObj);
+end;
+
+procedure TFrmCadastroProduto.SetFrmConsultaGrupo(pObj: TObject);
+begin
+  umfrmconsultagrupo := TFrmconsultagrupo(pObj);
+end;
+
+end.

@@ -1,0 +1,22 @@
+inherited FrmConsultaMarca: TFrmConsultaMarca
+  Caption = 'FrmConsultaMarca'
+  ExplicitLeft = -197
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited btnNovo: TSpeedButton
+    Left = 506
+    ExplicitLeft = 506
+  end
+  inherited btnAlterar: TSpeedButton
+    Left = 625
+    ExplicitLeft = 625
+  end
+  inherited btnExcluir: TSpeedButton
+    Left = 744
+    ExplicitLeft = 744
+  end
+  inherited btnSair: TSpeedButton
+    Left = 864
+    ExplicitLeft = 864
+  end
+end

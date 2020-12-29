@@ -1,0 +1,76 @@
+unit uFrmCadastroLaboratorio;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmCadastro, Vcl.StdCtrls;
+
+type
+  TFrmCadastroLaboratorio = class(TFrmCadastro)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure ConhecaObj (pObj : TObject);  Override;
+    procedure Salvar;                       Override;
+    procedure Sair;                         Override;
+    procedure CarregaEdt;                   Override;
+    procedure LimpaEdt;                     Override;
+    procedure BloqueiaEdt;                  Override;
+    procedure DesbloqueiaEdt;               Override;
+
+  end;
+
+var
+  FrmCadastroLaboratorio: TFrmCadastroLaboratorio;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmCadastroLaboratorio }
+
+procedure TFrmCadastroLaboratorio.BloqueiaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroLaboratorio.CarregaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroLaboratorio.ConhecaObj(pObj: TObject);
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroLaboratorio.DesbloqueiaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroLaboratorio.LimpaEdt;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroLaboratorio.Sair;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroLaboratorio.Salvar;
+begin
+  inherited;
+
+end;
+
+end.

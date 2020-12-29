@@ -1,0 +1,5 @@
+inherited FrmCadastroMarca: TFrmCadastroMarca
+  Caption = 'Cadastro Marca'
+  PixelsPerInch = 96
+  TextHeight = 13
+end

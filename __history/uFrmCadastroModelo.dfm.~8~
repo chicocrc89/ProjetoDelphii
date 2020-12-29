@@ -1,0 +1,107 @@
+inherited FrmCadastroModelo: TFrmCadastroModelo
+  Caption = 'Cadastro Modelo'
+  ExplicitWidth = 850
+  ExplicitHeight = 585
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel [8]
+    Left = 8
+    Top = 64
+    Width = 67
+    Height = 18
+    Caption = 'MODELO'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label3: TLabel [9]
+    Left = 8
+    Top = 128
+    Width = 62
+    Height = 18
+    Caption = 'CODIGO'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label4: TLabel [10]
+    Left = 96
+    Top = 128
+    Width = 53
+    Height = 18
+    Caption = 'MARCA'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label8: TLabel [11]
+    Left = 155
+    Top = 118
+    Width = 9
+    Height = 23
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -19
+    Font.Name = 'Calibri'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel [12]
+    Left = 81
+    Top = 54
+    Width = 9
+    Height = 23
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -19
+    Font.Name = 'Calibri'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  inherited edtCodigo: TEdit
+    Width = 62
+    ExplicitWidth = 62
+  end
+  object edtmodelo: TEdit
+    Left = 8
+    Top = 83
+    Width = 193
+    Height = 21
+    TabOrder = 4
+  end
+  object edtcodmarca: TEdit
+    Left = 8
+    Top = 147
+    Width = 62
+    Height = 21
+    TabOrder = 5
+    OnExit = edtcodmarcaExit
+  end
+  object edtmarca: TEdit
+    Left = 96
+    Top = 147
+    Width = 249
+    Height = 21
+    TabOrder = 6
+  end
+  object btnpesquisar: TButton
+    Left = 360
+    Top = 138
+    Width = 105
+    Height = 40
+    Caption = 'BUSCAR MARCA'
+    TabOrder = 7
+    OnClick = btnpesquisarClick
+  end
+end

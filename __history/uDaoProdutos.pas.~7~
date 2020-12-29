@@ -1,0 +1,118 @@
+unit uDaoprodutos;
+
+interface
+
+uses udao, uprodutos, uDM, DB, uDaoFabricantes, uDaoFornecedores,uDaoGrupos, SysUtils;
+
+type
+  Daoprodutos = class(dao)
+  private
+
+  protected
+    umdm: TDM;
+    umadaofabricante  : DaoFabricantes;
+    umadaofornecedor  : DaoFornecedores;
+    umadaogrupo       : DaoGrupos;
+  public
+    constructor CrieObj;
+    destructor Destrua_se;
+    function Salvar(pObj: TObject): string; override;
+    function Carregar(pObj: TObject): string; override;
+    function Excluir(pObj: TObject): string; override;
+    function Pesquisar(pChave: string): string; override;
+    procedure setDM(pDM: TDM);
+    function getds: Tdatasource;
+    procedure setdaofabricante(pObj: TObject);
+    procedure setdaofornecedor (pObj : TObject);
+    procedure setdaogrupo (pObj : TObject);
+  end;
+
+implementation
+
+{ Daoprodutos }
+
+{ Daoprodutos }
+
+function Daoprodutos.Carregar(pObj: TObject): string;
+var
+  mprodutos: produtos;
+begin
+  mprodutos := produtos(pObj);
+  if not umdm.trans.Active then
+    umdm.trans.Active := true;
+  if not umdm.dsetproduto.Active then
+    umdm.dsetproduto.Open;
+  mprodutos.setCodigo(umdm.dsetprodutoID_PRODUTO.Value);
+  mprodutos.setdescricao(umdm.dsetprodutoPRODUTO.Value);
+  mprodutos.setbarras(umdm.dsetprodutoCOD_BARRAS.Value);
+  mprodutos.getumfabricante.setcodigo(umdm.dsetprodutoID_FABRICANTE.Value);
+  mprodutos.getumfornecedor.setCodigo(umdm.dsetprodutoID_FORNECEDOR.Value);
+  mprodutos.getumgrupo.setCodigo(umdm.dsetprodutoID_GRUPO.Value);
+  mprodutos.setcusto(umdm.dsetprodutoCUSTO_PRODUTO.Value);
+  mprodutos.setund(umdm.dsetprodutoUND.Value);
+  mprodutos.setstatus(umdm.dsetprodutoSTATUS.Value);
+  mprodutos.setpreco_compra(umdm.dsetprodutoPRECO_COMPRA.Value);
+  mprodutos.setpreco_venda(umdm.dsetprodutoPRECO_VENDA.Value);
+  mprodutos.setmargem(umdm.dsetprodutoMARGEM.Value);
+  mprodutos.settp_produto(umdm.dsetprodutoTIPO_PRODUTO.Value);
+  mprodutos.setestoque(umdm.dsetprodutoESTOQUE.Value);
+  mprodutos.setobs(umdm.dsetprodutoOBS_PRODUTO.Value);
+  mprodutos.setCadastro(umdm.dsetprodutoDATA_CADASTRO.Value);
+  mprodutos.setUlt_Alt(umdm.dsetprodutoULTIMA_ALTERACAO.Value);
+end;
+
+constructor Daoprodutos.CrieObj;
+begin
+  umadaofabricante := DaoFabricantes.CrieObj;
+  umadaofornecedor := DaoFornecedores.CrieObj;
+  umadaogrupo := DaoGrupos.CrieObj;
+end;
+
+destructor Daoprodutos.Destrua_se;
+begin
+  umadaofabricante.Destrua_se;
+  umadaofornecedor.Destrua_se;
+  umadaogrupo.Destrua_se;
+end;
+
+function Daoprodutos.Excluir(pObj: TObject): string;
+begin
+
+end;
+
+function Daoprodutos.getds: Tdatasource;
+begin
+
+end;
+
+function Daoprodutos.Pesquisar(pChave: string): string;
+begin
+
+end;
+
+function Daoprodutos.Salvar(pObj: TObject): string;
+begin
+
+end;
+
+procedure Daoprodutos.setdaofabricante(pObj: TObject);
+begin
+  umadaofabricante := DaoFabricantes(pObj);
+end;
+
+procedure Daoprodutos.setdaofornecedor(pObj: TObject);
+begin
+  umadaofornecedor := DaoFornecedores(pObj);
+end;
+
+procedure Daoprodutos.setdaogrupo(pObj: TObject);
+begin
+  umadaogrupo := DaoGrupos(pObj);
+end;
+
+procedure Daoprodutos.setDM(pDM: TDM);
+begin
+  umdm := pDM;
+end;
+
+end.

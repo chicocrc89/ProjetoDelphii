@@ -1,0 +1,81 @@
+unit uFrmConsultaServicos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmConsulta, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, uFrmCadastroServicos, uServicos, uDM, uControllerServicos;
+
+type
+  TFrmConsultaServicos = class(TFrmConsulta)
+  private
+    { Private declarations }
+  protected
+    umFrmCadastroservico: TFrmCadastroServicos;
+    umservico: Servicos;
+    umactrlservico: Controllerservicos;
+    umdm: TDM;
+    procedure Novo; Override;
+    procedure Alterar; Override;
+    procedure Excluir; Override;
+    procedure Sair; Override;
+    procedure Pesquisar; Override;
+  public
+    { Public declarations }
+    procedure conhecaObj(pObj: TObject; pctrl: TObject); Override;
+    procedure SetFrmCadastro(pObj: TObject); Override;
+  end;
+
+var
+  FrmConsultaServicos: TFrmConsultaServicos;
+
+implementation
+
+{$R *.dfm}
+
+{ TFrmConsultaServicos }
+
+procedure TFrmConsultaServicos.Alterar;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaServicos.conhecaObj(pObj, pctrl: TObject);
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaServicos.Excluir;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaServicos.Novo;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaServicos.Pesquisar;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaServicos.Sair;
+begin
+  inherited;
+
+end;
+
+procedure TFrmConsultaServicos.SetFrmCadastro(pObj: TObject);
+begin
+  inherited;
+  umfrmcadastroservico := TFrmcadastroServicos(pObj);
+end;
+
+end.

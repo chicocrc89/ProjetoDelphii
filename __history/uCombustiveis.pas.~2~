@@ -1,0 +1,21 @@
+unit uCombustiveis;
+
+interface
+
+Uses uGenerica;
+
+type
+  Combustiveis = class(Generica)
+    private
+
+    protected
+      combustivel : string;
+    public
+
+  end;
+
+
+
+implementation
+
+end.

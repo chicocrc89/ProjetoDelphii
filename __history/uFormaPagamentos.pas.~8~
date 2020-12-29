@@ -1,0 +1,56 @@
+unit uFormaPagamentos;
+
+interface
+
+uses uGenerica;
+
+type
+  FormaPagamentos = class(Generica)
+
+  private
+
+  protected
+    pagamento: string;
+
+  public
+    Constructor Crieobj;
+    destructor Destrua_se;
+    procedure setpagamento(ppagamento: string);
+    function getpagamento: string;
+    function clone: FormaPagamentos;
+  end;
+
+implementation
+
+
+
+{ FormaPagamentos }
+
+function FormaPagamentos.clone: FormaPagamentos;
+begin
+  result := Formapagamentos.Crieobj;
+  result.setCodigo(codigo);
+  result.setpagamento(pagamento);
+end;
+
+constructor FormaPagamentos.Crieobj;
+begin
+
+end;
+
+destructor FormaPagamentos.Destrua_se;
+begin
+
+end;
+
+function FormaPagamentos.getpagamento: string;
+begin
+
+end;
+
+procedure FormaPagamentos.setpagamento(ppagamento: string);
+begin
+
+end;
+
+end.

@@ -1,0 +1,157 @@
+unit uVeiculos;
+
+interface
+
+uses uGenerica, uModelos, uCores, ucombustiveis;
+
+type
+  Veiculos = class(Generica)
+  private
+
+  protected
+    ummodelo: Modelos;
+    umacor : Cores;
+    umcombustivel : Combustiveis;
+    chassi: string;
+    placa: string;
+    ano: string;
+    quilometragem: integer;
+
+  public
+    constructor Crieobj;
+    destructor Destrua_se;
+    procedure setcodigo(pcodigo: integer);
+    procedure setummodelo(pmodelo: Modelos);
+    procedure setchassi(pchassi: string);
+    procedure setplaca(pplaca: string);
+    procedure setano(pano: string);
+    procedure setumacor(pcor: Cores);
+    procedure setumcombustivel(pcombustivel: Combustiveis);
+    procedure setquilometragem(pquilometragem: integer);
+    function getcodigo: integer;
+    function getummodelo: Modelos;
+    function getchassi: string;
+    function getplaca: string;
+    function getano: string;
+    function getumacor: Cores;
+    function getumcombustivel: Combustiveis;
+    function getquilometragem: integer;
+    function clone: Veiculos;
+  end;
+
+implementation
+
+{ Laboratorios }
+
+{ Veiculos }
+
+function Veiculos.clone: Veiculos;
+begin
+  result := Veiculos.Crieobj;
+  result.setcodigo(Codigo);
+  result.setummodelo(ummodelo);
+  result.setchassi(chassi);
+  result.setplaca(placa);
+  result.setano(ano);
+  result.setumacor(umacor);
+  result.setumcombustivel(umcombustivel);
+  result.setquilometragem(quilometragem);
+  result.setCadastro(Cadastro);
+  result.setUlt_Alt(ult_alt);
+end;
+
+constructor Veiculos.Crieobj;
+begin
+  ummodelo := Modelos.Crieobj;
+  umcombustivel := Combustiveis.Crieobj;
+  umacor := Cores.Crieobj;
+end;
+
+destructor Veiculos.Destrua_se;
+begin
+  ummodelo.Destrua_se;
+  umcombustivel.Destrua_se;
+  umacor.Destrua_se;
+end;
+
+function Veiculos.getano: string;
+begin
+  result := ano;
+end;
+
+function Veiculos.getchassi: string;
+begin
+  result := chassi;
+end;
+
+function Veiculos.getcodigo: integer;
+begin
+  result := Codigo;
+end;
+
+function Veiculos.getumcombustivel: Combustiveis;
+begin
+  result := umcombustivel;
+end;
+
+function Veiculos.getumacor: Cores;
+begin
+  result := umacor;
+end;
+
+function Veiculos.getummodelo: Modelos;
+begin
+  result := ummodelo;
+end;
+
+function Veiculos.getplaca: string;
+begin
+  result := placa;
+end;
+
+function Veiculos.getquilometragem: integer;
+begin
+  result := quilometragem;
+end;
+
+procedure Veiculos.setano(pano: string);
+begin
+  ano := pano;
+end;
+
+procedure Veiculos.setchassi(pchassi: string);
+begin
+  chassi := pchassi;
+end;
+
+procedure Veiculos.setcodigo(pcodigo: integer);
+begin
+  Codigo := pcodigo;
+end;
+
+procedure Veiculos.setumcombustivel(pcombustivel: Combustiveis);
+begin
+  umcombustivel := pcombustivel;
+end;
+
+procedure Veiculos.setumacor(pcor: Cores);
+begin
+  umacor := pcor;
+end;
+
+procedure Veiculos.setummodelo(pmodelo: Modelos);
+begin
+  ummodelo := pmodelo;
+end;
+
+procedure Veiculos.setplaca(pplaca: string);
+begin
+  placa := pplaca;
+end;
+
+procedure Veiculos.setquilometragem(pquilometragem: integer);
+begin
+  quilometragem := pquilometragem;
+end;
+
+end.

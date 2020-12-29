@@ -1,0 +1,11 @@
+inherited FrmConsultaMarca: TFrmConsultaMarca
+  Caption = 'Consulta Marca'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited btnPesquisar: TSpeedButton
+    OnClick = btnPesquisarClick
+  end
+  inherited DBGrid1: TDBGrid
+    DataSource = DM.dsmarca
+  end
+end

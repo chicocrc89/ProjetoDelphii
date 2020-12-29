@@ -1,0 +1,185 @@
+unit uProduto;
+
+interface
+  uses uGenerica, uGrupo, uLaboratorio, uFabricante;
+  type Produto = class(Generica)
+  private
+
+  protected
+    produto_id    : integer;
+    descricao     : string;
+    laboratorio   : laboratorio;
+    fabricante    : fabricante;
+    barras        : string;
+    grupo         : grupo;
+    preco_compra  : real;
+    preco_venda   : real;
+    margem        : real;
+    estoque       : integer;
+    dtalteracao   : TDate;
+    dtcadastro    : TDate;
+  public
+    constructor Crieobj;
+    destructor Destrua_se;
+    procedure setproduto_id (pproduto_id : integer);
+    procedure setdescricao (pdescricao : string);
+    procedure setlaboratorio (plaboratorio : laboratorio);
+    procedure setfabricante (pfabricante : fabricante);
+    procedure setbarras (pbarras : string);
+    procedure setgrupo (pgrupo : grupo);
+    procedure setpreco_compra (ppreco_compra : real);
+    procedure setpreco_venda (ppreco_venda : real);
+    procedure setmargem (pmargem : real);
+    procedure setestoque (pestoque : integer);
+    procedure setdtalteracao (pdtalteracao : Tdate);
+    procedure setdtcadastro (pdtcadastro : Tdate);
+    function getproduto_id : integer;
+    function getdescricao : string;
+    function getlaboratorio : laboratorio;
+    function getfabricante : fabricante;
+    function getbarras : string;
+    function getgrupo : grupo;
+    function getpreco_compra : real;
+    function getpreco_venda : real;
+    function getmargem : real;
+    function getestoque : integer;
+    function getdtalteracao : Tdate;
+    function getdtcadastro : Tdate;
+
+  end;
+
+implementation
+
+{ Produto }
+
+constructor Produto.Crieobj;
+begin
+
+end;
+
+destructor Produto.Destrua_se;
+begin
+
+end;
+
+function Produto.getbarras: string;
+begin
+  result := barras;
+end;
+
+function Produto.getdescricao: string;
+begin
+  result := descricao;
+end;
+
+function Produto.getdtalteracao: Tdate;
+begin
+  result := dtalteracao;
+end;
+
+function Produto.getdtcadastro: Tdate;
+begin
+  result := dtcadastro;
+end;
+
+function Produto.getestoque: integer;
+begin
+  result := estoque
+end;
+
+function Produto.getfabricante: fabricante;
+begin
+  result := fabricante;
+end;
+
+function Produto.getgrupo: grupo;
+begin
+  result := grupo;
+end;
+
+function Produto.getlaboratorio: laboratorio;
+begin
+  result := laboratorio;
+end;
+
+function Produto.getmargem: real;
+begin
+  result := margem;
+end;
+
+function Produto.getpreco_compra: real;
+begin
+  result := preco_compra;
+end;
+
+function Produto.getpreco_venda: real;
+begin
+  result := preco_venda;
+end;
+
+function Produto.getproduto_id: integer;
+begin
+  result := produto_id;
+end;
+
+procedure Produto.setbarras(pbarras: string);
+begin
+  barras := pbarras;
+end;
+
+procedure Produto.setdescricao(pdescricao: string);
+begin
+  descricao := pdescricao;
+end;
+
+procedure Produto.setdtalteracao(pdtalteracao: Tdate);
+begin
+  dtalteracao := pdtalteracao;
+end;
+
+procedure Produto.setdtcadastro(pdtcadastro: Tdate);
+begin
+  dtcadastro := pdtcadastro;
+end;
+
+procedure Produto.setestoque(pestoque: integer);
+begin
+  estoque := pestoque;
+end;
+
+procedure Produto.setfabricante(pfabricante: fabricante);
+begin
+  fabricante := pfabricante;
+end;
+
+procedure Produto.setgrupo(pgrupo: grupo);
+begin
+  grupo := pgrupo;
+end;
+
+procedure Produto.setlaboratorio(plaboratorio: laboratorio);
+begin
+  laboratorio := plaboratorio;
+end;
+
+procedure Produto.setmargem(pmargem: real);
+begin
+  margem := pmargem;
+end;
+
+procedure Produto.setpreco_compra(ppreco_compra: real);
+begin
+  preco_compra := ppreco_compra;
+end;
+
+procedure Produto.setpreco_venda(ppreco_venda: real);
+begin
+  preco_venda := ppreco_venda;
+end;
+
+procedure Produto.setproduto_id(pproduto_id: integer);
+begin
+  produto_id := pproduto_id;
+end;
+
+end.

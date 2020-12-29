@@ -1,0 +1,105 @@
+inherited FrmCadastroMarca: TFrmCadastroMarca
+  Caption = 'Cadastro Marca'
+  ClientHeight = 219
+  ClientWidth = 701
+  ExplicitWidth = 717
+  ExplicitHeight = 258
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited lblDtCadastro: TLabel
+    Left = 8
+    Top = 174
+    ExplicitLeft = 8
+    ExplicitTop = 174
+  end
+  inherited lblDtUlt_alt: TLabel
+    Left = 152
+    Top = 174
+    ExplicitLeft = 152
+    ExplicitTop = 174
+  end
+  inherited btnSalvar: TSpeedButton
+    Left = 512
+    Top = 171
+    ExplicitLeft = 512
+    ExplicitTop = 171
+  end
+  inherited btnSair: TSpeedButton
+    Left = 608
+    Top = 171
+    ExplicitLeft = 608
+    ExplicitTop = 171
+  end
+  inherited Label10: TLabel
+    Left = 320
+    Top = 174
+    ExplicitLeft = 320
+    ExplicitTop = 174
+  end
+  inherited lblobs: TLabel
+    Left = 8
+    Top = 134
+    ExplicitLeft = 8
+    ExplicitTop = 134
+  end
+  inherited Label23: TLabel
+    Left = 200
+    Top = 134
+    ExplicitLeft = 200
+    ExplicitTop = 134
+  end
+  object Label1: TLabel [8]
+    Left = 8
+    Top = 64
+    Width = 53
+    Height = 18
+    Caption = 'MARCA'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel [9]
+    Left = 67
+    Top = 59
+    Width = 9
+    Height = 23
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -19
+    Font.Name = 'Calibri'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  inherited edtCadastro: TEdit
+    Left = 8
+    Top = 193
+    TabOrder = 2
+    ExplicitLeft = 8
+    ExplicitTop = 193
+  end
+  inherited edtUlt_alt: TEdit
+    Left = 152
+    Top = 193
+    TabOrder = 3
+    ExplicitLeft = 152
+    ExplicitTop = 193
+  end
+  inherited edtcodusuario: TEdit
+    Left = 320
+    Top = 193
+    TabOrder = 4
+    ExplicitLeft = 320
+    ExplicitTop = 193
+  end
+  object edtmarca: TEdit
+    Left = 8
+    Top = 88
+    Width = 161
+    Height = 21
+    TabOrder = 1
+  end
+end

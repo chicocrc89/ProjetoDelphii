@@ -1,0 +1,62 @@
+unit uMarcas;
+
+interface
+  uses uGenerica;
+  type
+    Marcas = class(Generica)
+  private
+
+  protected
+    marca : string;
+  public
+    constructor crieobj;
+    destructor Destrua_se;
+    procedure setcodigo (pcodigo : integer);
+    procedure setmarca (pmarca : string);
+    function getcodigo : integer;
+    function getmarca : string;
+    function clone : marcas;
+  end;
+
+implementation
+
+{ Marcas }
+
+function Marcas.clone: marcas;
+begin
+  result := Marcas.crieobj;
+  result.setcodigo(codigo);
+  result.setmarca(marca);
+end;
+
+constructor Marcas.crieobj;
+begin
+
+end;
+
+destructor Marcas.Destrua_se;
+begin
+
+end;
+
+function Marcas.getcodigo: integer;
+begin
+
+end;
+
+function Marcas.getmarca: string;
+begin
+
+end;
+
+procedure Marcas.setcodigo(pcodigo: integer);
+begin
+
+end;
+
+procedure Marcas.setmarca(pmarca: string);
+begin
+
+end;
+
+end.

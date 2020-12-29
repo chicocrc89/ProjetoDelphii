@@ -1,0 +1,388 @@
+unit uFrmCadastroCarro;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmCadastro, Vcl.StdCtrls, Vcl.Buttons,
+  uFrmConsultaModelo, uFrmConsultaCombustivel, uFrmConsultaCor, uFrmConsultaCliente,
+  uVeiculos, uControllerVeiculos, Vcl.ExtCtrls;
+
+type
+  TFrmCadastroCarro = class(TFrmCadastro)
+    Label2: TLabel;
+    edtchassi: TEdit;
+    Label4: TLabel;
+    edtano: TEdit;
+    Label8: TLabel;
+    edtquilometragem: TEdit;
+    Label14: TLabel;
+    Label15: TLabel;
+    edtcodmodelo: TEdit;
+    edtmodelo: TEdit;
+    Label17: TLabel;
+    Label3: TLabel;
+    edtplaca: TEdit;
+    Label7: TLabel;
+    btnPesquisamodelo: TSpeedButton;
+    Label9: TLabel;
+    Label1: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    btnpesqcor: TSpeedButton;
+    edtcodcor: TEdit;
+    edtcor: TEdit;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    btnpesqcombustivel: TSpeedButton;
+    edtcodcombustivel: TEdit;
+    edtcombustivel: TEdit;
+    Label16: TLabel;
+    Label18: TLabel;
+    Label19: TLabel;
+    Label20: TLabel;
+    btnpesquisacliente: TSpeedButton;
+    Label21: TLabel;
+    edtcodcliente: TEdit;
+    edtcliente: TEdit;
+    edtendereco: TEdit;
+    edtcelular: TEdit;
+    procedure edtcodmodeloExit(Sender: TObject);
+    procedure edtcodcorExit(Sender: TObject);
+    procedure edtcodcombustivelExit(Sender: TObject);
+    procedure btnpesqcorClick(Sender: TObject);
+    procedure btnpesqcombustivelClick(Sender: TObject);
+    procedure btnPesquisamodeloClick(Sender: TObject);
+    procedure edtcodclienteExit(Sender: TObject);
+    procedure btnpesquisaclienteClick(Sender: TObject);
+  private
+    { Private declarations }
+    umveiculo: Veiculos;
+    umfrmconsultamodelo: TFrmConsultaModelo;
+    umactrlveiculo: ControllerVeiculos;
+    umfrmconsultacor : TFrmConsultaCor;
+    umfrmconsultacombustivel : TFrmconsultacombustivel;
+    umfrmconsultacliente : TFrmConsultaCliente;
+  public
+    { Public declarations }
+    procedure ConhecaObj(pObj: TObject; pctrl: TObject); Override;
+    procedure Salvar; Override;
+    procedure Sair; Override;
+    procedure CarregaEdt; Override;
+    procedure LimpaEdt; Override;
+    procedure BloqueiaEdt; Override;
+    procedure DesbloqueiaEdt; Override;
+    procedure SetFrmConsulta(pObj: TObject);
+    procedure SetFrmConsultacombustivel(pObj: TObject);
+    procedure SetFrmConsultacor(pObj: TObject);
+    procedure setFrmConsultaCliente(pObj: TObject);
+  end;
+
+var
+  FrmCadastroCarro: TFrmCadastroCarro;
+
+implementation
+
+{$R *.dfm}
+{ TFrmCadastroLaboratorio }
+
+procedure TFrmCadastroCarro.BloqueiaEdt;
+begin
+  inherited;
+  self.edtchassi.Enabled := false;
+  self.edtano.Enabled := false;
+  self.edtcor.Enabled := false;
+  self.edtcombustivel.Enabled := false;
+  self.edtquilometragem.Enabled := false;
+  self.edtcodmodelo.Enabled := false;
+  self.edtcodcor.Enabled := false;
+  self.edtcodcombustivel.Enabled := false;
+  self.edtplaca.Enabled := false;
+end;
+
+procedure TFrmCadastroCarro.btnpesqcombustivelClick(Sender: TObject);
+var
+  mbotao: string;
+begin
+  inherited;
+  mbotao := umfrmconsultacombustivel.btnSair.Caption;
+  umfrmconsultacombustivel.btnSair.Caption := 'SELECIONAR';
+  umfrmconsultacombustivel.ConhecaObj(umveiculo.getumcombustivel, umactrlveiculo.getctrlcombustivel);
+  umfrmconsultacombustivel.ShowModal;
+
+  umfrmconsultacombustivel.btnSair.Caption := mbotao;
+  self.edtcodcombustivel.Text := inttostr(umveiculo.getumcombustivel.getcodigo);
+  self.edtcombustivel.Text := umveiculo.getumcombustivel.getcombustivel;
+end;
+
+procedure TFrmCadastroCarro.btnpesqcorClick(Sender: TObject);
+var
+  mbotao: string;
+begin
+  inherited;
+  mbotao := umfrmconsultacor.btnSair.Caption;
+  umfrmconsultacor.btnSair.Caption := 'SELECIONAR';
+  umfrmconsultacor.ConhecaObj(umveiculo.getumacor, umactrlveiculo.getctrlcor);
+  umfrmconsultacor.ShowModal;
+
+  umfrmconsultacor.btnSair.Caption := mbotao;
+  self.edtcodcor.Text := inttostr(umveiculo.getumacor.getcodigo);
+  self.edtcor.Text := umveiculo.getumacor.getcor;
+end;
+
+procedure TFrmCadastroCarro.btnpesquisaclienteClick(Sender: TObject);
+var
+  mbotao: string;
+begin
+  inherited;
+  mbotao := umfrmconsultacliente.btnSair.Caption;
+  umfrmconsultacliente.btnSair.Caption := 'SELECIONAR';
+  umfrmconsultacliente.ConhecaObj(umveiculo.getumcliente, umactrlveiculo.getctrlcliente);
+  umfrmconsultacliente.ShowModal;
+
+  umfrmconsultacliente.btnSair.Caption := mbotao;
+  self.edtcodcliente.Text := inttostr(umveiculo.getumcliente.getcodigo);
+  self.edtcliente.Text := umveiculo.getumcliente.getnome;
+  self.edtendereco.Text := umveiculo.getumcliente.getendereco;
+  self.edtcelular.Text := umveiculo.getumcliente.getcelular;
+end;
+
+procedure TFrmCadastroCarro.btnPesquisamodeloClick(Sender: TObject);
+var
+  mbotao: string;
+begin
+  inherited;
+  mbotao := umfrmconsultamodelo.btnSair.Caption;
+  umfrmconsultamodelo.btnSair.Caption := 'SELECIONAR';
+  umfrmconsultamodelo.ConhecaObj(umveiculo.getummodelo, umactrlveiculo.getctrlmodelo);
+  umfrmconsultamodelo.ShowModal;
+
+  umfrmconsultamodelo.btnSair.Caption := mbotao;
+  self.edtcodmodelo.Text := inttostr(umveiculo.getummodelo.getcodigo);
+  self.edtmodelo.Text := umveiculo.getummodelo.getmodelo;
+end;
+
+procedure TFrmCadastroCarro.CarregaEdt;
+begin
+  inherited;
+  self.edtCodigo.Text := inttostr(umveiculo.getcodigo);
+  self.edtchassi.Text := umveiculo.getchassi;
+  self.edtano.Text := umveiculo.getano;
+  self.edtcodcor.Text := inttostr(umveiculo.getumacor.getcodigo);
+  self.edtcor.Text := umveiculo.getumacor.getcor;
+  self.edtcodcombustivel.Text := inttostr(umveiculo.getumcombustivel.getCodigo);
+  self.edtcombustivel.Text := umveiculo.getumcombustivel.getcombustivel;
+  self.edtquilometragem.Text := inttostr(umveiculo.getquilometragem);
+  self.edtcodmodelo.Text := inttostr(umveiculo.getummodelo.getcodigo);
+  self.edtmodelo.Text := umveiculo.getummodelo.getmodelo;
+  self.edtplaca.Text := umveiculo.getplaca;
+  self.edtCadastro.Text := DateToStr(umveiculo.getCadastro);
+  self.edtUlt_alt.Text := DateToStr(umveiculo.getUlt_Alt);
+end;
+
+procedure TFrmCadastroCarro.ConhecaObj(pObj: TObject; pctrl: TObject);
+begin
+  inherited;
+  umveiculo := Veiculos(pObj);
+  umactrlveiculo := ControllerVeiculos(pctrl);
+  self.edtCodigo.Text := inttostr(self.umveiculo.getcodigo);
+  self.edtCadastro.Text := DateToStr(self.umveiculo.getCadastro);
+  self.edtUlt_alt.Text := DateToStr(self.umveiculo.getUlt_Alt);
+end;
+
+procedure TFrmCadastroCarro.DesbloqueiaEdt;
+begin
+  inherited;
+  self.edtchassi.Enabled := true;
+  self.edtano.Enabled := true;
+  self.edtcor.Enabled := true;
+  self.edtcombustivel.Enabled := true;
+  self.edtquilometragem.Enabled := true;
+  self.edtcodmodelo.Enabled := true;
+  self.edtplaca.Enabled := true;
+  self.edtcodcor.Enabled := true;
+  self.edtcodcombustivel.Enabled := true;
+end;
+
+procedure TFrmCadastroCarro.edtcodclienteExit(Sender: TObject);
+var
+  mMSG: string;
+begin
+  inherited;
+  mMSG := umactrlveiculo.getctrlcliente.Pesquisar(self.edtcodcliente.Text);
+  umactrlveiculo.getctrlcliente.Carregar(umveiculo.getumcliente);
+  self.edtcodcliente.Text := inttostr(umveiculo.getumcliente.getCodigo);
+  self.edtcliente.Text := umveiculo.getumcliente.getnome;
+  self.edtendereco.Text := umveiculo.getumcliente.getendereco;
+  self.edtcelular.Text := umveiculo.getumcliente.getcelular;
+  if self.edtcodcliente.Text = inttostr(0) then
+  begin
+    ShowMessage('Cliente não Encontrado!');
+    self.edtcodcliente.SetFocus;
+  end;
+end;
+
+procedure TFrmCadastroCarro.edtcodcombustivelExit(Sender: TObject);
+var
+  mMSG: string;
+begin
+  inherited;
+  mMSG := umactrlveiculo.getctrlcombustivel.Pesquisar(self.edtcodcombustivel.Text);
+  umactrlveiculo.getctrlcombustivel.Carregar(umveiculo.getumcombustivel);
+  self.edtcodcombustivel.Text := inttostr(umveiculo.getumcombustivel.getcodigo);
+  self.edtcombustivel.Text := umveiculo.getumcombustivel.getcombustivel;
+  if self.edtcodcombustivel.Text = inttostr(0) then
+  begin
+    ShowMessage('Combustivel não Encontrado!');
+    self.edtcodcombustivel.SetFocus;
+  end;
+end;
+
+procedure TFrmCadastroCarro.edtcodcorExit(Sender: TObject);
+var
+  mMSG: string;
+begin
+  inherited;
+  mMSG := umactrlveiculo.getctrlcor.Pesquisar(self.edtcodcor.Text);
+  umactrlveiculo.getctrlcor.Carregar(umveiculo.getumacor);
+  self.edtcodcor.Text := inttostr(umveiculo.getumacor.getcodigo);
+  self.edtcor.Text := umveiculo.getumacor.getcor;
+  if self.edtcodcor.Text = inttostr(0) then
+  begin
+    ShowMessage('Cor não Encontrada!');
+    self.edtcodcor.SetFocus;
+  end;
+end;
+
+procedure TFrmCadastroCarro.edtcodmodeloExit(Sender: TObject);
+var
+  mMSG: string;
+begin
+  inherited;
+  mMSG := umactrlveiculo.getctrlmodelo.Pesquisar(self.edtcodmodelo.Text);
+  umactrlveiculo.getctrlmodelo.Carregar(umveiculo.getummodelo);
+  self.edtcodmodelo.Text := inttostr(umveiculo.getummodelo.getcodigo);
+  self.edtmodelo.Text := umveiculo.getummodelo.getmodelo;
+  if self.edtcodmodelo.Text = inttostr(0) then
+  begin
+    ShowMessage('Modelo não Encontrado!');
+    self.edtcodmodelo.SetFocus;
+  end;
+end;
+
+procedure TFrmCadastroCarro.LimpaEdt;
+begin
+  inherited;
+  self.edtchassi.Clear;
+  self.edtano.Clear;
+  self.edtcor.Clear;
+  self.edtcombustivel.Clear;
+  self.edtquilometragem.Clear;
+  self.edtcodmodelo.Clear;
+  self.edtplaca.Clear;
+end;
+
+procedure TFrmCadastroCarro.Sair;
+begin
+  inherited;
+
+end;
+
+procedure TFrmCadastroCarro.Salvar;
+begin
+  inherited;
+  if self.btnSalvar.Caption = '&Excluir' then
+  begin
+    If Application.MessageBox('Confirma Exclusão ?', 'Cuidado !!!',
+      MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES Then
+    begin
+      self.umactrlveiculo.Excluir(umveiculo);
+      ShowMessage('Excluido com Sucesso!!!');
+      self.Sair;
+    end;
+  end
+  else
+  begin
+    if (self.edtchassi.Text = '') then
+    begin
+      ShowMessage('Campo Chassi precisa ser preenchido!!!');
+      self.edtchassi.SetFocus;
+    end
+    else if (self.edtano.Text = '') then
+    begin
+      ShowMessage('Campo Ano precisa ser preenchido!!!');
+      self.edtano.SetFocus
+    end
+    else if (self.edtmodelo.Text = '') then
+    begin
+      ShowMessage('é necessario Selecionar um Modelo!!!!');
+      self.edtmodelo.SetFocus;
+    end
+    else if (self.edtcor.Text = '') then
+    begin
+      ShowMessage('Campo Cor precisa ser preenchido!!!');
+      self.edtcor.SetFocus;
+    end
+    else if (self.edtcombustivel.Text = '') then
+    begin
+      ShowMessage('Campo Combustivel precisa ser preenchido!!!');
+      self.edtcombustivel.SetFocus;
+    end
+    else if (self.edtquilometragem.Text = '') then
+    begin
+      ShowMessage('Campo Quilometragem precisa ser preenchido!!!');
+      self.edtquilometragem.SetFocus;
+    end
+    else if (self.edtplaca.Text = '') then
+    begin
+      ShowMessage('Campo Placa precisa ser preenchido!!!');
+      self.edtplaca.SetFocus;
+    end
+
+    else
+    begin
+      umveiculo.setcodigo(strtoint(self.edtCodigo.Text));
+      umveiculo.setchassi(self.edtchassi.Text);
+      umveiculo.getumacor.setcodigo(strtoint(self.edtcodcor.Text));
+      umveiculo.getumacor.setcor(self.edtcor.Text);
+      umveiculo.getummodelo.setcodigo(strtoint(self.edtcodmodelo.Text));
+      umveiculo.getummodelo.setmodelo(self.edtmodelo.Text);
+      umveiculo.getumcombustivel.setCodigo(strtoint(self.edtcodcombustivel.Text));
+      umveiculo.getumcombustivel.setcombustivel(self.edtcombustivel.Text);
+      umveiculo.setplaca(self.edtplaca.Text);
+      umveiculo.setano(self.edtano.Text);
+      umveiculo.setquilometragem(strtoint(self.edtquilometragem.Text));
+      umveiculo.setCadastro(StrToDate(self.edtCadastro.Text));
+      umveiculo.setUlt_Alt(StrToDate(self.edtUlt_alt.Text));
+      umactrlveiculo.Salvar(umveiculo.clone);
+      ShowMessage('Salvo com Sucesso!!!');
+      self.Sair;
+
+    end;
+  end;
+
+end;
+
+procedure TFrmCadastroCarro.SetFrmConsulta(pObj: TObject);
+begin
+  umfrmconsultamodelo := TFrmConsultaModelo(pObj);
+end;
+
+procedure TFrmCadastroCarro.setFrmConsultaCliente(pObj: TObject);
+begin
+  umfrmconsultacliente := TFrmConsultaCliente(pObj);
+end;
+
+procedure TFrmCadastroCarro.SetFrmConsultacombustivel(pObj: TObject);
+begin
+  umfrmconsultacombustivel := TFrmConsultaCombustivel(pObj);
+end;
+
+procedure TFrmCadastroCarro.SetFrmConsultacor(pObj: TObject);
+begin
+  umfrmconsultacor := TFrmConsultaCor(pObj);
+end;
+
+end.

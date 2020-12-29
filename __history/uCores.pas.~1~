@@ -1,0 +1,52 @@
+unit uCores;
+
+interface
+
+uses uGenerica;
+
+type
+  Cores = class(Generica)
+  private
+
+  protected
+    cor: string;
+  public
+    constructor Crieobj;
+    destructor Destrua_se;
+    procedure setcor(pcor: string);
+    function getcor: string;
+    function clone: Cores;
+  end;
+
+implementation
+
+{ Grupo }
+
+function Grupos.clone: Grupos;
+begin
+  result := Grupos.Crieobj;
+  result.setcodigo(codigo);
+  result.setgrupo(grupo);
+end;
+
+constructor Grupos.Crieobj;
+begin
+
+end;
+
+destructor Grupos.Destrua_se;
+begin
+
+end;
+
+function Grupos.getgrupo: string;
+begin
+  result := grupo;
+end;
+
+procedure Grupos.setgrupo(pgrupo: string);
+begin
+  grupo := pgrupo;
+end;
+
+end.

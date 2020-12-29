@@ -1,0 +1,53 @@
+inherited FrmCadastroMarca: TFrmCadastroMarca
+  Caption = 'Cadastro Marca'
+  ExplicitTop = -88
+  ExplicitWidth = 858
+  ExplicitHeight = 596
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited lblobs: TLabel
+    Top = 454
+    ExplicitTop = 454
+  end
+  inherited Label23: TLabel
+    Top = 454
+    ExplicitTop = 454
+  end
+  object Label1: TLabel [8]
+    Left = 8
+    Top = 64
+    Width = 53
+    Height = 18
+    Caption = 'MARCA'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel [9]
+    Left = 67
+    Top = 59
+    Width = 9
+    Height = 23
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -19
+    Font.Name = 'Calibri'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  inherited edtCodigo: TEdit
+    Width = 62
+    ExplicitWidth = 62
+  end
+  object edtmarca: TEdit
+    Left = 8
+    Top = 88
+    Width = 161
+    Height = 21
+    TabOrder = 4
+  end
+end

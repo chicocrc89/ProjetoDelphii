@@ -1,0 +1,5 @@
+inherited FrmConsultaMarca: TFrmConsultaMarca
+  Caption = 'Consulta Marca'
+  PixelsPerInch = 96
+  TextHeight = 13
+end

@@ -1,0 +1,107 @@
+unit uDaomarcas;
+
+interface
+  uses udao, uDM, DB, umarcas, SysUtils;
+  type Daomarcas = class(dao)
+  private
+
+  protected
+    umdm : TDM;
+  public
+    constructor CrieObj;
+    destructor  Destrua_se;
+    function Salvar ( pObj :  TObject ):         string;    override;
+    function Carregar ( pObj : TObject ):        string;    override;
+    function Excluir ( pObj : TObject ):         string;    override;
+    function Pesquisar ( pChave : string):       string;    override;
+    procedure setDM (pDM : TDM);
+    function getds : Tdatasource;
+  end;
+
+implementation
+
+{ Daomarcas }
+
+function Daomarcas.Carregar(pObj: TObject): string;
+var mmarcas : marcas;
+begin
+  mmarcas := marcas (pObj);
+  if not umDM.trans.Active then
+      umDM.trans.Active := true;
+   if not umDM.dsetpais.Active then
+      umDM.dsetpais.Open;
+   mmarcas.setCodigo(umdm.dsetpaisID_PAIS.Value);
+   mmarcas.setpais(umdm.dsetpaisPAIS.Value);
+   mmarcas.setDDI(umdm.dsetpaisDDI.Value);
+   mmarcas.setsigra(umdm.dsetpaisSIGLA.value);
+end;
+
+constructor Daomarcas.CrieObj;
+begin
+
+end;
+
+destructor Daomarcas.Destrua_se;
+begin
+
+end;
+
+function Daomarcas.Excluir(pObj: TObject): string;
+begin
+  if not umDM.trans.Active then
+      umDM.trans.Active := true;
+   if not umDM.DSetpais.Active then
+      umDM.DSetpais.Open;
+   umDM.DSetpais.Delete;
+   umDM.trans.Commit;
+end;
+
+function Daomarcas.getds: Tdatasource;
+begin
+  result := umdm.dspais;
+end;
+
+function Daomarcas.Pesquisar(pChave: string): string;
+var mSQL : string;
+begin
+  if length(pchave) = 0 then
+    mSQL := 'select * from pais order by pais'
+  else if ehnumero(pchave) then
+    mSql:='select * from pais where id_pais =' + QuotedStr(pchave)
+  else
+    mSql:='select * from pais where pais =' + QuotedStr(pchave);
+    umDM.DSetpais.Active := false;
+    umDM.DSetpais.SelectSQL.Text := mSQL;
+    if not umDM.trans.Active then
+      umDM.trans.Active := true;
+    if not umDM.DSetpais.Active then
+      umDM.DSetpais.Open;
+    result := '';
+end;
+
+function Daomarcas.Salvar(pObj: TObject): string;
+var mmarcas : marcas;
+begin
+   mmarcas := marcas (pobj);
+   if not umDM.trans.Active then
+      umDM.trans.Active := true;
+   if not umDM.DSetpais.Active then
+      umDM.DSetpais.Open;
+   if mmarcas.getcodigo = 0 then
+      umDM.DSetpais.Insert
+   else
+      umDM.DSetpais.Edit;
+      umdm.dsetpaisID_PAIS.Value := mmarcas.getcodigo;
+      umdm.dsetpaisPAIS.Value := mmarcas.getpais;
+      umdm.dsetpaisDDI.Value  := mmarcas.getDDI;
+      umdm.dsetpaisSIGLA.Value := mmarcas.getsigla;
+      umDM.DSetpais.Post;
+      umDM.trans.Commit;
+end;
+
+procedure Daomarcas.setDM(pDM: TDM);
+begin
+  umdm := pDM;
+end;
+
+end.

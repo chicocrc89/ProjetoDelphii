@@ -1,0 +1,102 @@
+unit uControllerclientes;
+
+interface
+
+uses SysUtils, uController, DB, uDM, uControllerCidades, uClientes, uDaoClientes,
+uControllerFormaPagamentos;
+
+type
+  Controllerclientes = class(controller)
+  private
+
+  protected
+    umadaocliente: DaoClientes;
+    umactrlcidade: ControllerCidades;
+    umactrlformapagamento : ControllerFormaPagamentos;
+  public
+    constructor CrieObj;
+    destructor Destrua_se;
+    function Salvar(pObj: TObject): string; override;
+    function Carregar(pObj: TObject): string; override;
+    function Excluir(pObj: TObject): string; override;
+    function Pesquisar(pChave: string): string; override;
+    procedure setDM(pDM: TDM);
+    function getds: Tdatasource;
+    procedure setctrlcidade(pObj: TObject);
+    function getctrlcidade: ControllerCidades;
+    procedure setctrlformapagamento(pObj: TObject);
+    function getctrlformapagamento: ControllerFormaPagamentos;
+  end;
+
+implementation
+
+{ Controllerclientes }
+
+function Controllerclientes.Carregar(pObj: TObject): string;
+var
+  mcliente: Clientes;
+begin
+  self.umadaocliente.Carregar(pObj);
+  mcliente := Clientes(pObj);
+  umactrlcidade.Pesquisar(inttostr(mcliente.getumacidade.getcodigo));
+  self.umactrlcidade.Carregar(mcliente.getumacidade);
+  umactrlformapagamento.Pesquisar(inttostr(mcliente.getumaformapagamento.getCodigo));
+  self.umactrlformapagamento.Carregar(mcliente.getumaformapagamento);
+end;
+
+constructor Controllerclientes.CrieObj;
+begin
+  self.umadaocliente := DaoClientes.CrieObj;
+end;
+
+destructor Controllerclientes.Destrua_se;
+begin
+  self.umadaocliente.Destrua_se;
+end;
+
+function Controllerclientes.Excluir(pObj: TObject): string;
+begin
+  self.umadaocliente.Excluir(pObj);
+end;
+
+function Controllerclientes.getctrlcidade: ControllerCidades;
+begin
+  result := umactrlcidade;
+end;
+
+function Controllerclientes.getctrlformapagamento: ControllerFormaPagamentos;
+begin
+  result := umactrlformapagamento;
+end;
+
+function Controllerclientes.getds: Tdatasource;
+begin
+  result := umadaocliente.getds;
+end;
+
+function Controllerclientes.Pesquisar(pChave: string): string;
+begin
+  self.umadaocliente.Pesquisar(pChave);
+end;
+
+function Controllerclientes.Salvar(pObj: TObject): string;
+begin
+  self.umadaocliente.Salvar(pObj);
+end;
+
+procedure Controllerclientes.setctrlcidade(pObj: TObject);
+begin
+  self.umactrlcidade := ControllerCidades(pObj);
+end;
+
+procedure Controllerclientes.setctrlformapagamento(pObj: TObject);
+begin
+  umactrlformapagamento := ControllerFormaPagamentos (pObj);
+end;
+
+procedure Controllerclientes.setDM(pDM: TDM);
+begin
+  self.umadaocliente.setDM(pDM);
+end;
+
+end.

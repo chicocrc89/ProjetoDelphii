@@ -1,0 +1,28 @@
+inherited FrmCadastroLaboratorio: TFrmCadastroLaboratorio
+  Caption = 'Cadastro Laboratorio'
+  ExplicitWidth = 799
+  ExplicitHeight = 526
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel [3]
+    Left = 8
+    Top = 88
+    Width = 55
+    Height = 13
+    Caption = 'Laborat'#243'rio'
+  end
+  inherited edtCodigo: TEdit
+    Width = 55
+    Alignment = taCenter
+    ExplicitWidth = 55
+  end
+  object Edit1: TEdit
+    Left = 8
+    Top = 107
+    Width = 297
+    Height = 21
+    Alignment = taCenter
+    TabOrder = 5
+    Text = 'Edit1'
+  end
+end
